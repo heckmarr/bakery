@@ -3,7 +3,7 @@ package flour
 import "fmt"
 
 type Button struct{
-	X,Y int
+	x,y int
 	label string
 }
 
@@ -18,10 +18,22 @@ func Toast() {
 
 }
 
-func Oven(butt []Button) []Button {
-	for i := range butt {
-		butt[i].X = 1
-		butt[i].Y = 1
+func Oven(butt []Button, label string, xvar int, yvar int) []Button {
+	x := 0
+	y := 0
+	for index := range butt{
+
+		//X values
+		if index % xvar == 0{
+			x = 0
+		}
+		butt[index].x = x
+		x++
+		//Y values
+		if index % yvar == 0{
+			y++
+		}
+		butt[index].y = y
 	}
 	return butt
 }
@@ -35,7 +47,8 @@ func Dough(dough string) []Button {
 	fmt.Println("Dough all mooshy!")
 	switch dough {
 		case "button":
-			butt = make([]Button, 9)
+			//the nines can be changed
+			butt = make([]Button, 27, 27)
 		default:
 	}
 	return butt

@@ -13,9 +13,11 @@ func main() {
 //	toast.Toast()
 //	oven.Oven()
 //	loaf.Loaf()
-	//init
+	//init can be changed
+	xvar := 9
+	yvar := 9
 	new_button := flour.Dough("button")
-	new_button = flour.Oven(new_button)
+	new_button = flour.Oven(new_button, "BUTOOON", xvar, yvar)
 	//just toasting something
 	bread := "rye"
 	for _, v := range bread {
