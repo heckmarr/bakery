@@ -13,6 +13,7 @@ func main() {
 //	toast.Toast()
 //	oven.Oven()
 //	loaf.Loaf()
+	input := ""
 	//init can be changed
 	xvar := 81
 	yvar := 23
@@ -24,11 +25,15 @@ func main() {
 		fmt.Printf(string(v))
 	}
 	fmt.Println(new_button)
-	for i := range new_button {
-		fmt.Printf(new_button[i].Label)
-		if new_button[i].Nl {
-			fmt.Println("")
+	for {
+		for i := range new_button {
+			fmt.Printf(new_button[i].Label)
+			if new_button[i].Nl {
+				fmt.Println("")
+			}
 		}
+		fmt.Printf("0DG:>")
+		fmt.Scan(&input)
 	}
 //	for _, v := range new_button {
 //		fmt.Println("X = ",v.X)
