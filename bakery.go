@@ -14,9 +14,9 @@ func main() {
 //	oven.Oven()
 //	loaf.Loaf()
 	//init can be changed
-	xvar := 9
-	yvar := 9
-	new_button := flour.Dough("button")
+	xvar := 81
+	yvar := 23
+	new_button := flour.Dough(xvar, yvar)
 	new_button = flour.Oven(new_button, "BUTOOON", xvar, yvar)
 	//just toasting something
 	bread := "rye"
@@ -24,6 +24,12 @@ func main() {
 		fmt.Printf(string(v))
 	}
 	fmt.Println(new_button)
+	for i := range new_button {
+		fmt.Printf(new_button[i].Label)
+		if new_button[i].Nl {
+			fmt.Println("")
+		}
+	}
 //	for _, v := range new_button {
 //		fmt.Println("X = ",v.X)
 //		fmt.Println("Y = ", v.Y)

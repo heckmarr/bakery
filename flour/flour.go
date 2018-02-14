@@ -3,8 +3,9 @@ package flour
 import "fmt"
 
 type Button struct{
-	x,y int
-	label string
+	X,Y int
+	Label string
+	Nl bool
 }
 
 type Flour interface {
@@ -24,33 +25,47 @@ func Oven(butt []Button, label string, xvar int, yvar int) []Button {
 	for index := range butt{
 
 		//X values
-		if index % xvar == 0{
+		if x + 1 == xvar {
 			x = 0
-		}
-		butt[index].x = x
-		x++
-		//Y values
-		if index % yvar == 0{
+//			butt[index].Y = y
+			butt[index].Nl = true
 			y++
 		}
-		butt[index].y = y
+		butt[index].X = x
+		x++
+		//Y values
+//		if index % yvar == 0{
+//			y++
+//		}
+		butt[index].Y = y
 	}
-	return butt
+	var butter []Button
+	//we get some extraneous values
+	for yandex := range butt{
+		if yandex % 2 == 0{
+			butt[yandex].Label = "0"
+		} else {
+			butt[yandex].Label = "1"
+		}
+		if butt[yandex].Y >= yvar {
+			butter = butt[:yandex]
+			fmt.Println("GAME OVER MAN, GAME OVER")
+			break
+		}
+	}
+	return butter
 }
 
 func Bread() {
 
 }
 
-func Dough(dough string) []Button {
+func Dough(width int, height int) []Button {
 	var butt []Button
 	fmt.Println("Dough all mooshy!")
-	switch dough {
-		case "button":
-			//the nines can be changed
-			butt = make([]Button, 27, 27)
-		default:
-	}
+	//the nines can be changed
+	butt = make([]Button, width*height)
+
 	return butt
 
 }
