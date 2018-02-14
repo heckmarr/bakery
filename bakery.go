@@ -6,6 +6,8 @@ import (
 //	"gitlab.com/localtoast/bakery/loaf"
 //	"gitlab.com/localtoast/bakery/dough"
 	"fmt"
+	"strings"
+	"time"
 )
 
 
@@ -34,6 +36,54 @@ func main() {
 		}
 		fmt.Printf("0DG:>")
 		fmt.Scan(&input)
+		switch input {
+			case "spawn":
+				x := 0
+				done := false
+				y := 0
+				welcome := "WELCOME_TO_DEEGEE"
+				wel := strings.Split(welcome, "")
+				fmt.Println(wel[0])
+				for {
+					for i := range new_button {
+						if new_button[i].Y == y {
+							if new_button[i].X > 30 {
+								if done == false{
+									new_button[i].Label = wel[x]
+									x++
+									if x == 17{
+										x = 0
+										y++
+										if y == 11 {
+										done = true
+										x = 0
+										}
+									}
+								}
+							}
+						
+						}
+						fmt.Printf(new_button[i].Label)
+						if new_button[i].X % 80 == 0 {
+							fmt.Println("")
+							time.Sleep(250*time.Millisecond)
+						}
+					}
+					if done {
+//						time.Sleep(250*time.Millisecond)
+					//	fmt.Scan(&input)
+						for i := range new_button {
+							if new_button[i].Y == 11{
+								break
+							}
+							fmt.Printf(new_button[0].Label)
+							time.Sleep(5*time.Millisecond)
+						}
+						fmt.Scan(&input)
+					}
+					
+				}
+		}
 	}
 //	for _, v := range new_button {
 //		fmt.Println("X = ",v.X)
