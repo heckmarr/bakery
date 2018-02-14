@@ -7,7 +7,7 @@ import (
 //	"gitlab.com/localtoast/bakery/dough"
 	"fmt"
 	"strings"
-	"time"
+//	"time"
 )
 
 
@@ -19,70 +19,39 @@ func main() {
 	//init can be changed
 	xvar := 81
 	yvar := 23
-	new_button := flour.Dough(xvar, yvar)
-	new_button = flour.Oven(new_button, "BUTOOON", xvar, yvar)
+	test_toast := flour.Dough(xvar, yvar)
+	test_toast = flour.Oven(test_toast, "BUTOOON", xvar, yvar)
 	//just toasting something
 	bread := "rye"
 	for _, v := range bread {
 		fmt.Printf(string(v))
 	}
-	fmt.Println(new_button)
+	fmt.Println(test_toast)
 	for {
-		for i := range new_button {
-			fmt.Printf(new_button[i].Label)
-			if new_button[i].Nl {
-				fmt.Println("")
-			}
-		}
+//		for i := range test_toast {
+//			fmt.Printf(test_toast[i].Label)
+//			if test_toast[i].Nl {
+//				fmt.Println("")
+//			}
+//		}
 		fmt.Printf("0DG:>")
 		fmt.Scan(&input)
 		switch input {
 			case "spawn":
-				x := 0
-				done := false
-				y := 0
 				welcome := "WELCOME_TO_DEEGEE"
 				wel := strings.Split(welcome, "")
 				fmt.Println(wel[0])
-				for {
-					for i := range new_button {
-						if new_button[i].Y == y {
-							if new_button[i].X > 30 {
-								if done == false{
-									new_button[i].Label = wel[x]
-									x++
-									if x == 17{
-										x = 0
-										y++
-										if y == 11 {
-										done = true
-										x = 0
-										}
-									}
-								}
-							}
-						
-						}
-						fmt.Printf(new_button[i].Label)
-						if new_button[i].X % 80 == 0 {
-							fmt.Println("")
-							time.Sleep(250*time.Millisecond)
-						}
-					}
-					if done {
-//						time.Sleep(250*time.Millisecond)
-					//	fmt.Scan(&input)
-						for i := range new_button {
-							if new_button[i].Y == 11{
-								break
-							}
-							fmt.Printf(new_button[0].Label)
-							time.Sleep(5*time.Millisecond)
-						}
-						fmt.Scan(&input)
-					}
-					
+				for i := 0;i < len(welcome);i++ {
+//        				  DO STUFF HERE
+					slice := flour.Bread_Getter(30+i, 11, test_toast)
+					slice.Label = string(wel[i])
+					test_toast = flour.Bread_Setter(30+i, 11, test_toast, slice)
 				}
+				flour.Toast(test_toast)
+			case "exit":
+				break
+			default:
+				flour.Toast(test_toast)
 		}
 	}
 //	for _, v := range new_button {

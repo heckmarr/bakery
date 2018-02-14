@@ -2,7 +2,7 @@ package flour
 
 import "fmt"
 
-type Button struct{
+type Bread struct{
 	X,Y int
 	Label string
 	Nl bool
@@ -15,11 +15,16 @@ type Flour interface {
 	Bread()
 }
 
-func Toast() {
-
+func Toast(loaf []Bread) {
+	for i := range loaf {
+		fmt.Printf(loaf[i].Label)
+		if loaf[i].Nl {
+			fmt.Println("")
+		}
+	}
 }
 
-func Oven(butt []Button, label string, xvar int, yvar int) []Button {
+func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 	x := 0
 	y := 0
 	for index := range butt{
@@ -39,7 +44,7 @@ func Oven(butt []Button, label string, xvar int, yvar int) []Button {
 //		}
 		butt[index].Y = y
 	}
-	var butter []Button
+	var butter []Bread
 	//we get some extraneous values
 	for yandex := range butt{
 		if yandex % 2 == 0{
@@ -56,15 +61,41 @@ func Oven(butt []Button, label string, xvar int, yvar int) []Button {
 	return butter
 }
 
-func Bread() {
+func Bread_Getter(x int, y int, loaf []Bread) Bread {
+	//Gets the bread at position x, y
+	var val Bread
+
+	for i := range loaf {
+		if loaf[i].Y == y {
+			if loaf[i].X == x {
+				val = loaf[i]
+				break
+			}
+		}
+	}
+	return val
+}
+
+func Bread_Setter(x int, y int, loaf []Bread, val Bread) []Bread {
+	//sets the Bread at position x, y
+	for i := range loaf {
+		if loaf[i].Y == y {
+			if loaf[i].X == x {
+				loaf[i] = val
+				break
+			}
+		}
+	}
+
+	return loaf
 
 }
 
-func Dough(width int, height int) []Button {
-	var butt []Button
+func Dough(width int, height int) []Bread {
+	var butt []Bread
 	fmt.Println("Dough all mooshy!")
 	//the nines can be changed
-	butt = make([]Button, width*height)
+	butt = make([]Bread, width*height)
 
 	return butt
 
