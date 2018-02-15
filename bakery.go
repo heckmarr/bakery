@@ -42,6 +42,25 @@ func Welcome(test_toast []flour.Bread) {
 	fmt.Printf("\nDG:>")
 }
 
+func Copy_Toast(welcome string, xvar int, yvar int, yend int, test_toast []flour.Bread) {
+        wel := strings.Split(welcome, "")
+        fmt.Println(wel[0])
+	if yend != 0{
+		for x := yend; x > 0;x--{
+		        for i := 0;i < len(welcome);i++ {
+//                                        DO STUFF HERE
+       		        slice := flour.Bread_Getter(xvar+i, yvar - x, test_toast)
+                	slice.Label = string(wel[i])
+                	test_toast = flour.Bread_Setter(xvar+i, yvar - x, test_toast, slice)
+			}
+		}
+	}
+        flour.Toast(test_toast)
+        fmt.Printf("\nDG:>")
+}
+
+
+
 func Flat(test_toast []flour.Bread) {
         for i := range test_toast {
                 test_toast[i].Label = "_"
@@ -49,6 +68,14 @@ func Flat(test_toast []flour.Bread) {
         flour.Toast(test_toast)
 	fmt.Printf("\nDG:>")
 }
+
+func Spawn_Button(xvar int, yvar int, test_toast []flour.Bread){
+	Copy_Toast("=====", xvar, yvar, 1, test_toast)
+	Copy_Toast("| X |", xvar, yvar+1, 1, test_toast)
+	Copy_Toast("=====", xvar, yvar+2, 1, test_toast)
+
+}
+
 
 
 func main() {
@@ -71,10 +98,16 @@ func main() {
 			case "spawn":
 				Flat(test_toast)
 				time.Sleep(1*time.Second)
-				Welcome(test_toast)
+				Copy_Toast("DEEGEE", 35, 11, 1, test_toast)
 				time.Sleep(1*time.Second)
 				Spatter(xvar, yvar, test_toast)
 				Flat(test_toast)
+				Spawn_Button(30, 2, test_toast)
+				Spawn_Button(30, 19, test_toast)
+				Spawn_Button(1, 2, test_toast)
+				Spawn_Button(1, 19, test_toast)
+				Spawn_Button(74, 2, test_toast)
+				Spawn_Button(74, 19, test_toast)
 			case "spatter":
 				Spatter(xvar, yvar, test_toast)
 			case "welcome":
