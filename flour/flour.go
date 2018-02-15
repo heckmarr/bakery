@@ -47,10 +47,15 @@ func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 	var butter []Bread
 	//we get some extraneous values
 	for yandex := range butt{
-		if yandex % 2 == 0{
-			butt[yandex].Label = "0"
+		
+		if label == "_" {
+			if yandex % 2 == 0{
+				butt[yandex].Label = "0"
+			} else {
+				butt[yandex].Label = "1"
+			}
 		} else {
-			butt[yandex].Label = "1"
+			butt[yandex].Label = label
 		}
 		if butt[yandex].Y >= yvar {
 			butter = butt[:yandex]
