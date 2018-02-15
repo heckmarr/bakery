@@ -7,7 +7,8 @@ import (
 //	"gitlab.com/localtoast/bakery/dough"
 	"fmt"
 	"strings"
-//	"time"
+	"math/rand"
+	"time"
 )
 
 
@@ -34,6 +35,7 @@ func main() {
 //				fmt.Println("")
 //			}
 //		}
+		flour.Toast(test_toast)
 		fmt.Printf("0DG:>")
 		fmt.Scan(&input)
 		switch input {
@@ -46,6 +48,26 @@ func main() {
 					slice := flour.Bread_Getter(30+i, 11, test_toast)
 					slice.Label = string(wel[i])
 					test_toast = flour.Bread_Setter(30+i, 11, test_toast, slice)
+				}
+				flour.Toast(test_toast)
+			case "matrici":
+				rand.Seed(12)
+				welcome := "WELCOME_TO_HECK"
+				wel := strings.Split(welcome, "")
+				fmt.Println(wel[0])
+				for i := 0;i < len(test_toast)/24;i++ {
+					x := rand.Intn(xvar - 1)
+					y := rand.Intn(yvar - 1)
+					slice := flour.Bread_Getter(x, y, test_toast)
+					slice.Label = string(wel[rand.Intn(len(wel)-1)])
+					test_toast = flour.Bread_Setter(x, y, test_toast, slice)
+					flour.Toast(test_toast)
+					fmt.Printf("0DG:>")
+					time.Sleep(100*time.Millisecond)
+				}
+			case "flat":
+				for i := range test_toast {
+					test_toast[i].Label = "_"
 				}
 				flour.Toast(test_toast)
 			case "exit":
