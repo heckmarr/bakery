@@ -9,6 +9,9 @@ import (
 	"strings"
 	"math/rand"
 	"time"
+//	"bufio"
+//	"io"
+
 )
 
 func Spatter(xvar int, yvar int, test_toast []flour.Bread) {
@@ -102,13 +105,21 @@ func main() {
 	yvar := 23
 	test_toast := flour.Dough(xvar, yvar)
 	test_toast = flour.Oven(test_toast, "BUTOOON", xvar, yvar)
+//	var rd io.Reader
+//	reader := bufio.NewReader(rd)
+	var r rune
+//	var x int
 	//just toasting something
 	for {
 		flour.Toast(test_toast)
 		fmt.Printf("\nDG:>")
-		fmt.Scan(&input)
-
+//		r  = scanner.Scan()
+//		fmt.Scan(&input, "%1")
+//		flour.Pop()
+		fmt.Println("GOT :"+string(r))
 		switch input {
+			case "$":
+				Copy_Toast("$", 35, 5, 1, test_toast)
 			case "spawn":
 				var contentview []flour.Bread
 				var nodeview []flour.Bread
