@@ -8,20 +8,26 @@ import (
 
 func readStdin(out chan string, in chan bool) {
 	//no buffering
-	exec.Command("stty", "-f", "/dev/tty", "cbreak", "min", "1").Run()
+	exec.Command("stty","-F", "/dev/tty", "cbreak", "min", "1").Start()
 	//no visible output
-	exec.Command("stty", "-f", "/dev/tty", "-echo").Run()
+	exec.Command("stty", "-F", "/dev/tty", "-echo").Run()
+	// restore the echoing state when exiting
+	defer exec.Command("stty", "-F", "/dev/tty", "echo").Run()
 
 	var b []byte = make([]byte, 1)
 	for {
-		select {
-		case <-in:
-			return
-		default:
-			os.Stdin.Read(b)
-			fmt.Printf(">>> %v: ", b)
-			out <- string(b)
+		os.Stdin.Read(b)
+		if b != nil {
+		fmt.Println("==="+string(b)+"===")
 		}
+//		select {
+//		case <-in:
+//			return
+//		default:
+//			os.Stdin.Read(b)
+//			fmt.Printf(">>> %v: ", b)
+//			out <- string(b)
+//		}
 	}
 }
 
@@ -31,33 +37,19 @@ func main() {
 	}()
 	stdin := make(chan string, 1)
 	kill := make(chan bool, 1)
-	var count int = 0
-	var input string
 
-	fmt.Print("this program don't wait for a enter-key\nyou can now start typing\npress \"q\" to quit\n\n")
-
-	go readStdin(stdin, kill)
+	readStdin(stdin, kill)
 	for {
 		str := <-stdin
 
-		if str == "q" {
+		if str == "0" {
 			kill <- true
 			close(stdin)
 			break
+		} else {
+			fmt.Println(str)
 		}
 
-		fmt.Println(str)
-		input += str
-		count++
-
-		if count%10 == 0 {
-			fmt.Printf("\n\nyou typed %v keys, quit the demo by pressing \"q\"\n\n", count)
-			if count == 600 {
-				fmt.Printf("Don't waste your time! Do something meaningful!")
-				break
-			}
-		}
 	}
-	fmt.Printf("\n\nyou typed %v keys before you quit the program\n", count)
-	fmt.Println(input)
+
 }
