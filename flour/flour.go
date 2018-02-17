@@ -115,6 +115,7 @@ func Dough(width int, height int) []Bread {
 
 }
 
+
 func Toast_Logger(logger string) {
 	blab := 0
 	loggo, err := os.OpenFile("toast.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)

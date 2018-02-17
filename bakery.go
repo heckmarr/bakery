@@ -10,7 +10,7 @@ import (
 	"math/rand"
 	"time"
 //	"bufio"
-//	"io"
+	"io/ioutil"
 	"os"
 	"os/exec"
 )
@@ -117,7 +117,21 @@ func Spawn_View(xvar int, yvar int, test_toast []flour.Bread, xlen int, yhei int
 	return slice
 
 }
-
+func Toast_Item(path string, slice []flour.Bread){
+//        text, err := os.OpenFile(path, os.O_RDONLY, 777)
+//        defer text.Close()
+//	var temp string
+	in4, err := ioutil.ReadFile(path)
+//	defer in4.Close()
+	fmt.Printf(string(in4))
+//	for i := 0; i < len(string(in4));i++{
+		Copy_Toast(string(in4), 1, 1, 14, slice)
+		fmt.Println("DOOT")
+//	}
+	if err != nil{
+		fmt.Println("Something went wrong!")
+	}
+}
 
 
 
@@ -187,6 +201,7 @@ func main() {
 				Spawn_Button("6",74, 19, test_toast)
 				contentview = Spawn_View(35, 5, test_toast, 39, 14)
 				nodeview = Spawn_View(5, 5, test_toast, 25, 14)
+				Toast_Item("breadbox/000", test_toast)
 				//do things with them
 				contentview[0] = contentview[0]
 				nodeview[0] = nodeview[0]
