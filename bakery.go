@@ -15,6 +15,7 @@ import (
 	"os/exec"
 )
 func readStdin(out chan string, in chan bool) {
+	flour.Toast_Logger("readStdin")
         //no buffering
         exec.Command("stty","-F", "/dev/tty", "cbreak", "min", "1").Run()
         //no visible output
@@ -34,6 +35,7 @@ func readStdin(out chan string, in chan bool) {
 
 
 func Spatter(xvar int, yvar int, test_toast []flour.Bread) {
+	flour.Toast_Logger("Spatter")
         rand.Seed(12)
         welcome := "WELCOME_TO_HECK"
         wel := strings.Split(welcome, "")
@@ -51,6 +53,7 @@ func Spatter(xvar int, yvar int, test_toast []flour.Bread) {
 }
 
 func Welcome(test_toast []flour.Bread) {
+	flour.Toast_Logger("Welcome")
         welcome := "WELCOME_TO_DEEGEE"
         wel := strings.Split(welcome, "")
 //        fmt.Println(wel[0])
@@ -65,6 +68,7 @@ func Welcome(test_toast []flour.Bread) {
 }
 
 func Copy_Toast(welcome string, xvar int, yvar int, yend int, test_toast []flour.Bread) {
+	flour.Toast_Logger("Copy_Toast")
         wel := strings.Split(welcome, "")
 //        fmt.Println(wel[0])
 	if yend != 0{
@@ -84,6 +88,7 @@ func Copy_Toast(welcome string, xvar int, yvar int, yend int, test_toast []flour
 
 
 func Flat(label string, test_toast []flour.Bread) {
+	flour.Toast_Logger("Flat")
         for i := range test_toast {
                 test_toast[i].Label = label
         }
@@ -92,6 +97,7 @@ func Flat(label string, test_toast []flour.Bread) {
 }
 
 func Spawn_Button(label string, xvar int, yvar int, test_toast []flour.Bread){
+	flour.Toast_Logger("Spawn_Button")
 	Copy_Toast("=====", xvar, yvar, 1, test_toast)
 	Copy_Toast(("| "+label+ " |"), xvar, yvar+1, 1, test_toast)
 	Copy_Toast("=====", xvar, yvar+2, 1, test_toast)
@@ -99,7 +105,7 @@ func Spawn_Button(label string, xvar int, yvar int, test_toast []flour.Bread){
 }
 
 func Spawn_View(xvar int, yvar int, test_toast []flour.Bread, xlen int, yhei int) []flour.Bread {
-
+	flour.Toast_Logger("Spawn_View")
 	slice := flour.Dough(xvar+1, yvar+1)
 	slice = flour.Oven(slice, "=", xvar, yvar)
 
@@ -111,6 +117,7 @@ func Spawn_View(xvar int, yvar int, test_toast []flour.Bread, xlen int, yhei int
 	return slice
 
 }
+
 
 
 
@@ -172,7 +179,7 @@ func main() {
 				time.Sleep(1*time.Second)
 				Spatter(xvar, yvar, test_toast)
 				Flat("_", test_toast)
-				Spawn_Button("1",30, 2, test_toast)
+				Spawn_Button("$",30, 2, test_toast)
 				Spawn_Button("2",30, 19, test_toast)
 				Spawn_Button("3",1, 2, test_toast)
 				Spawn_Button("4",1, 19, test_toast)

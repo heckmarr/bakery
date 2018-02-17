@@ -1,6 +1,10 @@
 package flour
 
-import "fmt"
+import (
+	"fmt"
+//	"io/ioutil"
+	"os"
+)
 
 type Bread struct{
 	X,Y int
@@ -16,6 +20,7 @@ type Flour interface {
 }
 
 func Toast(loaf []Bread) {
+	Toast_Logger("Toast")
 	for i := range loaf {
 		fmt.Printf(loaf[i].Label)
 		if loaf[i].Nl {
@@ -25,6 +30,7 @@ func Toast(loaf []Bread) {
 }
 
 func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
+	Toast_Logger("Oven")
 	x := 0
 	y := 0
 	for index := range butt{
@@ -67,6 +73,7 @@ func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 }
 
 func Bread_Getter(x int, y int, loaf []Bread) Bread {
+	Toast_Logger("Bread_Getter")
 	//Gets the bread at position x, y
 	var val Bread
 
@@ -82,6 +89,7 @@ func Bread_Getter(x int, y int, loaf []Bread) Bread {
 }
 
 func Bread_Setter(x int, y int, loaf []Bread, val Bread) []Bread {
+	Toast_Logger("Bread_Setter")
 	//sets the Bread at position x, y
 	for i := range loaf {
 		if loaf[i].Y == y {
@@ -97,11 +105,23 @@ func Bread_Setter(x int, y int, loaf []Bread, val Bread) []Bread {
 }
 
 func Dough(width int, height int) []Bread {
+	Toast_Logger("Dough")
 	var butt []Bread
 	fmt.Println("Dough all mooshy!")
 	//the nines can be changed
 	butt = make([]Bread, width*height)
 
 	return butt
+
+}
+
+func Toast_Logger(logger string) {
+	loggo, err := os.Create("toastlog.log")
+	_, err = os.Lstat("toastlog.log")
+	if err != nil {
+		fmt.Println("Fatal error")
+	}
+	loggo.WriteString(("==="+logger+"===\n"))
+	loggo.Close()
 
 }
