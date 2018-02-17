@@ -116,12 +116,14 @@ func Dough(width int, height int) []Bread {
 }
 
 func Toast_Logger(logger string) {
-	loggo, err := os.Create("toastlog.log")
-	_, err = os.Lstat("toastlog.log")
+	blab := 0
+	loggo, err := os.OpenFile("toast.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	defer loggo.Close()
+	_, err = os.Lstat("toast.log")
 	if err != nil {
 		fmt.Println("Fatal error")
 	}
-	loggo.WriteString(("==="+logger+"===\n"))
-	loggo.Close()
-
+	if blab == 1{
+		loggo.WriteString("==="+logger+"===\n")
+	}
 }
