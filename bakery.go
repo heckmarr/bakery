@@ -11,8 +11,27 @@ import (
 	"time"
 //	"bufio"
 //	"io"
-
+	"os"
+	"os/exec"
 )
+func readStdin(out chan string, in chan bool) {
+        //no buffering
+        exec.Command("stty","-F", "/dev/tty", "cbreak", "min", "1").Run()
+        //no visible output
+        exec.Command("stty", "-F", "/dev/tty", "-echo").Run()
+        // restore the echoing state when exiting
+        defer exec.Command("stty", "-F", "/dev/tty", "echo").Run()
+
+        var b []byte = make([]byte, 1)
+        for {
+                os.Stdin.Read(b)
+                out <- string(b)
+
+        }
+}
+
+
+
 
 func Spatter(xvar int, yvar int, test_toast []flour.Bread) {
         rand.Seed(12)
@@ -107,19 +126,42 @@ func main() {
 	test_toast = flour.Oven(test_toast, "BUTOOON", xvar, yvar)
 //	var rd io.Reader
 //	reader := bufio.NewReader(rd)
-	var r rune
+//	var r rune
 //	var x int
 	//just toasting something
 	for {
 		flour.Toast(test_toast)
 		fmt.Printf("\nDG:>")
 //		r  = scanner.Scan()
-//		fmt.Scan(&input, "%1")
+		fmt.Scan(&input)
 //		flour.Pop()
-		fmt.Println("GOT :"+string(r))
+//		fmt.Println("GOT :"+string(r))
 		switch input {
 			case "$":
-				Copy_Toast("$", 35, 5, 1, test_toast)
+			        stdin := make(chan string, 1)
+        			kill := make(chan bool, 1)
+				xpos := 0
+//				ypos := 0
+        			go readStdin(stdin, kill)
+        			for {
+					flour.Toast(test_toast)
+					fmt.Printf("_")
+        			        str := <-stdin
+
+        			        if str == "0" {
+                			        kill <- true
+                			        close(stdin)
+                        			break
+                			} else {
+                				Copy_Toast(str, 35+xpos, 5, 1, test_toast)
+				//	        fmt.Println("I got : "+str)
+						xpos++
+                			}
+
+       				}
+
+
+//				Copy_Toast("$", 35, 5, 1, test_toast)
 			case "spawn":
 				var contentview []flour.Bread
 				var nodeview []flour.Bread

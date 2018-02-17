@@ -8,7 +8,7 @@ import (
 
 func readStdin(out chan string, in chan bool) {
 	//no buffering
-	exec.Command("stty","-F", "/dev/tty", "cbreak", "min", "1").Start()
+	exec.Command("stty","-F", "/dev/tty", "cbreak", "min", "1").Run()
 	//no visible output
 	exec.Command("stty", "-F", "/dev/tty", "-echo").Run()
 	// restore the echoing state when exiting
@@ -16,18 +16,13 @@ func readStdin(out chan string, in chan bool) {
 
 	var b []byte = make([]byte, 1)
 	for {
-		os.Stdin.Read(b)
-		if b != nil {
-		fmt.Println("==="+string(b)+"===")
-		}
-//		select {
-//		case <-in:
-//			return
-//		default:
-//			os.Stdin.Read(b)
-//			fmt.Printf(">>> %v: ", b)
-//			out <- string(b)
+//		if b != nil {
+//		fmt.Println("==="+string(b)+"===")
 //		}
+		os.Stdin.Read(b)
+//		fmt.Printf(">>> %v: ", b)
+		out <- string(b)
+		
 	}
 }
 
@@ -38,7 +33,7 @@ func main() {
 	stdin := make(chan string, 1)
 	kill := make(chan bool, 1)
 
-	readStdin(stdin, kill)
+	go readStdin(stdin, kill)
 	for {
 		str := <-stdin
 
@@ -47,7 +42,7 @@ func main() {
 			close(stdin)
 			break
 		} else {
-			fmt.Println(str)
+			fmt.Println("I got : "+str)
 		}
 
 	}
