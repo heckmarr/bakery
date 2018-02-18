@@ -9,7 +9,8 @@ import (
 	"strings"
 	"math/rand"
 	"time"
-//	"bufio"
+	"bufio"
+	"io"
 	"io/ioutil"
 	"os"
 	"os/exec"
@@ -104,34 +105,29 @@ func Spawn_Button(label string, xvar int, yvar int, test_toast []flour.Bread){
 
 }
 
-func Spawn_View(xvar int, yvar int, test_toast []flour.Bread, xlen int, yhei int) []flour.Bread {
-	flour.Toast_Logger("Spawn_View")
+func Spawn_Index(path string, xvar int, yvar int, test_toast []flour.Bread, xlen int, yhei int) []flour.Bread {
+	flour.Toast_Logger("Spawn_Index")
 	slice := flour.Dough(xvar+1, yvar+1)
 	slice = flour.Oven(slice, "=", xvar, yvar)
+	fi, err := ioutil.ReadFile(path)
+	var reader io.Reader
+	reader = bufio.NewReader(reader)
+	filo, _ := os.Open(path)
+	filscan := bufio.NewScanner(filo)
+	xlen = len(string(fi))
+	for filscan.Scan() {
+		yvar++
+		Copy_Toast(filscan.Text(), xvar, yvar, 1, test_toast)
 
-	for y := 0;y < yhei;y++ {
-		for x := 0;x < xlen;x++{
-			Copy_Toast(slice[0].Label, xvar+x, yvar+y, 1, test_toast)
-		}
+	}
+
+	if err != nil {
+		fmt.Println("Something went wrong!")
 	}
 	return slice
 
 }
-func Toast_Item(path string, slice []flour.Bread){
-//        text, err := os.OpenFile(path, os.O_RDONLY, 777)
-//        defer text.Close()
-//	var temp string
-	in4, err := ioutil.ReadFile(path)
-//	defer in4.Close()
-	fmt.Printf(string(in4))
-//	for i := 0; i < len(string(in4));i++{
-		Copy_Toast(string(in4), 1, 1, 14, slice)
-		fmt.Println("DOOT")
-//	}
-	if err != nil{
-		fmt.Println("Something went wrong!")
-	}
-}
+
 
 
 
@@ -151,6 +147,9 @@ func main() {
 //	var x int
 	//just toasting something
 	for {
+//		if input == "spawn"{
+//			flour.Toast(nodeview)
+//		}
 		flour.Toast(test_toast)
 		fmt.Printf("\nDG:>")
 //		r  = scanner.Scan()
@@ -184,12 +183,11 @@ func main() {
 
 //				Copy_Toast("$", 35, 5, 1, test_toast)
 			case "spawn":
-				var contentview []flour.Bread
-				var nodeview []flour.Bread
 				Flat("_", test_toast)
 				time.Sleep(1*time.Second)
 				Copy_Toast("DEEGEE", 35, 11, 1, test_toast)
 				flour.Toast(test_toast)
+				fmt.Printf("_DG:>")
 				time.Sleep(1*time.Second)
 				Spatter(xvar, yvar, test_toast)
 				Flat("_", test_toast)
@@ -199,12 +197,10 @@ func main() {
 				Spawn_Button("4",1, 19, test_toast)
 				Spawn_Button("5",74, 2, test_toast)
 				Spawn_Button("6",74, 19, test_toast)
-				contentview = Spawn_View(35, 5, test_toast, 39, 14)
-				nodeview = Spawn_View(5, 5, test_toast, 25, 14)
-				Toast_Item("breadbox/000", test_toast)
+				//turn this into spawn_content
+				Spawn_Index("breadbox/000.1", 35, 5, test_toast, 39, 14)
+				Spawn_Index("breadbox/000", 5, 5, test_toast, 25, 14)
 				//do things with them
-				contentview[0] = contentview[0]
-				nodeview[0] = nodeview[0]
 			case "spatter":
 				Spatter(xvar, yvar, test_toast)
 			case "welcome":
