@@ -10,8 +10,8 @@ import (
 	"math/rand"
 	"time"
 	"bufio"
-	"io"
-	"io/ioutil"
+//	"io"
+//	"io/ioutil"
 	"os"
 	"os/exec"
 )
@@ -38,7 +38,7 @@ func readStdin(out chan string, in chan bool) {
 func Spatter(xvar int, yvar int, test_toast []flour.Bread) {
 	flour.Toast_Logger("Spatter")
         rand.Seed(12)
-        welcome := "WELCOME_TO_HECK"
+        welcome := "WELCOME_TO_ROBOT_HECK"
         wel := strings.Split(welcome, "")
         fmt.Println(wel[0])
         for i := 0;i < len(test_toast)/24;i++ {
@@ -57,7 +57,6 @@ func Welcome(test_toast []flour.Bread) {
 	flour.Toast_Logger("Welcome")
         welcome := "WELCOME_TO_DEEGEE"
         wel := strings.Split(welcome, "")
-//        fmt.Println(wel[0])
         for i := 0;i < len(welcome);i++ {
 //                                        DO STUFF HERE
                 slice := flour.Bread_Getter(30+i, 11, test_toast)
@@ -71,7 +70,6 @@ func Welcome(test_toast []flour.Bread) {
 func Copy_Toast(welcome string, xvar int, yvar int, yend int, test_toast []flour.Bread) {
 	flour.Toast_Logger("Copy_Toast")
         wel := strings.Split(welcome, "")
-//        fmt.Println(wel[0])
 	if yend != 0{
 		for x := yend; x > 0;x--{
 		        for i := 0;i < len(welcome);i++ {
@@ -82,8 +80,6 @@ func Copy_Toast(welcome string, xvar int, yvar int, yend int, test_toast []flour
 			}
 		}
 	}
-//        flour.Toast(test_toast)
-//        fmt.Printf("\nDG:>")
 }
 
 
@@ -109,12 +105,8 @@ func Spawn_Index(path string, xvar int, yvar int, test_toast []flour.Bread, xlen
 	flour.Toast_Logger("Spawn_Index")
 	slice := flour.Dough(xvar+1, yvar+1)
 	slice = flour.Oven(slice, "=", xvar, yvar)
-	fi, err := ioutil.ReadFile(path)
-	var reader io.Reader
-	reader = bufio.NewReader(reader)
-	filo, _ := os.Open(path)
+	filo, err := os.Open(path)
 	filscan := bufio.NewScanner(filo)
-	xlen = len(string(fi))
 	for filscan.Scan() {
 		yvar++
 		Copy_Toast(filscan.Text(), xvar, yvar, 1, test_toast)
@@ -132,36 +124,23 @@ func Spawn_Index(path string, xvar int, yvar int, test_toast []flour.Bread, xlen
 
 
 func main() {
-//	toast.Toast()
-//	oven.Oven()
-//	loaf.Loaf()
 	input := ""
 	//init can be changed
 	xvar := 81
 	yvar := 23
 	test_toast := flour.Dough(xvar, yvar)
-	test_toast = flour.Oven(test_toast, "BUTOOON", xvar, yvar)
-//	var rd io.Reader
-//	reader := bufio.NewReader(rd)
-//	var r rune
-//	var x int
+	test_toast = flour.Oven(test_toast, "_", xvar, yvar)
+	Flat("_", test_toast)
 	//just toasting something
 	for {
-//		if input == "spawn"{
-//			flour.Toast(nodeview)
-//		}
 		flour.Toast(test_toast)
 		fmt.Printf("\nDG:>")
-//		r  = scanner.Scan()
 		fmt.Scan(&input)
-//		flour.Pop()
-//		fmt.Println("GOT :"+string(r))
 		switch input {
 			case "$":
 			        stdin := make(chan string, 1)
         			kill := make(chan bool, 1)
 				xpos := 0
-//				ypos := 0
         			go readStdin(stdin, kill)
         			for {
 					flour.Toast(test_toast)
@@ -174,14 +153,13 @@ func main() {
                         			break
                 			} else {
                 				Copy_Toast(str, 35+xpos, 5, 1, test_toast)
-				//	        fmt.Println("I got : "+str)
 						xpos++
+// this is a good place to grab the rune printed
                 			}
 
        				}
 
 
-//				Copy_Toast("$", 35, 5, 1, test_toast)
 			case "spawn":
 				Flat("_", test_toast)
 				time.Sleep(1*time.Second)
