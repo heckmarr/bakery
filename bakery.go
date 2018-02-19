@@ -38,7 +38,7 @@ func readStdin(out chan string, in chan bool) {
 func Spatter(xvar int, yvar int, test_toast []flour.Bread) {
 	flour.Toast_Logger("Spatter")
         rand.Seed(12)
-        welcome := "WELCOME_TO_ROBOT_HECK"
+        welcome := "WELCOME_TO_THE_MARCHELL"
         wel := strings.Split(welcome, "")
         fmt.Println(wel[0])
         for i := 0;i < len(test_toast)/24;i++ {
@@ -48,7 +48,7 @@ func Spatter(xvar int, yvar int, test_toast []flour.Bread) {
                 slice.Label = string(wel[rand.Intn(len(wel)-1)])
                 test_toast = flour.Bread_Setter(x, y, test_toast, slice)
                 flour.Toast(test_toast)
-                fmt.Printf("0\nDG:>")
+                fmt.Printf("0\n<:o.o:>")
                 time.Sleep(75*time.Millisecond)
                 }
 }
@@ -64,7 +64,7 @@ func Welcome(test_toast []flour.Bread) {
                 test_toast = flour.Bread_Setter(30+i, 11, test_toast, slice)
         }
 	flour.Toast(test_toast)
-	fmt.Printf("\nDG:>")
+	fmt.Printf("\n<:o.o:>")
 }
 
 func Copy_Toast(welcome string, xvar int, yvar int, yend int, test_toast []flour.Bread) {
@@ -90,7 +90,7 @@ func Flat(label string, test_toast []flour.Bread) {
                 test_toast[i].Label = label
         }
         flour.Toast(test_toast)
-	fmt.Printf("\nDG:>")
+	fmt.Printf("\n<:o.o:>")
 }
 
 func Spawn_Button(label string, xvar int, yvar int, test_toast []flour.Bread){
@@ -134,7 +134,7 @@ func main() {
 	//just toasting something
 	for {
 		flour.Toast(test_toast)
-		fmt.Printf("\nDG:>")
+		fmt.Printf("\n<:o.o:>")
 		fmt.Scan(&input)
 		switch input {
 			case "$":
@@ -165,7 +165,7 @@ func main() {
 				time.Sleep(1*time.Second)
 				Copy_Toast("DEEGEE", 35, 11, 1, test_toast)
 				flour.Toast(test_toast)
-				fmt.Printf("_DG:>")
+				fmt.Printf("_<:o.o:>")
 				time.Sleep(1*time.Second)
 				Spatter(xvar, yvar, test_toast)
 				Flat("_", test_toast)
@@ -176,8 +176,8 @@ func main() {
 				Spawn_Button("5",74, 2, test_toast)
 				Spawn_Button("6",74, 19, test_toast)
 				//turn this into spawn_content
-				Spawn_Index("breadbox/000.1", 35, 5, test_toast, 39, 14)
-				Spawn_Index("breadbox/000", 5, 5, test_toast, 25, 14)
+				Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
+				Spawn_Index("breadbox/000", 5, 4, test_toast, 25, 14)
 				//do things with them
 			case "spatter":
 				Spatter(xvar, yvar, test_toast)
