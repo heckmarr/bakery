@@ -174,13 +174,38 @@ func main() {
                                                 kill <- true
                                                 close(stdin)
                                                 break
-                                        } else {
-						//pre and post title hash
+                                        }
+					if str == "k" {
+                                                Copy_Toast("_", 4, 5+xpos+1, 1, test_toast)
+                                                Copy_Toast("_", 30, 5+xpos+1, 1, test_toast)
+                                                //pre and post title hash
                                                 Copy_Toast("#", 4, 5+xpos, 1, test_toast)
-						Copy_Toast("#", 30, 5+xpos, 1, test_toast)
+                                                Copy_Toast("#", 30, 5+xpos, 1, test_toast)
+                                                
+						xpos--
+					//	if xpos == 0 {
+					//		continue
+					//	} else {
+					//		xpos--
+					//	}
+					}
+					if str == "j" {
+						if xpos == 0 {
+							Copy_Toast("#", 4, 5, 1, test_toast)
+							Copy_Toast("#", 30, 5, 1, test_toast)
+						} else{
+							Copy_Toast("_", 4, 5+xpos-1, 1, test_toast)
+							Copy_Toast("_", 30, 5+xpos-1, 1, test_toast)
+							//pre and post title hash
+                                                	Copy_Toast("#", 4, 5+xpos, 1, test_toast)
+							Copy_Toast("#", 30, 5+xpos, 1, test_toast)
+						}
 						xpos++
 // this is a good place to grab the rune printed
                                         }
+					//clear old hash
+//					Copy_Toast("_", 4, 5-xpos, 1, test_toast)
+//					Copy_Toast("_", 30, 5-xpos, 1, test_toast)
 				}
 
 			case "spawn":
