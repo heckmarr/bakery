@@ -164,6 +164,17 @@ func main() {
                                 stdin := make(chan string, 1)
                                 kill := make(chan bool, 1)
                                 xpos := 0
+				thread := "0"
+//WIP
+				for x := 0; x <  14; x++ {
+					if x < 10 {
+						thread = "00" + string(x) 
+					}else {
+						thread = "0" + string(x)
+					}
+					fmt.Println("AT THREAD POSITION "+thread)
+				}
+//WIP thread position
                                 go readStdin(stdin, kill)
                                 for {
                                         flour.Toast(test_toast)
@@ -176,18 +187,12 @@ func main() {
                                                 break
                                         }
 					if str == "k" {
-                                                Copy_Toast("_", 4, 5+xpos+1, 1, test_toast)
-                                                Copy_Toast("_", 30, 5+xpos+1, 1, test_toast)
-                                                //pre and post title hash
-                                                Copy_Toast("#", 4, 5+xpos, 1, test_toast)
-                                                Copy_Toast("#", 30, 5+xpos, 1, test_toast)
-                                                
+	                                        Copy_Toast("_", 4, 5+xpos+1, 1, test_toast)
+        	                                Copy_Toast("_", 30, 5+xpos+1, 1, test_toast)
+                	                        //pre and post title hash
+                        	                Copy_Toast("#", 4, 5+xpos, 1, test_toast)
+                                	        Copy_Toast("#", 30, 5+xpos, 1, test_toast)
 						xpos--
-					//	if xpos == 0 {
-					//		continue
-					//	} else {
-					//		xpos--
-					//	}
 					}
 					if str == "j" {
 						if xpos == 0 {
@@ -203,9 +208,6 @@ func main() {
 						xpos++
 // this is a good place to grab the rune printed
                                         }
-					//clear old hash
-//					Copy_Toast("_", 4, 5-xpos, 1, test_toast)
-//					Copy_Toast("_", 30, 5-xpos, 1, test_toast)
 				}
 
 			case "spawn":
