@@ -160,6 +160,29 @@ func main() {
        				}
 
 
+			case "#":
+                                stdin := make(chan string, 1)
+                                kill := make(chan bool, 1)
+                                xpos := 0
+                                go readStdin(stdin, kill)
+                                for {
+                                        flour.Toast(test_toast)
+                                        fmt.Printf("_")
+                                        str := <-stdin
+
+                                        if str == "0" {
+                                                kill <- true
+                                                close(stdin)
+                                                break
+                                        } else {
+						//pre and post title hash
+                                                Copy_Toast("#", 4, 5+xpos, 1, test_toast)
+						Copy_Toast("#", 30, 5+xpos, 1, test_toast)
+						xpos++
+// this is a good place to grab the rune printed
+                                        }
+				}
+
 			case "spawn":
 				Flat("_", test_toast)
 				time.Sleep(1*time.Second)
@@ -171,13 +194,14 @@ func main() {
 				Flat("_", test_toast)
 				Spawn_Button("$",30, 2, test_toast)
 				Spawn_Button("2",30, 19, test_toast)
-				Spawn_Button("3",1, 2, test_toast)
+				Spawn_Button("#",1, 2, test_toast)
 				Spawn_Button("4",1, 19, test_toast)
 				Spawn_Button("5",74, 2, test_toast)
 				Spawn_Button("6",74, 19, test_toast)
 				//turn this into spawn_content
 				Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
 				Spawn_Index("breadbox/000", 5, 4, test_toast, 25, 14)
+				Spawn_Index("breadbox/001", 5, 5, test_toast, 25, 14)
 				//do things with them
 			case "spatter":
 				Spatter(xvar, yvar, test_toast)
