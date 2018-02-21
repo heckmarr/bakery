@@ -16,13 +16,9 @@ func readStdin(out chan string, in chan bool) {
 
 	var b []byte = make([]byte, 1)
 	for {
-//		if b != nil {
-//		fmt.Println("==="+string(b)+"===")
-//		}
 		os.Stdin.Read(b)
-//		fmt.Printf(">>> %v: ", b)
 		out <- string(b)
-		
+
 	}
 }
 
