@@ -32,16 +32,15 @@ func readStdin(out chan string, in chan bool) {
         }
 }
 
-func Get_Note(test_toast []flour.Bread) {
+func Get_Note(test_toast []flour.Bread, fipath string) {
 	xstart := 35
 	xend := 74
 	ystart := 2
 	yend := 17
+//WIP GET FILENAME PROGRAMMATICALLY
+//    ALSO FILE THINGIES
 	fe, err := os.Create("breadbox/toasting")
 	defer fe.Close()
-//	fe = fe
-//	fi, err := os.Open("breadbox/toasting")
-//	fo := bufio.NewWriter(fi)
 	var temp_toast flour.Bread
 //	74 - 35 = length we need to go over
 //	17 - 2 = height we need to go over
@@ -49,12 +48,11 @@ func Get_Note(test_toast []flour.Bread) {
 		for x := xstart;x < xend;x++{
 			temp_toast = flour.Bread_Getter(x, y, test_toast)
 			fe.WriteString(temp_toast.Label)
-//			fmt.Println(temp_toast.Label)
 		}
 		fe.WriteString("\n")
+//		Sync() does the writing to a safe place	
 		fe.Sync()
 	}
-	//fe.Flush()
 	fe.Close()
 	if err != nil {
 		fmt.Println("SOMETHING WENT WRONG, AIEEE")
@@ -93,7 +91,6 @@ func Welcome(test_toast []flour.Bread) {
 	flour.Toast(test_toast)
 	fmt.Printf("\n<:o.o:>")
 }
-
 func Copy_Toast(welcome string, xvar int, yvar int, yend int, test_toast []flour.Bread) {
 	flour.Toast_Logger("Copy_Toast")
         wel := strings.Split(welcome, "")
@@ -198,7 +195,9 @@ func main() {
 		fmt.Scan(&input)
 		switch input {
 			case "@":
-				Get_Note(test_toast)
+//WIP FILE THINGIES
+				Get_Note(test_toast, "blah")
+			//	Spawn_Contents(path, 
 			case "$":
 			        stdin := make(chan string, 1)
         			kill := make(chan bool, 1)
