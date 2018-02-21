@@ -181,8 +181,10 @@ func main() {
         			        str := <-stdin
 
         			        if str == "0" {
-                			        kill <- true
-                			        close(stdin)
+                			        exec.Command("stty", "-F", "/dev/tty", "echo").Run()
+
+//						kill <- true
+                			        //close(stdin)
                         			break
                 			} else {
                 				Copy_Toast(str, 35+xpos, 5, 1, test_toast)
@@ -205,8 +207,9 @@ func main() {
 					fmt.Printf("_")
                                         str := <-stdin
                                         if str == "0" {
-                                                kill <- true
-                                                close(stdin)
+                                                exec.Command("stty", "-F", "/dev/tty", "echo").Run()
+						//kill <- true
+                                                //close(stdin)
                                                 break
                                         }
 					if str == "k" {
