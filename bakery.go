@@ -101,6 +101,24 @@ func Spawn_Button(label string, xvar int, yvar int, test_toast []flour.Bread){
 
 }
 
+func Spawn_Contents(path string, xvar int, yvar int, test_toast []flour.Bread, xlen int, yhei int) []flour.Bread {
+        flour.Toast_Logger("Spawn_Contents")
+        slice := flour.Dough(xvar+1, yvar+1)
+        slice = flour.Oven(slice, "=", xvar, yvar)
+        filo, err := os.Open(path)
+        filscan := bufio.NewScanner(filo)
+        for filscan.Scan() {
+                yvar++
+                Copy_Toast(filscan.Text(), xvar, yvar, 1, test_toast)
+
+        }
+
+        if err != nil {
+                fmt.Println("Something went wrong!")
+        }
+        return slice
+}
+
 func Spawn_Index(path string, xvar int, yvar int, test_toast []flour.Bread, xlen int, yhei int) []flour.Bread {
 	flour.Toast_Logger("Spawn_Index")
 	slice := flour.Dough(xvar+1, yvar+1)
@@ -189,10 +207,26 @@ func main() {
 					if str == "k" {
 	                                        Copy_Toast("_", 4, 5+xpos+1, 1, test_toast)
         	                                Copy_Toast("_", 30, 5+xpos+1, 1, test_toast)
+//WIP, do we really need another redraw event?	Flat("_", test_toast)
                 	                        //pre and post title hash
-                        	                Copy_Toast("#", 4, 5+xpos, 1, test_toast)
+//WIP works on thread UP, not down
+						if xpos < 10{
+							thread = fmt.Sprint("00",xpos)
+							fmt.Println("THREADPOSITION IS = " + string(thread))
+						}
+						if xpos >= 100{
+							thread = fmt.Sprint(xpos)
+							fmt.Println("THREADPOSITION IS = " + string(thread))
+						}
+						if xpos >= 10{
+							thread = fmt.Sprint("0",xpos)
+							fmt.Println("THREADPOSITION IS = " + string(thread))
+						}
+                        	                Spawn_Contents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, test_toast, 39, 14)
+						Copy_Toast("#", 4, 5+xpos, 1, test_toast)
                                 	        Copy_Toast("#", 30, 5+xpos, 1, test_toast)
 						xpos--
+//END WIP, don't forget to do it upwards too
 					}
 					if str == "j" {
 						if xpos == 0 {
