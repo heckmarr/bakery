@@ -32,13 +32,40 @@ func readStdin(out chan string, in chan bool) {
         }
 }
 
-
+func Get_Note(test_toast []flour.Bread) {
+	xstart := 35
+	xend := 74
+	ystart := 2
+	yend := 17
+	fe, err := os.Create("breadbox/toasting")
+	defer fe.Close()
+//	fe = fe
+//	fi, err := os.Open("breadbox/toasting")
+//	fo := bufio.NewWriter(fi)
+	var temp_toast flour.Bread
+//	74 - 35 = length we need to go over
+//	17 - 2 = height we need to go over
+	for y := ystart;y < yend;y++{
+		for x := xstart;x < xend;x++{
+			temp_toast = flour.Bread_Getter(x, y, test_toast)
+			fe.WriteString(temp_toast.Label)
+//			fmt.Println(temp_toast.Label)
+		}
+		fe.WriteString("\n")
+		fe.Sync()
+	}
+	//fe.Flush()
+	fe.Close()
+	if err != nil {
+		fmt.Println("SOMETHING WENT WRONG, AIEEE")
+	}
+}
 
 
 func Spatter(xvar int, yvar int, test_toast []flour.Bread) {
 	flour.Toast_Logger("Spatter")
         rand.Seed(12)
-        welcome := "WELCOME_TO_THE_MARCHELL"
+        welcome := "MARCHELL"
         wel := strings.Split(welcome, "")
         fmt.Println(wel[0])
         for i := 0;i < len(test_toast)/24;i++ {
@@ -140,7 +167,7 @@ func Spawn_Context(test_toast []flour.Bread){
 //put different context triggers here
 	Flat("_", test_toast)
 	Spawn_Button("$",30, 2, test_toast)
-	Spawn_Button("2",30, 19, test_toast)
+	Spawn_Button("@",30, 19, test_toast)
 	Spawn_Button("#",1, 2, test_toast)
 	Spawn_Button("4",1, 19, test_toast)
 	Spawn_Button("5",74, 2, test_toast)
@@ -170,6 +197,8 @@ func main() {
 		fmt.Printf("\n<:o.o:>")
 		fmt.Scan(&input)
 		switch input {
+			case "@":
+				Get_Note(test_toast)
 			case "$":
 			        stdin := make(chan string, 1)
         			kill := make(chan bool, 1)
