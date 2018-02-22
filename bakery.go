@@ -160,22 +160,36 @@ func Spawn_Index(path string, xvar int, yvar int, test_toast []flour.Bread, xlen
 	return slice
 
 }
-func Spawn_Context(test_toast []flour.Bread){
+func Spawn_Context(view string, test_toast []flour.Bread){
 //put different context triggers here
-	Flat("_", test_toast)
-	Spawn_Button("$",30, 2, test_toast)
-	Spawn_Button("@",30, 19, test_toast)
-	Spawn_Button("#",1, 2, test_toast)
-	Spawn_Button("4",1, 19, test_toast)
-	Spawn_Button("5",74, 2, test_toast)
-	Spawn_Button("6",74, 19, test_toast)
-	//turn this into spawn_content
-//	Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
-	Spawn_Index("breadbox/000", 5, 4, test_toast, 25, 14)
-	Spawn_Index("breadbox/001", 5, 5, test_toast, 25, 14)
-	//Update the screen
-	flour.Toast(test_toast)
+	switch view {
+		case "owo":
+			Flat("_", test_toast)
+			Spawn_Button("$",30, 2, test_toast)
+			Spawn_Button("@",30, 19, test_toast)
+			Spawn_Button("#",1, 2, test_toast)
+			Spawn_Button("4",1, 19, test_toast)
+			Spawn_Button("5",74, 2, test_toast)
+			Spawn_Button("6",74, 19, test_toast)
+			Spawn_Index("breadbox/000", 5, 4, test_toast, 25, 14)
+			Spawn_Index("breadbox/001", 5, 5, test_toast, 25, 14)
+			//Update the screen
+			flour.Toast(test_toast)
+		case "ono":
+                        Flat("_", test_toast)
+                        Spawn_Button("$",59, 2, test_toast)
+                        Spawn_Button("@",59, 19, test_toast)
+                        Spawn_Button("#",1, 2, test_toast)
+                        Spawn_Button("4",1, 19, test_toast)
+                        Spawn_Button("5",74, 2, test_toast)
+                        Spawn_Button("6",74, 19, test_toast)
+                  //update this with the autonoodly filename
+			Spawn_Index("breadbox/toasting", 5, 4, test_toast, 25, 14)
+                        Spawn_Index("breadbox/001", 5, 5, test_toast, 25, 14)
+                        //Update the screen
+                        flour.Toast(test_toast)
 
+	}
 }
 
 
@@ -255,7 +269,7 @@ func main() {
 						if xpos >= 10{
 							thread = fmt.Sprint("0",xpos)
 						}
-						Spawn_Context(test_toast)
+						Spawn_Context("owo", test_toast)
                         	                Spawn_Contents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, test_toast)
 						Copy_Toast("#", 4, 5+xpos, 1, test_toast)
                                 	        Copy_Toast("#", 30, 5+xpos, 1, test_toast)
@@ -281,7 +295,7 @@ func main() {
         	                                                thread = fmt.Sprint("0",xpos)
 	                                                }
 						//}
-							Spawn_Context(test_toast)
+							Spawn_Context("owo",test_toast)
 							//Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
 							Spawn_Contents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, test_toast)
                                                 	Copy_Toast("#", 4, 5+xpos, 1, test_toast)
@@ -301,7 +315,8 @@ func main() {
 				time.Sleep(1*time.Second)
 				Spatter(xvar, yvar, test_toast)
 				//Now spawn where we want to go
-				Spawn_Context(test_toast)
+				Spawn_Context("ono", test_toast)
+//				Spawn_Context("owo",test_toast)
 				//from here
 				//turn this into spawn_content
 				Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
