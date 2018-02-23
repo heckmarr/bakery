@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gitlab.com/localtoast/bakery/flour"
+	"localtoast.net/localtoast/bakery/flour"
 //	"gitlab.com/localtoast/bakery/oven"
 //	"gitlab.com/localtoast/bakery/loaf"
 //	"gitlab.com/localtoast/bakery/dough"
@@ -223,6 +223,7 @@ func main() {
         			        str := <-stdin
 
         			        if str == "0" {
+						//give echo back to the terminal
                 			        exec.Command("stty", "-F", "/dev/tty", "echo").Run()
 
 //						kill <- true
@@ -255,11 +256,6 @@ func main() {
                                                 break
                                         }
 					if str == "k" {
-	                          //              Copy_Toast("_", 4, 5+xpos+1, 1, test_toast)
-        	                  //              Copy_Toast("_", 30, 5+xpos+1, 1, test_toast)
-//WIP, do we really need another redraw event?	Flat("_", test_toast)
-                	                        //pre and post title hash
-//WIP works on thread UP, not down
 						if xpos < 10{
 							thread = fmt.Sprint("00",xpos)
 						}
@@ -315,14 +311,24 @@ func main() {
 				time.Sleep(1*time.Second)
 				Spatter(xvar, yvar, test_toast)
 				//Now spawn where we want to go
-				Spawn_Context("ono", test_toast)
-//				Spawn_Context("owo",test_toast)
+//				Spawn_Context("ono", test_toast)
+				Spawn_Context("owo",test_toast)
 				//from here
 				//turn this into spawn_content
 				Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
 				Spawn_Index("breadbox/000", 5, 4, test_toast, 25, 14)
 				Spawn_Index("breadbox/001", 5, 5, test_toast, 25, 14)
 				//do things with them
+			case "owo":
+				Flat("_", test_toast)
+				fmt.Printf("_<:o.o:>")
+				Spawn_Context("owo", test_toast)
+				Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
+				
+			case "ono":
+				Flat("_", test_toast)
+				fmt.Printf("_<:o.o:>")
+				Spawn_Context("ono", test_toast)
 			case "spatter":
 				Spatter(xvar, yvar, test_toast)
 			case "welcome":
