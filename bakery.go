@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gitlab.com/localtoast/bakery/flour"
+	"localtoast.net/localtoast/bakery/flour"
 //	"gitlab.com/localtoast/bakery/oven"
 //	"gitlab.com/localtoast/bakery/loaf"
 //	"gitlab.com/localtoast/bakery/dough"
@@ -32,13 +32,38 @@ func readStdin(out chan string, in chan bool) {
         }
 }
 
-
+func Get_Note(test_toast []flour.Bread, fipath string) {
+	xstart := 35
+	xend := 74
+	ystart := 2
+	yend := 17
+//WIP GET FILENAME PROGRAMMATICALLY
+//    ALSO FILE THINGIES
+	fe, err := os.Create("breadbox/toasting")
+	defer fe.Close()
+	var temp_toast flour.Bread
+//	74 - 35 = length we need to go over
+//	17 - 2 = height we need to go over
+	for y := ystart;y < yend;y++{
+		for x := xstart;x < xend;x++{
+			temp_toast = flour.Bread_Getter(x, y, test_toast)
+			fe.WriteString(temp_toast.Label)
+		}
+		fe.WriteString("\n")
+//		Sync() does the writing to a safe place	
+		fe.Sync()
+	}
+	fe.Close()
+	if err != nil {
+		fmt.Println("SOMETHING WENT WRONG, AIEEE")
+	}
+}
 
 
 func Spatter(xvar int, yvar int, test_toast []flour.Bread) {
 	flour.Toast_Logger("Spatter")
         rand.Seed(12)
-        welcome := "WELCOME_TO_THE_MARCHELL"
+        welcome := "MARCHELL"
         wel := strings.Split(welcome, "")
         fmt.Println(wel[0])
         for i := 0;i < len(test_toast)/24;i++ {
@@ -66,7 +91,6 @@ func Welcome(test_toast []flour.Bread) {
 	flour.Toast(test_toast)
 	fmt.Printf("\n<:o.o:>")
 }
-
 func Copy_Toast(welcome string, xvar int, yvar int, yend int, test_toast []flour.Bread) {
 	flour.Toast_Logger("Copy_Toast")
         wel := strings.Split(welcome, "")
@@ -136,22 +160,36 @@ func Spawn_Index(path string, xvar int, yvar int, test_toast []flour.Bread, xlen
 	return slice
 
 }
-func Spawn_Context(test_toast []flour.Bread){
+func Spawn_Context(view string, test_toast []flour.Bread){
 //put different context triggers here
-	Flat("_", test_toast)
-	Spawn_Button("$",30, 2, test_toast)
-	Spawn_Button("2",30, 19, test_toast)
-	Spawn_Button("#",1, 2, test_toast)
-	Spawn_Button("4",1, 19, test_toast)
-	Spawn_Button("5",74, 2, test_toast)
-	Spawn_Button("6",74, 19, test_toast)
-	//turn this into spawn_content
-//	Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
-	Spawn_Index("breadbox/000", 5, 4, test_toast, 25, 14)
-	Spawn_Index("breadbox/001", 5, 5, test_toast, 25, 14)
-	//Update the screen
-	flour.Toast(test_toast)
+	switch view {
+		case "owo":
+			Flat("_", test_toast)
+			Spawn_Button("$",30, 2, test_toast)
+			Spawn_Button("@",30, 19, test_toast)
+			Spawn_Button("#",1, 2, test_toast)
+			Spawn_Button("4",1, 19, test_toast)
+			Spawn_Button("5",74, 2, test_toast)
+			Spawn_Button("6",74, 19, test_toast)
+			Spawn_Index("breadbox/000", 5, 4, test_toast, 25, 14)
+			Spawn_Index("breadbox/001", 5, 5, test_toast, 25, 14)
+			//Update the screen
+			flour.Toast(test_toast)
+		case "ono":
+                        Flat("_", test_toast)
+                        Spawn_Button("$",59, 2, test_toast)
+                        Spawn_Button("@",59, 19, test_toast)
+                        Spawn_Button("#",1, 2, test_toast)
+                        Spawn_Button("4",1, 19, test_toast)
+                        Spawn_Button("5",74, 2, test_toast)
+                        Spawn_Button("6",74, 19, test_toast)
+                  //update this with the autonoodly filename
+			Spawn_Index("breadbox/toasting", 5, 4, test_toast, 25, 14)
+                        Spawn_Index("breadbox/001", 5, 5, test_toast, 25, 14)
+                        //Update the screen
+                        flour.Toast(test_toast)
 
+	}
 }
 
 
@@ -170,6 +208,10 @@ func main() {
 		fmt.Printf("\n<:o.o:>")
 		fmt.Scan(&input)
 		switch input {
+			case "@":
+//WIP FILE THINGIES
+				Get_Note(test_toast, "blah")
+			//	Spawn_Contents(path, 
 			case "$":
 			        stdin := make(chan string, 1)
         			kill := make(chan bool, 1)
@@ -181,6 +223,7 @@ func main() {
         			        str := <-stdin
 
         			        if str == "0" {
+						//give echo back to the terminal
                 			        exec.Command("stty", "-F", "/dev/tty", "echo").Run()
 
 //						kill <- true
@@ -213,11 +256,6 @@ func main() {
                                                 break
                                         }
 					if str == "k" {
-	                          //              Copy_Toast("_", 4, 5+xpos+1, 1, test_toast)
-        	                  //              Copy_Toast("_", 30, 5+xpos+1, 1, test_toast)
-//WIP, do we really need another redraw event?	Flat("_", test_toast)
-                	                        //pre and post title hash
-//WIP works on thread UP, not down
 						if xpos < 10{
 							thread = fmt.Sprint("00",xpos)
 						}
@@ -227,7 +265,7 @@ func main() {
 						if xpos >= 10{
 							thread = fmt.Sprint("0",xpos)
 						}
-						Spawn_Context(test_toast)
+						Spawn_Context("owo", test_toast)
                         	                Spawn_Contents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, test_toast)
 						Copy_Toast("#", 4, 5+xpos, 1, test_toast)
                                 	        Copy_Toast("#", 30, 5+xpos, 1, test_toast)
@@ -253,7 +291,7 @@ func main() {
         	                                                thread = fmt.Sprint("0",xpos)
 	                                                }
 						//}
-							Spawn_Context(test_toast)
+							Spawn_Context("owo",test_toast)
 							//Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
 							Spawn_Contents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, test_toast)
                                                 	Copy_Toast("#", 4, 5+xpos, 1, test_toast)
@@ -273,13 +311,24 @@ func main() {
 				time.Sleep(1*time.Second)
 				Spatter(xvar, yvar, test_toast)
 				//Now spawn where we want to go
-				Spawn_Context(test_toast)
+//				Spawn_Context("ono", test_toast)
+				Spawn_Context("owo",test_toast)
 				//from here
 				//turn this into spawn_content
 				Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
 				Spawn_Index("breadbox/000", 5, 4, test_toast, 25, 14)
 				Spawn_Index("breadbox/001", 5, 5, test_toast, 25, 14)
 				//do things with them
+			case "owo":
+				Flat("_", test_toast)
+				fmt.Printf("_<:o.o:>")
+				Spawn_Context("owo", test_toast)
+				Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
+				
+			case "ono":
+				Flat("_", test_toast)
+				fmt.Printf("_<:o.o:>")
+				Spawn_Context("ono", test_toast)
 			case "spatter":
 				Spatter(xvar, yvar, test_toast)
 			case "welcome":
