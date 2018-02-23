@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gitlab.com/localtoast/bakery/flour"
+	"localtoast.net/localtoast/bakery/flour"
 //	"gitlab.com/localtoast/bakery/oven"
 //	"gitlab.com/localtoast/bakery/loaf"
 //	"gitlab.com/localtoast/bakery/dough"
