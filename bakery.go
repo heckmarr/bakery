@@ -215,6 +215,7 @@ func main() {
 			go readStdin(stdin, kill)
 			for {
 				flour.Toast(test_toast)
+				fmt.Printf("0\n<:o.o:>")
 				fmt.Printf("_")
 				str := <-stdin
 
@@ -242,6 +243,7 @@ func main() {
 			go readStdin(stdin, kill)
 			for {
 				flour.Toast(test_toast)
+				fmt.Printf("0\n<:o.o:>")
 				fmt.Printf("_")
 				str := <-stdin
 				if str == "0" {
@@ -262,8 +264,10 @@ func main() {
 					}
 					Spawn_Context("owo", test_toast)
 					Spawn_Contents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, test_toast)
+					fmt.Printf("0\n<:o.o:>")
 					Copy_Toast("#", 4, 5+xpos, 1, test_toast)
 					Copy_Toast("#", 30, 5+xpos, 1, test_toast)
+
 					xpos--
 					//END WIP, don't forget to do it upwards too
 				}
@@ -289,6 +293,7 @@ func main() {
 					Spawn_Context("owo", test_toast)
 					//Spawn_Index("breadbox/000.1", 35, 4, test_toast, 39, 14)
 					Spawn_Contents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, test_toast)
+					fmt.Printf("0\n<:o.o:>")
 					Copy_Toast("#", 4, 5+xpos, 1, test_toast)
 					Copy_Toast("#", 30, 5+xpos, 1, test_toast)
 
