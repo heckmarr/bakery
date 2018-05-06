@@ -21,12 +21,17 @@ type Flour interface {
 
 func Toast(loaf []Bread) {
 	Toast_Logger("Toast")
+	var display_toast string
 	for i := range loaf {
-		fmt.Printf(loaf[i].Label)
+
+		display_toast += loaf[i].Label
+		//fmt.Printf(loaf[i].Label)
 		if loaf[i].Nl {
-			fmt.Println("")
+			display_toast += "\n"
+			//	fmt.Println("")
 		}
 	}
+	fmt.Printf(display_toast)
 }
 
 func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
