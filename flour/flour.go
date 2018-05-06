@@ -2,14 +2,14 @@ package flour
 
 import (
 	"fmt"
-//	"io/ioutil"
+	//	"io/ioutil"
 	"os"
 )
 
-type Bread struct{
-	X,Y int
+type Bread struct {
+	X, Y  int
 	Label string
-	Nl bool
+	Nl    bool
 }
 
 type Flour interface {
@@ -33,29 +33,29 @@ func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 	Toast_Logger("Oven")
 	x := 0
 	y := 0
-	for index := range butt{
+	for index := range butt {
 
 		//X values
-		if x + 1 == xvar {
+		if x+1 == xvar {
 			x = 0
-//			butt[index].Y = y
+			//			butt[index].Y = y
 			butt[index].Nl = true
 			y++
 		}
 		butt[index].X = x
 		x++
 		//Y values
-//		if index % yvar == 0{
-//			y++
-//		}
+		//		if index % yvar == 0{
+		//			y++
+		//		}
 		butt[index].Y = y
 	}
 	var butter []Bread
 	//we get some extraneous values
-	for yandex := range butt{
-		
+	for yandex := range butt {
+
 		if label == "_" {
-			if yandex % 2 == 0{
+			if yandex%2 == 0 {
 				butt[yandex].Label = "0"
 			} else {
 				butt[yandex].Label = "1"
@@ -65,7 +65,7 @@ func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 		}
 		if butt[yandex].Y >= yvar {
 			butter = butt[:yandex]
-			fmt.Println("GAME OVER MAN, GAME OVER")
+			//fmt.Println("GAME OVER MAN, GAME OVER")
 			break
 		}
 	}
@@ -107,14 +107,13 @@ func Bread_Setter(x int, y int, loaf []Bread, val Bread) []Bread {
 func Dough(width int, height int) []Bread {
 	Toast_Logger("Dough")
 	var butt []Bread
-	fmt.Println("Dough all mooshy!")
+	//fmt.Println("Dough all mooshy!")
 	//the nines can be changed
 	butt = make([]Bread, width*height)
 
 	return butt
 
 }
-
 
 func Toast_Logger(logger string) {
 	blab := 0
@@ -124,7 +123,7 @@ func Toast_Logger(logger string) {
 	if err != nil {
 		fmt.Println("Fatal error")
 	}
-	if blab == 1{
-		loggo.WriteString("==="+logger+"===\n")
+	if blab == 1 {
+		loggo.WriteString("===" + logger + "===\n")
 	}
 }
