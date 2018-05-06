@@ -21,7 +21,7 @@ def asciified(filename):
                 break
         delname = filename
         filename = filename.split('.')
-        img = img.resize((62,62))
+        img = img.resize((16,16))
         argument = ("{0}".format("grey")+filename[0])
         #os.remove('/home/{0}/go/src/localtoast.net/localtoast/bakery/poptart/101/'.format(username)+delname)
         img.save('/home/{0}/go/src/localtoast.net/localtoast/bakery/poptart/101/'.format(username)+argument+".png")
@@ -36,8 +36,8 @@ def asciified(filename):
         filename = '/home/{0}/go/src/localtoast.net/localtoast/bakery/poptart/101/{1}.txt'.format(username, filename[0])
         finalascii = open(filename, 'w+')
         #print finalascii
-        for column in range(62):
-            for row in range(62):
+        for column in range(16):
+            for row in range(16):
                 rowcol = grey[row, column]
                 asciinum = rowcol[0]/24
 
