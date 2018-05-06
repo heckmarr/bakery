@@ -336,6 +336,7 @@ func main() {
 		case "flat":
 			Flat("_", test_toast)
 		case "exit":
+			os.Exit(1)
 			break
 		default:
 			flour.Toast(test_toast)
