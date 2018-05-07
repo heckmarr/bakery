@@ -89,7 +89,7 @@ func Welcome(test_toast []flour.Bread) {
 		test_toast = flour.Bread_Setter(30+i, 11, test_toast, slice)
 	}
 	flour.Toast(test_toast)
-	fmt.Printf("\n<:o.o:>")
+	//fmt.Printf("\n<:o.o:>")
 }
 func Copy_Toast(welcome string, xvar int, yvar int, yend int, test_toast []flour.Bread) {
 	flour.Toast_Logger("Copy_Toast")
@@ -112,7 +112,7 @@ func Flat(label string, test_toast []flour.Bread) {
 		test_toast[i].Label = label
 	}
 	flour.Toast(test_toast)
-	fmt.Printf("\n<:o.o:>")
+	//fmt.Printf("\n<:o.o:>")
 }
 
 func Spawn_Button(label string, xvar int, yvar int, test_toast []flour.Bread) {
@@ -174,6 +174,10 @@ func Spawn_Context(view string, test_toast []flour.Bread) {
 		//Update the screen
 		flour.Toast(test_toast)
 	case "ono":
+		//	ctx := context.Background()
+		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
+		//	cmd.Run()
+
 		Flat("_", test_toast)
 		Spawn_Button("$", 59, 2, test_toast)
 		Spawn_Button("@", 59, 19, test_toast)
@@ -182,11 +186,13 @@ func Spawn_Context(view string, test_toast []flour.Bread) {
 		Spawn_Button("5", 74, 2, test_toast)
 		Spawn_Button("6", 74, 19, test_toast)
 		//update this with the autonoodly filename
-		Spawn_Index("breadbox/toasting", 5, 4, test_toast, 25, 14)
-		Spawn_Index("breadbox/001", 5, 5, test_toast, 25, 14)
-		//Update the screen
-		flour.Toast(test_toast)
-
+		for {
+			Spawn_Index("poptart/101/localtoast.txt", 5, 4, test_toast, 25, 14)
+			Spawn_Index("poptart/101/localtoast.txt", 5, 5, test_toast, 25, 14)
+			//fmt.Printf("0\n<:o.o:>")
+			//Update the screen
+			flour.Toast(test_toast)
+		}
 	}
 }
 
@@ -201,7 +207,7 @@ func main() {
 	//just toasting something
 	for {
 		flour.Toast(test_toast)
-		fmt.Printf("\n<:o.o:>")
+		//fmt.Printf("\n<:o.o:>")
 		fmt.Scan(&input)
 		switch input {
 		case "@":

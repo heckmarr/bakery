@@ -31,6 +31,7 @@ func Toast(loaf []Bread) {
 			//	fmt.Println("")
 		}
 	}
+	display_toast += "_\n<:o.o:>"
 	fmt.Printf(display_toast)
 }
 
