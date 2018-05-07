@@ -192,7 +192,7 @@ func Spawn_Context(view string, test_toast []flour.Bread) {
 		for {
 			Spawn_Index("poptart/101/localtoast.txt", 5, 4, test_toast, 25, 14)
 			Spawn_Index("poptart/101/localtoast.txt", 5, 5, test_toast, 25, 14)
-			fmt.Printf("0\n<:o.o:>")
+			//fmt.Printf("0\n<:o.o:>")
 			//Update the screen
 			flour.Toast(test_toast)
 		}
