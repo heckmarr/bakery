@@ -24,17 +24,22 @@ func Toast(loaf []Bread) {
 	var display_toast string
 	for i := range loaf {
 
-		display_toast += loaf[i].Label
+		display_toast += Fleck(i, loaf)
+		//display_toast += loaf[i].Label
 		//fmt.Printf(loaf[i].Label)
-		if loaf[i].Nl {
-			display_toast += "\n"
-			//	fmt.Println("")
-		}
+		//if loaf[i].Nl {
+		//	display_toast += "\n"
+		//	fmt.Println("")
+		//}
 	}
-	display_toast += "_\n<:o.o:>"
+	display_toast += "_\n\x1b[93;41m\x1b[3;6H<:o.o:>\x1b[0m"
 	fmt.Printf(display_toast)
 }
 
+func Fleck(index int, loaf []Bread) string {
+	text := fmt.Sprint("\x1b[", loaf[index].Y, ";", loaf[index].X, "H", loaf[index].Label, "\x1b[0m")
+	return text
+}
 func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 	Toast_Logger("Oven")
 	x := 0

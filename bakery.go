@@ -25,7 +25,7 @@ func readStdin(out chan string, in chan bool) {
 	// restore the echoing state when exiting
 	defer exec.Command("stty", "-F", "/dev/tty", "echo").Run()
 
-	var b []byte = make([]byte, 1)
+	var b = make([]byte, 1)
 	for {
 		os.Stdin.Read(b)
 		out <- string(b)
