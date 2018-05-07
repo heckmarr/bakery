@@ -1,8 +1,6 @@
 package main
 
 import (
-	"context"
-
 	"localtoast.net/localtoast/bakery/flour"
 	//	"gitlab.com/localtoast/bakery/oven"
 	//	"gitlab.com/localtoast/bakery/loaf"
@@ -176,10 +174,9 @@ func Spawn_Context(view string, test_toast []flour.Bread) {
 		//Update the screen
 		flour.Toast(test_toast)
 	case "ono":
-		ctx, cancel := context.WithTimeout(context.Background(), 100*time.Millisecond)
-		defer cancel()
-		cmd := exec.CommandContext(ctx, "poptart/poptart.py")
-		cmd.Run()
+		//	ctx := context.Background()
+		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
+		//	cmd.Run()
 
 		Flat("_", test_toast)
 		Spawn_Button("$", 59, 2, test_toast)
@@ -192,7 +189,7 @@ func Spawn_Context(view string, test_toast []flour.Bread) {
 		for {
 			Spawn_Index("poptart/101/localtoast.txt", 5, 4, test_toast, 25, 14)
 			Spawn_Index("poptart/101/localtoast.txt", 5, 5, test_toast, 25, 14)
-			//fmt.Printf("0\n<:o.o:>")
+			fmt.Printf("0\n<:o.o:>")
 			//Update the screen
 			flour.Toast(test_toast)
 		}
