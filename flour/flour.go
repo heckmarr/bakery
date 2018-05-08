@@ -4,6 +4,8 @@ import (
 	"fmt"
 	//	"io/ioutil"
 	"os"
+
+	"github.com/wayneashleyberry/terminal-dimensions"
 )
 
 type Bread struct {
@@ -21,19 +23,19 @@ type Flour interface {
 
 func Toast(loaf []Bread) {
 	ToastLogger("Toast")
-	var display_toast string
+	var displaytoast string
 	for i := range loaf {
 
-		display_toast += Fleck(i, loaf)
-		//display_toast += loaf[i].Label
+		displaytoast += Fleck(i, loaf)
+		//displaytoast += loaf[i].Label
 		//fmt.Printf(loaf[i].Label)
 		//if loaf[i].Nl {
-		//	display_toast += "\n"
+		//	displaytoast += "\n"
 		//	fmt.Println("")
 		//}
 	}
-	display_toast += "_\n\x1b[93;41m\x1b[3;6H<:o.o:>\x1b[0m"
-	fmt.Printf(display_toast)
+	displaytoast += "_\n\x1b[93;41m\x1b[3;6H<:o.o:>\x1b[0m"
+	fmt.Printf(displaytoast)
 }
 
 func Fleck(index int, loaf []Bread) string {
@@ -114,15 +116,31 @@ func BreadSetter(x int, y int, loaf []Bread, val Bread) []Bread {
 	return loaf
 
 }
-
 func Dough(width int, height int) []Bread {
 	ToastLogger("Dough")
 	var butt []Bread
-	//fmt.Println("Dough all mooshy!")
-	//the nines can be changed
 	butt = make([]Bread, width*height)
 
 	return butt
+}
+func DoughMax() (int, int, []Bread) {
+	ToastLogger("DoughMax")
+	var butt []Bread
+	height, err := terminaldimensions.Height()
+	width, err := terminaldimensions.Width()
+	if err != nil {
+		fmt.Println("Dimensional error")
+		//fmt.Println(strconv.Atoi(string(height)))
+		//fmt.Println(strconv.Atoi(string(width)))
+	}
+
+	//fmt.Println("Dough all mooshy!")
+	//the nines can be changed
+	heightInt := int(height)
+	widthInt := int(width)
+	butt = make([]Bread, widthInt*heightInt)
+
+	return widthInt, heightInt, butt
 
 }
 
