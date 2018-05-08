@@ -168,6 +168,7 @@ func spawnContext(view string, testToast []flour.Bread) {
 	switch view {
 	case "owo":
 		//flat("_", testToast)
+		testToast = flour.CleanFlecks(testToast)
 		spawnButton("$", 30, 2, testToast)
 		spawnButton("@", 30, 19, testToast)
 		spawnButton("#", 1, 2, testToast)
@@ -183,8 +184,9 @@ func spawnContext(view string, testToast []flour.Bread) {
 		//	ctx := context.Background()
 		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
 		//	cmd.Run()
+		testToast = flour.CleanFlecks(testToast)
 
-		flat("_", testToast)
+		//flat("_", testToast)
 		spawnButton("$", 59, 2, testToast)
 		spawnButton("@", 59, 19, testToast)
 		spawnButton("#", 1, 2, testToast)
@@ -212,8 +214,9 @@ func main() {
 	fmt.Println(xvar)
 	fmt.Println(yvar)
 	testToast = flour.Oven(testToast, "_", xvar, yvar)
+	//flour.CleanFlecks(testToast)
 	flat("_", testToast)
-	flour.CleanFlecks(testToast)
+
 	//just toasting something
 	for {
 		flour.Toast(testToast)
@@ -260,6 +263,7 @@ func main() {
 
 			go readStdin(stdin, kill)
 			for {
+
 				flour.Toast(testToast)
 				//testToast = flour.CleanFlecks(testToast)
 				//fmt.Printf("0\n<:o.o:>")
@@ -281,6 +285,8 @@ func main() {
 					if xpos >= 10 {
 						thread = fmt.Sprint("0", xpos)
 					}
+					//flour.CleanFlecks(testToast)
+					//flat("_", testToast)
 					spawnContext("owo", testToast)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
 					//fmt.Printf("0\n<:o.o:>")
@@ -309,6 +315,8 @@ func main() {
 						thread = fmt.Sprint("0", xpos)
 					}
 					//}
+					//flour.CleanFlecks(testToast)
+					//flat("_", testToast)
 					spawnContext("owo", testToast)
 					//spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
@@ -331,7 +339,9 @@ func main() {
 			spatter(xvar, yvar, testToast)
 			//Now spawn where we want to go
 			//				spawnContext("ono", testToast)
+			//flour.CleanFlecks(testToast)
 			flat("_", testToast)
+
 			spawnContext("owo", testToast)
 			//from here
 			//turn this into spawn_content

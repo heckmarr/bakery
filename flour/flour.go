@@ -24,7 +24,18 @@ type Flour interface {
 
 func CleanFlecks(loaf []Bread) []Bread {
 	for i := range loaf {
-		loaf[i].Dirty = false
+		if loaf[i].Label != "_" {
+			loaf[i].Dirty = false
+		}
+	}
+	return loaf
+}
+func MakeCleanFlecks(loaf []Bread) []Bread {
+	for i := range loaf {
+		if loaf[i].Dirty == true {
+			loaf[i].Label = "_"
+			loaf[i].Dirty = false
+		}
 	}
 	return loaf
 }
@@ -34,9 +45,12 @@ func Toast(loaf []Bread) {
 	for i := range loaf {
 		if loaf[i].Dirty {
 			displaytoast += Fleck(i, loaf)
-		} else {
+		}
+		if loaf[i].Dirty != true && loaf[i].Label != "_" {
 			loaf[i].Label = "_"
 			displaytoast += Fleck(i, loaf)
+		} else {
+			//do nothing
 		}
 		//displaytoast += loaf[i].Label
 		//fmt.Printf(loaf[i].Label)
