@@ -66,13 +66,13 @@ func spatter(xvar int, yvar int, testToast []flour.Bread) {
 	welcome := "MARCHELL"
 	wel := strings.Split(welcome, "")
 	fmt.Println(wel[0])
-	for i := 0; i < len(testToast)/24; i++ {
+	for i := 0; i < len(testToast); i++ {
 		x := rand.Intn(xvar - 1)
 		y := rand.Intn(yvar - 1)
 		slice := flour.BreadGetter(x, y, testToast)
 		slice.Label = string(wel[rand.Intn(len(wel)-1)])
 		testToast = flour.BreadSetter(x, y, testToast, slice)
-		flour.Toast(testToast)
+		flour.PrintFleck(i, testToast)
 		//fmt.Printf("0\n<:o.o:>")
 		//time.Sleep(75*time.Millisecond)
 	}
@@ -89,6 +89,7 @@ func welcome(testToast []flour.Bread) {
 		testToast = flour.BreadSetter(30+i, 11, testToast, slice)
 	}
 	flour.Toast(testToast)
+	testToast = flour.CleanFlecks(testToast)
 	//fmt.Printf("\n<:o.o:>")
 }
 func copyToast(welcome string, xvar int, yvar int, yend int, testToast []flour.Bread) {
@@ -100,6 +101,7 @@ func copyToast(welcome string, xvar int, yvar int, yend int, testToast []flour.B
 				//                                        DO STUFF HERE
 				slice := flour.BreadGetter(xvar+i, yvar-x, testToast)
 				slice.Label = string(wel[i])
+				slice.Dirty = true
 				testToast = flour.BreadSetter(xvar+i, yvar-x, testToast, slice)
 			}
 		}
@@ -110,6 +112,9 @@ func flat(label string, testToast []flour.Bread) {
 	flour.ToastLogger("flat")
 	for i := range testToast {
 		testToast[i].Label = label
+		testToast[i].Dirty = true
+		//copyToast(label, testToast[i].X, testToast[i].Y, testToast[i].Y+1, testToast)
+
 	}
 	flour.Toast(testToast)
 	//fmt.Printf("\n<:o.o:>")
@@ -162,7 +167,8 @@ func spawnContext(view string, testToast []flour.Bread) {
 	//put different context triggers here
 	switch view {
 	case "owo":
-		flat("_", testToast)
+		//flat("_", testToast)
+		testToast = flour.CleanFlecks(testToast)
 		spawnButton("$", 30, 2, testToast)
 		spawnButton("@", 30, 19, testToast)
 		spawnButton("#", 1, 2, testToast)
@@ -173,12 +179,14 @@ func spawnContext(view string, testToast []flour.Bread) {
 		spawnIndex("breadbox/001", 5, 5, testToast, 25, 14)
 		//Update the screen
 		flour.Toast(testToast)
+		//testToast = flour.CleanFlecks(testToast)
 	case "ono":
 		//	ctx := context.Background()
 		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
 		//	cmd.Run()
+		testToast = flour.CleanFlecks(testToast)
 
-		flat("_", testToast)
+		//flat("_", testToast)
 		spawnButton("$", 59, 2, testToast)
 		spawnButton("@", 59, 19, testToast)
 		spawnButton("#", 1, 2, testToast)
@@ -192,6 +200,7 @@ func spawnContext(view string, testToast []flour.Bread) {
 			//fmt.Printf("0\n<:o.o:>")
 			//Update the screen
 			flour.Toast(testToast)
+			//testToast = flour.CleanFlecks(testToast)
 		}
 	}
 }
@@ -205,10 +214,13 @@ func main() {
 	fmt.Println(xvar)
 	fmt.Println(yvar)
 	testToast = flour.Oven(testToast, "_", xvar, yvar)
+	//flour.CleanFlecks(testToast)
 	flat("_", testToast)
+
 	//just toasting something
 	for {
 		flour.Toast(testToast)
+		//testToast = flour.CleanFlecks(testToast)
 		//fmt.Printf("\n<:o.o:>")
 		fmt.Scan(&input)
 		switch input {
@@ -223,6 +235,7 @@ func main() {
 			go readStdin(stdin, kill)
 			for {
 				flour.Toast(testToast)
+				//testToast = flour.CleanFlecks(testToast)
 				//fmt.Printf("0\n<:o.o:>")
 				//fmt.Printf("_")
 				str := <-stdin
@@ -250,7 +263,9 @@ func main() {
 
 			go readStdin(stdin, kill)
 			for {
+
 				flour.Toast(testToast)
+				//testToast = flour.CleanFlecks(testToast)
 				//fmt.Printf("0\n<:o.o:>")
 				//fmt.Printf("_")
 				str := <-stdin
@@ -270,6 +285,8 @@ func main() {
 					if xpos >= 10 {
 						thread = fmt.Sprint("0", xpos)
 					}
+					//flour.CleanFlecks(testToast)
+					//flat("_", testToast)
 					spawnContext("owo", testToast)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
 					//fmt.Printf("0\n<:o.o:>")
@@ -298,6 +315,8 @@ func main() {
 						thread = fmt.Sprint("0", xpos)
 					}
 					//}
+					//flour.CleanFlecks(testToast)
+					//flat("_", testToast)
 					spawnContext("owo", testToast)
 					//spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
@@ -320,6 +339,9 @@ func main() {
 			spatter(xvar, yvar, testToast)
 			//Now spawn where we want to go
 			//				spawnContext("ono", testToast)
+			//flour.CleanFlecks(testToast)
+			flat("_", testToast)
+
 			spawnContext("owo", testToast)
 			//from here
 			//turn this into spawn_content
@@ -328,7 +350,7 @@ func main() {
 			spawnIndex("breadbox/001", 5, 5, testToast, 25, 14)
 			//do things with them
 		case "owo":
-			flat("_", testToast)
+			//flat("_", testToast)
 			//fmt.Printf("_<:o.o:>")
 			spawnContext("owo", testToast)
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
@@ -348,6 +370,7 @@ func main() {
 			break
 		default:
 			flour.Toast(testToast)
+			//testToast = flour.CleanFlecks(testToast)
 		}
 	}
 }

@@ -12,6 +12,7 @@ type Bread struct {
 	X, Y  int
 	Label string
 	Nl    bool
+	Dirty bool
 }
 
 type Flour interface {
@@ -21,12 +22,36 @@ type Flour interface {
 	Bread()
 }
 
+func CleanFlecks(loaf []Bread) []Bread {
+	for i := range loaf {
+		if loaf[i].Label != "_" {
+			loaf[i].Dirty = false
+		}
+	}
+	return loaf
+}
+func MakeCleanFlecks(loaf []Bread) []Bread {
+	for i := range loaf {
+		if loaf[i].Dirty == true {
+			loaf[i].Label = "_"
+			loaf[i].Dirty = false
+		}
+	}
+	return loaf
+}
 func Toast(loaf []Bread) {
 	ToastLogger("Toast")
 	var displaytoast string
 	for i := range loaf {
-
-		displaytoast += Fleck(i, loaf)
+		if loaf[i].Dirty {
+			displaytoast += Fleck(i, loaf)
+		}
+		if loaf[i].Dirty != true && loaf[i].Label != "_" {
+			loaf[i].Label = "_"
+			displaytoast += Fleck(i, loaf)
+		} else {
+			//do nothing
+		}
 		//displaytoast += loaf[i].Label
 		//fmt.Printf(loaf[i].Label)
 		//if loaf[i].Nl {
@@ -41,6 +66,10 @@ func Toast(loaf []Bread) {
 func Fleck(index int, loaf []Bread) string {
 	text := fmt.Sprint("\x1b[", loaf[index].Y, ";", loaf[index].X, "H", loaf[index].Label, "\x1b[0m")
 	return text
+}
+func PrintFleck(index int, loaf []Bread) {
+	text := fmt.Sprint("\x1b[", loaf[index].Y, ";", loaf[index].X, "H", loaf[index].Label, "\x1b[0m")
+	fmt.Printf(text)
 }
 func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 	ToastLogger("Oven")
