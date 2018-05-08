@@ -356,7 +356,7 @@ func main() {
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 
 		case "ono":
-			flat("_", testToast)
+			//flat("_", testToast)
 			//fmt.Printf("_<:o.o:>")
 			spawnContext("ono", testToast)
 		case "spatter":
