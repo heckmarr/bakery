@@ -19,7 +19,7 @@ def main():
     cam1 = cammod.list_cameras()
     #print(cam1[0])
 
-    cam = cammod.Camera('/dev/video0', (1024, 768))
+    cam = cammod.Camera('/dev/video1', (1024, 768))
     count = 0
     cam.start()
     ready = False
