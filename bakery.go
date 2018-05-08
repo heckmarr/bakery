@@ -73,7 +73,7 @@ func spatter(xvar int, yvar int, testToast []flour.Bread) {
 		slice.Label = string(wel[rand.Intn(len(wel)-1)])
 		testToast = flour.BreadSetter(x, y, testToast, slice)
 		flour.Toast(testToast)
-		fmt.Printf("0\n<:o.o:>")
+		//fmt.Printf("0\n<:o.o:>")
 		//time.Sleep(75*time.Millisecond)
 	}
 }
@@ -199,9 +199,11 @@ func spawnContext(view string, testToast []flour.Bread) {
 func main() {
 	input := ""
 	//init can be changed
-	xvar := 81
-	yvar := 23
-	testToast := flour.Dough(xvar, yvar)
+	//	xvar := 81
+	//	yvar := 23
+	xvar, yvar, testToast := flour.DoughMax()
+	fmt.Println(xvar)
+	fmt.Println(yvar)
 	testToast = flour.Oven(testToast, "_", xvar, yvar)
 	flat("_", testToast)
 	//just toasting something
@@ -221,8 +223,8 @@ func main() {
 			go readStdin(stdin, kill)
 			for {
 				flour.Toast(testToast)
-				fmt.Printf("0\n<:o.o:>")
-				fmt.Printf("_")
+				//fmt.Printf("0\n<:o.o:>")
+				//fmt.Printf("_")
 				str := <-stdin
 
 				if str == "0" {
@@ -249,8 +251,8 @@ func main() {
 			go readStdin(stdin, kill)
 			for {
 				flour.Toast(testToast)
-				fmt.Printf("0\n<:o.o:>")
-				fmt.Printf("_")
+				//fmt.Printf("0\n<:o.o:>")
+				//fmt.Printf("_")
 				str := <-stdin
 				if str == "0" {
 					exec.Command("stty", "-F", "/dev/tty", "echo").Run()
@@ -270,7 +272,7 @@ func main() {
 					}
 					spawnContext("owo", testToast)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
-					fmt.Printf("0\n<:o.o:>")
+					//fmt.Printf("0\n<:o.o:>")
 					copyToast("#", 4, 5+xpos, 1, testToast)
 					copyToast("#", 30, 5+xpos, 1, testToast)
 
@@ -299,7 +301,7 @@ func main() {
 					spawnContext("owo", testToast)
 					//spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
-					fmt.Printf("0\n<:o.o:>")
+					//fmt.Printf("0\n<:o.o:>")
 					copyToast("#", 4, 5+xpos, 1, testToast)
 					copyToast("#", 30, 5+xpos, 1, testToast)
 
@@ -313,7 +315,7 @@ func main() {
 			time.Sleep(1 * time.Second)
 			copyToast("DEEGEE", 35, 11, 1, testToast)
 			flour.Toast(testToast)
-			fmt.Printf("_<:o.o:>")
+			//fmt.Printf("_<:o.o:>")
 			time.Sleep(1 * time.Second)
 			spatter(xvar, yvar, testToast)
 			//Now spawn where we want to go
@@ -327,13 +329,13 @@ func main() {
 			//do things with them
 		case "owo":
 			flat("_", testToast)
-			fmt.Printf("_<:o.o:>")
+			//fmt.Printf("_<:o.o:>")
 			spawnContext("owo", testToast)
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 
 		case "ono":
 			flat("_", testToast)
-			fmt.Printf("_<:o.o:>")
+			//fmt.Printf("_<:o.o:>")
 			spawnContext("ono", testToast)
 		case "spatter":
 			spatter(xvar, yvar, testToast)
