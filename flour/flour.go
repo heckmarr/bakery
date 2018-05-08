@@ -12,6 +12,7 @@ type Bread struct {
 	X, Y  int
 	Label string
 	Nl    bool
+	Dirty bool
 }
 
 type Flour interface {
@@ -21,12 +22,22 @@ type Flour interface {
 	Bread()
 }
 
+func CleanFlecks(loaf []Bread) []Bread {
+	for i := range loaf {
+		loaf[i].Dirty = false
+	}
+	return loaf
+}
 func Toast(loaf []Bread) {
 	ToastLogger("Toast")
 	var displaytoast string
 	for i := range loaf {
-
-		displaytoast += Fleck(i, loaf)
+		if loaf[i].Dirty {
+			displaytoast += Fleck(i, loaf)
+		} else {
+			loaf[i].Label = "_"
+			displaytoast += Fleck(i, loaf)
+		}
 		//displaytoast += loaf[i].Label
 		//fmt.Printf(loaf[i].Label)
 		//if loaf[i].Nl {
