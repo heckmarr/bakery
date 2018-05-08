@@ -20,7 +20,7 @@ type Flour interface {
 }
 
 func Toast(loaf []Bread) {
-	Toast_Logger("Toast")
+	ToastLogger("Toast")
 	var display_toast string
 	for i := range loaf {
 
@@ -41,7 +41,7 @@ func Fleck(index int, loaf []Bread) string {
 	return text
 }
 func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
-	Toast_Logger("Oven")
+	ToastLogger("Oven")
 	x := 0
 	y := 0
 	for index := range butt {
@@ -83,8 +83,8 @@ func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 	return butter
 }
 
-func Bread_Getter(x int, y int, loaf []Bread) Bread {
-	Toast_Logger("Bread_Getter")
+func BreadGetter(x int, y int, loaf []Bread) Bread {
+	ToastLogger("BreadGetter")
 	//Gets the bread at position x, y
 	var val Bread
 
@@ -99,8 +99,8 @@ func Bread_Getter(x int, y int, loaf []Bread) Bread {
 	return val
 }
 
-func Bread_Setter(x int, y int, loaf []Bread, val Bread) []Bread {
-	Toast_Logger("Bread_Setter")
+func BreadSetter(x int, y int, loaf []Bread, val Bread) []Bread {
+	ToastLogger("BreadSetter")
 	//sets the Bread at position x, y
 	for i := range loaf {
 		if loaf[i].Y == y {
@@ -116,7 +116,7 @@ func Bread_Setter(x int, y int, loaf []Bread, val Bread) []Bread {
 }
 
 func Dough(width int, height int) []Bread {
-	Toast_Logger("Dough")
+	ToastLogger("Dough")
 	var butt []Bread
 	//fmt.Println("Dough all mooshy!")
 	//the nines can be changed
@@ -126,7 +126,7 @@ func Dough(width int, height int) []Bread {
 
 }
 
-func Toast_Logger(logger string) {
+func ToastLogger(logger string) {
 	blab := 0
 	loggo, err := os.OpenFile("toast.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	defer loggo.Close()
