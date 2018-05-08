@@ -42,6 +42,10 @@ func Fleck(index int, loaf []Bread) string {
 	text := fmt.Sprint("\x1b[", loaf[index].Y, ";", loaf[index].X, "H", loaf[index].Label, "\x1b[0m")
 	return text
 }
+func PrintFleck(index int, loaf []Bread) {
+	text := fmt.Sprint("\x1b[", loaf[index].Y, ";", loaf[index].X, "H", loaf[index].Label, "\x1b[0m")
+	fmt.Printf(text)
+}
 func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 	ToastLogger("Oven")
 	x := 0

@@ -66,13 +66,13 @@ func spatter(xvar int, yvar int, testToast []flour.Bread) {
 	welcome := "MARCHELL"
 	wel := strings.Split(welcome, "")
 	fmt.Println(wel[0])
-	for i := 0; i < len(testToast)/24; i++ {
+	for i := 0; i < len(testToast); i++ {
 		x := rand.Intn(xvar - 1)
 		y := rand.Intn(yvar - 1)
 		slice := flour.BreadGetter(x, y, testToast)
 		slice.Label = string(wel[rand.Intn(len(wel)-1)])
 		testToast = flour.BreadSetter(x, y, testToast, slice)
-		flour.Toast(testToast)
+		flour.PrintFleck(i, testToast)
 		//fmt.Printf("0\n<:o.o:>")
 		//time.Sleep(75*time.Millisecond)
 	}
