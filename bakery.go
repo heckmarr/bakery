@@ -147,6 +147,12 @@ func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen i
 func spawnContext(view string, testToast []flour.Bread) {
 	//put different context triggers here
 	switch view {
+	case "ouo":
+		flat("+", testToast)
+		//testToast = flour.CleanFlecks(testToast)
+		win := flour.SpawnWin(25, 25)
+		testToast = flour.RelWin(0.5, 0.5, 5, 5, win, testToast)
+		flour.Toast(testToast)
 	case "owo":
 		//flat("_", testToast)
 		testToast = flour.CleanFlecks(testToast)
@@ -335,7 +341,8 @@ func main() {
 			//fmt.Printf("_<:o.o:>")
 			spawnContext("owo", testToast)
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
-
+		case "ouo":
+			spawnContext("ouo", testToast)
 		case "ono":
 			//flat("_", testToast)
 			//fmt.Printf("_<:o.o:>")

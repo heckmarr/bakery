@@ -46,20 +46,40 @@ func MakeCleanFlecks(loaf []Bread) []Bread {
 func SpawnWin(xvar int, yvar int) []Bread {
 	//ToastLogger("SpawnWin")
 	win := Dough(xvar, yvar)
-	win = Oven(win, "_", xvar, yvar)
+	win = Oven(win, "*", xvar, yvar)
 	return win
 }
 
 //RelWin Copies a window with size and height relative to the size of the toast
 //passed to the []Bread passed
-func RelWin(heightP float64, widthP float64, width float64, height float64, win []Bread) []Bread {
-	xvar := math.Floor(width*widthP - (width * (width * 0.5)))
+func RelWin(heightP float64, widthP float64, width float64, height float64, win []Bread, testToast []Bread) []Bread {
+	xvar := math.Floor(width*widthP + (width * (width * 0.5)))
+	//  xend := math.Floor(width + (width * (width * 0.5)))
+	yvar := math.Floor(height*heightP + (height * (height * 0.5)))
+	yend := math.Floor(height + (height * (height * 0.5)))
+	xvarI := int(xvar)
+	yvarI := int(yvar)
+	//	xendI := int(xend)
+	yendI := int(yend)
 
-	yvar := math.Floor(height*heightP - (height * (height * 0.5)))
-	yend := math.Floor(height - (height * (height * 0.5)))
-	win = CopyToast("_", int(xvar), int(yvar), int(yend), win)
-	return win
+	for i := range win {
+		CopyToast(win[i].Label, win[i].X+xvarI, win[i].Y+yvarI, yendI, testToast)
+	}
+	//	if yend != 0 {
+	//		for x := yendI; x > 0; x-- {
+	//			for i := 0; i < xendI; i++ {
+	//				BreadSetter(int(xvar), int(yvar), testToast, win[i])
+	//				slice := BreadGetter(xvarI+i, yvarI-x, win)
+	//				slice.Label = "_"
+	//				slice.Dirty = true
+	//				testToast = BreadSetter(xvarI+i, yvarI-x, testToast, slice)
+	//			}
+	//		}
+	//	}
+	return testToast
 }
+
+//CopyBread Copi
 
 //CopyToast copies the string passed into the values of a []Bread given
 func CopyToast(welcome string, xvar int, yvar int, yend int, testToast []Bread) []Bread {
