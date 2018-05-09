@@ -52,18 +52,29 @@ func SpawnWin(xvar int, yvar int) []Bread {
 
 //RelWin Copies a window with size and height relative to the size of the toast
 //passed to the []Bread passed
-func RelWin(heightP float64, widthP float64, width float64, height float64, win []Bread, testToast []Bread) []Bread {
-	xvar := math.Floor(width*widthP + (width * (width * 0.5)))
-	//  xend := math.Floor(width + (width * (width * 0.5)))
-	yvar := math.Floor(height*heightP + (height * (height * 0.5)))
-	yend := math.Floor(height + (height * (height * 0.5)))
-	xvarI := int(xvar)
-	yvarI := int(yvar)
-	//	xendI := int(xend)
-	yendI := int(yend)
+func RelWin(widthP float64, heightP float64, width float64, height float64, win []Bread, testToast []Bread) []Bread {
+	//	xvar := math.Floor(width*widthP + (width))
+	tHeight, err := terminaldimensions.Height()
+	tWidth, err := terminaldimensions.Width()
+	if err != nil {
+		fmt.Println("terminal sizing error!")
+	}
+	tHeight64 := float64(tHeight)
+	tWidth64 := float64(tWidth)
 
+	xbeg := math.Floor((tWidth64 * widthP))
+	xend := math.Floor(xbeg + width)
+	//	yvar := math.Floor(height*heightP + (height))
+	ybeg := math.Floor((tHeight64 * heightP))
+	yend := math.Floor(ybeg + height)
+	//	xvarI := int(xvar)
+	//	yvarI := int(yvar)
+	xendI := int(xend)
+	yendI := int(yend)
+	ybegI := int(ybeg)
+	xbegI := int(xbeg)
 	for i := range win {
-		CopyToast(win[i].Label, win[i].X+xvarI, win[i].Y+yvarI, yendI, testToast)
+		CopySubToast(win[i].Label, win[i].X, win[i].Y, xbegI, xendI, ybegI, yendI, testToast)
 	}
 	//	if yend != 0 {
 	//		for x := yendI; x > 0; x-- {
@@ -79,7 +90,26 @@ func RelWin(heightP float64, widthP float64, width float64, height float64, win 
 	return testToast
 }
 
-//CopyBread Copi
+//CopySubToast copies the string passed into the values of a []Bread given
+func CopySubToast(welcome string, xvar int, yvar int, xbeg int, xend int, ybeg int, yend int, testToast []Bread) []Bread {
+	//ToastLogger("CopyToast")
+	//wel := strings.Split(welcome, "")
+	if yend != 0 {
+		for x := ybeg; x < yend; x++ {
+			for i := xbeg; i < xend; i++ {
+				//                           DO STUFF HERE
+				//			if x < yend && x > yend {
+				//slice := BreadGetter(0, 0, testToast)
+				slice := BreadGetter(xvar+i, yvar+x, testToast)
+				slice.Label = welcome
+				slice.Dirty = true
+				testToast = BreadSetter(xvar+i, yvar+x, testToast, slice)
+				//			}
+			}
+		}
+	}
+	return testToast
+}
 
 //CopyToast copies the string passed into the values of a []Bread given
 func CopyToast(welcome string, xvar int, yvar int, yend int, testToast []Bread) []Bread {

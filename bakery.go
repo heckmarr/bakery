@@ -150,7 +150,7 @@ func spawnContext(view string, testToast []flour.Bread) {
 	case "ouo":
 		flat("+", testToast)
 		//testToast = flour.CleanFlecks(testToast)
-		win := flour.SpawnWin(25, 25)
+		win := flour.SpawnWin(5, 5)
 		testToast = flour.RelWin(0.5, 0.5, 5, 5, win, testToast)
 		flour.Toast(testToast)
 	case "owo":
