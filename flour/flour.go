@@ -2,6 +2,8 @@ package flour
 
 import (
 	"fmt"
+	"math"
+	"strings"
 	//	"io/ioutil"
 	"os"
 
@@ -41,7 +43,41 @@ func MakeCleanFlecks(loaf []Bread) []Bread {
 	}
 	return loaf
 }
+func SpawnWin(xvar int, yvar int) []Bread {
+	//ToastLogger("SpawnWin")
+	win := Dough(xvar, yvar)
+	win = Oven(win, "_", xvar, yvar)
+	return win
+}
 
+//RelWin Copies a window with size and height relative to the size of the toast
+//passed to the []Bread passed
+func RelWin(heightP float64, widthP float64, width float64, height float64, win []Bread) []Bread {
+	xvar := math.Floor(width*widthP - (width * (width * 0.5)))
+
+	yvar := math.Floor(height*heightP - (height * (height * 0.5)))
+	yend := math.Floor(height - (height * (height * 0.5)))
+	win = CopyToast("_", int(xvar), int(yvar), int(yend), win)
+	return win
+}
+
+//CopyToast copies the string passed into the values of a []Bread given
+func CopyToast(welcome string, xvar int, yvar int, yend int, testToast []Bread) []Bread {
+	//ToastLogger("CopyToast")
+	wel := strings.Split(welcome, "")
+	if yend != 0 {
+		for x := yend; x > 0; x-- {
+			for i := 0; i < len(welcome); i++ {
+				//                                        DO STUFF HERE
+				slice := BreadGetter(xvar+i, yvar-x, testToast)
+				slice.Label = string(wel[i])
+				slice.Dirty = true
+				testToast = BreadSetter(xvar+i, yvar-x, testToast, slice)
+			}
+		}
+	}
+	return testToast
+}
 func Toast(loaf []Bread) {
 	//ToastLogger("Toast")
 	var displaytoast string
