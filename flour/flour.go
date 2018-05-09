@@ -62,10 +62,10 @@ func RelWin(widthP float64, heightP float64, width float64, height float64, win 
 	tHeight64 := float64(tHeight)
 	tWidth64 := float64(tWidth)
 
-	xbeg := math.Floor((tWidth64 * widthP))
+	xbeg := math.Floor((tWidth64 * widthP) - width*0.5)
 	xend := math.Floor(xbeg + width)
 	//	yvar := math.Floor(height*heightP + (height))
-	ybeg := math.Floor((tHeight64 * heightP))
+	ybeg := math.Floor((tHeight64 * heightP) - height*0.5)
 	yend := math.Floor(ybeg + height)
 	//	xvarI := int(xvar)
 	//	yvarI := int(yvar)
@@ -95,8 +95,8 @@ func CopySubToast(welcome string, xvar int, yvar int, xbeg int, xend int, ybeg i
 	//ToastLogger("CopyToast")
 	//wel := strings.Split(welcome, "")
 	if yend != 0 {
-		for x := ybeg; x < yend; x++ {
-			for i := xbeg; i < xend; i++ {
+		for x := ybeg - int(float64(yvar)*0.5); x < yend-int(float64(yvar)*0.5); x++ {
+			for i := xbeg - int(float64(xvar)*0.5); i < xend-int(float64(xvar)*0.5); i++ {
 				//                           DO STUFF HERE
 				//			if x < yend && x > yend {
 				//slice := BreadGetter(0, 0, testToast)
