@@ -2,6 +2,8 @@ package flour
 
 import (
 	"fmt"
+	"math"
+	"strings"
 	//	"io/ioutil"
 	"os"
 
@@ -23,6 +25,7 @@ type Flour interface {
 }
 
 func CleanFlecks(loaf []Bread) []Bread {
+	//ToastLogger("CleanFlecks")
 	for i := range loaf {
 		if loaf[i].Label != "_" {
 			loaf[i].Dirty = false
@@ -31,6 +34,7 @@ func CleanFlecks(loaf []Bread) []Bread {
 	return loaf
 }
 func MakeCleanFlecks(loaf []Bread) []Bread {
+	//ToastLogger("MakeCleanFlecks")
 	for i := range loaf {
 		if loaf[i].Dirty == true {
 			loaf[i].Label = "_"
@@ -39,8 +43,93 @@ func MakeCleanFlecks(loaf []Bread) []Bread {
 	}
 	return loaf
 }
+func SpawnWin(xvar int, yvar int) []Bread {
+	//ToastLogger("SpawnWin")
+	win := Dough(xvar, yvar)
+	win = Oven(win, "*", xvar, yvar)
+	return win
+}
+
+//RelWin Copies a window with size and height relative to the size of the toast
+//passed to the []Bread passed
+func RelWin(widthP float64, heightP float64, width float64, height float64, win []Bread, testToast []Bread) []Bread {
+	//	xvar := math.Floor(width*widthP + (width))
+	tHeight, err := terminaldimensions.Height()
+	tWidth, err := terminaldimensions.Width()
+	if err != nil {
+		fmt.Println("terminal sizing error!")
+	}
+	tHeight64 := float64(tHeight)
+	tWidth64 := float64(tWidth)
+
+	xbeg := math.Floor((tWidth64 * widthP))
+	xend := math.Floor(xbeg + width)
+	//	yvar := math.Floor(height*heightP + (height))
+	ybeg := math.Floor((tHeight64 * heightP))
+	yend := math.Floor(ybeg + height)
+	//	xvarI := int(xvar)
+	//	yvarI := int(yvar)
+	xendI := int(xend)
+	yendI := int(yend)
+	ybegI := int(ybeg)
+	xbegI := int(xbeg)
+	for i := range win {
+		CopySubToast(win[i].Label, win[i].X, win[i].Y, xbegI, xendI, ybegI, yendI, testToast)
+	}
+	//	if yend != 0 {
+	//		for x := yendI; x > 0; x-- {
+	//			for i := 0; i < xendI; i++ {
+	//				BreadSetter(int(xvar), int(yvar), testToast, win[i])
+	//				slice := BreadGetter(xvarI+i, yvarI-x, win)
+	//				slice.Label = "_"
+	//				slice.Dirty = true
+	//				testToast = BreadSetter(xvarI+i, yvarI-x, testToast, slice)
+	//			}
+	//		}
+	//	}
+	return testToast
+}
+
+//CopySubToast copies the string passed into the values of a []Bread given
+func CopySubToast(welcome string, xvar int, yvar int, xbeg int, xend int, ybeg int, yend int, testToast []Bread) []Bread {
+	//ToastLogger("CopyToast")
+	//wel := strings.Split(welcome, "")
+	if yend != 0 {
+		for x := ybeg; x < yend; x++ {
+			for i := xbeg; i < xend; i++ {
+				//                           DO STUFF HERE
+				//			if x < yend && x > yend {
+				//slice := BreadGetter(0, 0, testToast)
+				slice := BreadGetter(xvar+i, yvar+x, testToast)
+				slice.Label = welcome
+				slice.Dirty = true
+				testToast = BreadSetter(xvar+i, yvar+x, testToast, slice)
+				//			}
+			}
+		}
+	}
+	return testToast
+}
+
+//CopyToast copies the string passed into the values of a []Bread given
+func CopyToast(welcome string, xvar int, yvar int, yend int, testToast []Bread) []Bread {
+	//ToastLogger("CopyToast")
+	wel := strings.Split(welcome, "")
+	if yend != 0 {
+		for x := yend; x > 0; x-- {
+			for i := 0; i < len(welcome); i++ {
+				//                                        DO STUFF HERE
+				slice := BreadGetter(xvar+i, yvar-x, testToast)
+				slice.Label = string(wel[i])
+				slice.Dirty = true
+				testToast = BreadSetter(xvar+i, yvar-x, testToast, slice)
+			}
+		}
+	}
+	return testToast
+}
 func Toast(loaf []Bread) {
-	ToastLogger("Toast")
+	//ToastLogger("Toast")
 	var displaytoast string
 	for i := range loaf {
 		if loaf[i].Dirty {
@@ -58,15 +147,17 @@ func Toast(loaf []Bread) {
 }
 
 func Fleck(index int, loaf []Bread) string {
+	//ToastLogger("Fleck")
 	text := fmt.Sprint("\x1b[", loaf[index].Y, ";", loaf[index].X, "H", loaf[index].Label, "\x1b[0m")
 	return text
 }
 func PrintFleck(index int, loaf []Bread) {
+	//ToastLogger("PrintFleck")
 	text := fmt.Sprint("\x1b[", loaf[index].Y, ";", loaf[index].X, "H", loaf[index].Label, "\x1b[0m")
 	fmt.Printf(text)
 }
 func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
-	ToastLogger("Oven")
+	//ToastLogger("Oven")
 	x := 0
 	y := 0
 	for index := range butt {
@@ -109,7 +200,7 @@ func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 }
 
 func BreadGetter(x int, y int, loaf []Bread) Bread {
-	ToastLogger("BreadGetter")
+	//ToastLogger("BreadGetter")
 	//Gets the bread at position x, y
 	var val Bread
 
@@ -125,7 +216,7 @@ func BreadGetter(x int, y int, loaf []Bread) Bread {
 }
 
 func BreadSetter(x int, y int, loaf []Bread, val Bread) []Bread {
-	ToastLogger("BreadSetter")
+	//ToastLogger("BreadSetter")
 	//sets the Bread at position x, y
 	for i := range loaf {
 		if loaf[i].Y == y {
@@ -140,14 +231,14 @@ func BreadSetter(x int, y int, loaf []Bread, val Bread) []Bread {
 
 }
 func Dough(width int, height int) []Bread {
-	ToastLogger("Dough")
+	//ToastLogger("Dough")
 	var butt []Bread
 	butt = make([]Bread, width*height)
 
 	return butt
 }
 func DoughMax() (int, int, []Bread) {
-	ToastLogger("DoughMax")
+	//ToastLogger("DoughMax")
 	var butt []Bread
 	height, err := terminaldimensions.Height()
 	width, err := terminaldimensions.Width()

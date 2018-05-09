@@ -17,7 +17,7 @@ import (
 )
 
 func readStdin(out chan string, in chan bool) {
-	flour.ToastLogger("readStdin")
+	//flour.ToastLogger("readStdin")
 	//no buffering
 	exec.Command("stty", "-F", "/dev/tty", "cbreak", "min", "1").Run()
 	//no visible output
@@ -61,7 +61,7 @@ func getNote(testToast []flour.Bread, fipath string) {
 }
 
 func spatter(xvar int, yvar int, testToast []flour.Bread) {
-	flour.ToastLogger("spatter")
+	//flour.ToastLogger("spatter")
 	rand.Seed(12)
 	welcome := "MARCHELL"
 	wel := strings.Split(welcome, "")
@@ -79,7 +79,7 @@ func spatter(xvar int, yvar int, testToast []flour.Bread) {
 }
 
 func welcome(testToast []flour.Bread) {
-	flour.ToastLogger("welcome")
+	//flour.ToastLogger("welcome")
 	welcome := "WELCOME_TO_DEEGEE"
 	wel := strings.Split(welcome, "")
 	for i := 0; i < len(welcome); i++ {
@@ -92,28 +92,13 @@ func welcome(testToast []flour.Bread) {
 	testToast = flour.CleanFlecks(testToast)
 	//fmt.Printf("\n<:o.o:>")
 }
-func copyToast(welcome string, xvar int, yvar int, yend int, testToast []flour.Bread) {
-	flour.ToastLogger("copyToast")
-	wel := strings.Split(welcome, "")
-	if yend != 0 {
-		for x := yend; x > 0; x-- {
-			for i := 0; i < len(welcome); i++ {
-				//                                        DO STUFF HERE
-				slice := flour.BreadGetter(xvar+i, yvar-x, testToast)
-				slice.Label = string(wel[i])
-				slice.Dirty = true
-				testToast = flour.BreadSetter(xvar+i, yvar-x, testToast, slice)
-			}
-		}
-	}
-}
 
 func flat(label string, testToast []flour.Bread) {
-	flour.ToastLogger("flat")
+	//flour.ToastLogger("flat")
 	for i := range testToast {
 		testToast[i].Label = label
 		testToast[i].Dirty = true
-		//copyToast(label, testToast[i].X, testToast[i].Y, testToast[i].Y+1, testToast)
+		//flour.CopyToast(label, testToast[i].X, testToast[i].Y, testToast[i].Y+1, testToast)
 
 	}
 	flour.Toast(testToast)
@@ -121,20 +106,20 @@ func flat(label string, testToast []flour.Bread) {
 }
 
 func spawnButton(label string, xvar int, yvar int, testToast []flour.Bread) {
-	flour.ToastLogger("spawnButton")
-	copyToast("=====", xvar, yvar, 1, testToast)
-	copyToast(("| " + label + " |"), xvar, yvar+1, 1, testToast)
-	copyToast("=====", xvar, yvar+2, 1, testToast)
+	//flour.ToastLogger("spawnButton")
+	flour.CopyToast("=====", xvar, yvar, 1, testToast)
+	flour.CopyToast(("| " + label + " |"), xvar, yvar+1, 1, testToast)
+	flour.CopyToast("=====", xvar, yvar+2, 1, testToast)
 
 }
 
 func spawnContents(path string, xvar int, yvar int, testToast []flour.Bread) {
-	flour.ToastLogger("spawnContents")
+	//flour.ToastLogger("spawnContents")
 	filo, err := os.Open(path)
 	filscan := bufio.NewScanner(filo)
 	for filscan.Scan() {
 		yvar++
-		copyToast(filscan.Text(), xvar, yvar, 1, testToast)
+		flour.CopyToast(filscan.Text(), xvar, yvar, 1, testToast)
 
 	}
 
@@ -144,12 +129,12 @@ func spawnContents(path string, xvar int, yvar int, testToast []flour.Bread) {
 }
 
 func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen int, yhei int) {
-	flour.ToastLogger("spawnIndex")
+	//flour.ToastLogger("spawnIndex")
 	filo, err := os.Open(path)
 	filscan := bufio.NewScanner(filo)
 	for filscan.Scan() {
 		yvar++
-		copyToast(filscan.Text(), xvar, yvar, 1, testToast)
+		flour.CopyToast(filscan.Text(), xvar, yvar, 1, testToast)
 
 	}
 
@@ -162,6 +147,12 @@ func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen i
 func spawnContext(view string, testToast []flour.Bread) {
 	//put different context triggers here
 	switch view {
+	case "ouo":
+		flat("+", testToast)
+		//testToast = flour.CleanFlecks(testToast)
+		win := flour.SpawnWin(5, 5)
+		testToast = flour.RelWin(0.5, 0.5, 5, 5, win, testToast)
+		flour.Toast(testToast)
 	case "owo":
 		//flat("_", testToast)
 		testToast = flour.CleanFlecks(testToast)
@@ -244,7 +235,7 @@ func main() {
 					//close(stdin)
 					break
 				} else {
-					copyToast(str, 35+xpos, 5, 1, testToast)
+					flour.CopyToast(str, 35+xpos, 5, 1, testToast)
 					xpos++
 					// this is a good place to grab the rune printed
 				}
@@ -286,19 +277,19 @@ func main() {
 					spawnContext("owo", testToast)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
 					//fmt.Printf("0\n<:o.o:>")
-					copyToast("#", 4, 5+xpos, 1, testToast)
-					copyToast("#", 30, 5+xpos, 1, testToast)
+					flour.CopyToast("#", 4, 5+xpos, 1, testToast)
+					flour.CopyToast("#", 30, 5+xpos, 1, testToast)
 
 					xpos--
 					//END WIP, don't forget to do it upwards too
 				}
 				if str == "j" {
 					//if xpos == 0 {
-					//	copyToast("#", 4, 5, 1, testToast)
-					//	copyToast("#", 30, 5, 1, testToast)
+					//	flour.CopyToast("#", 4, 5, 1, testToast)
+					//	flour.CopyToast("#", 30, 5, 1, testToast)
 					//} else{
-					//			copyToast("_", 4, 5+xpos-1, 1, testToast)
-					//			copyToast("_", 30, 5+xpos-1, 1, testToast)
+					//			flour.CopyToast("_", 4, 5+xpos-1, 1, testToast)
+					//			flour.CopyToast("_", 30, 5+xpos-1, 1, testToast)
 					//pre and post title hash
 					//Spawn Context clears, so we don't need pre
 					if xpos < 10 {
@@ -317,8 +308,8 @@ func main() {
 					//spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
 					//fmt.Printf("0\n<:o.o:>")
-					copyToast("#", 4, 5+xpos, 1, testToast)
-					copyToast("#", 30, 5+xpos, 1, testToast)
+					flour.CopyToast("#", 4, 5+xpos, 1, testToast)
+					flour.CopyToast("#", 30, 5+xpos, 1, testToast)
 
 					xpos++
 					// this is a good place to grab the rune printed
@@ -328,7 +319,7 @@ func main() {
 		case "spawn":
 			flat("_", testToast)
 			time.Sleep(1 * time.Second)
-			copyToast("DEEGEE", 35, 11, 1, testToast)
+			flour.CopyToast("DEEGEE", 35, 11, 1, testToast)
 			flour.Toast(testToast)
 			//fmt.Printf("_<:o.o:>")
 			time.Sleep(1 * time.Second)
@@ -350,7 +341,8 @@ func main() {
 			//fmt.Printf("_<:o.o:>")
 			spawnContext("owo", testToast)
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
-
+		case "ouo":
+			spawnContext("ouo", testToast)
 		case "ono":
 			//flat("_", testToast)
 			//fmt.Printf("_<:o.o:>")
