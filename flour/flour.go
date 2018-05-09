@@ -52,12 +52,6 @@ func Toast(loaf []Bread) {
 		} else {
 			//do nothing
 		}
-		//displaytoast += loaf[i].Label
-		//fmt.Printf(loaf[i].Label)
-		//if loaf[i].Nl {
-		//	displaytoast += "\n"
-		//	fmt.Println("")
-		//}
 	}
 	displaytoast += "_\n\x1b[93;41m\x1b[3;6H<:o.o:>\x1b[0m"
 	fmt.Printf(displaytoast)

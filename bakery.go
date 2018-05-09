@@ -130,8 +130,6 @@ func spawnButton(label string, xvar int, yvar int, testToast []flour.Bread) {
 
 func spawnContents(path string, xvar int, yvar int, testToast []flour.Bread) {
 	flour.ToastLogger("spawnContents")
-	slice := flour.Dough(xvar+1, yvar+1)
-	slice = flour.Oven(slice, "=", xvar, yvar)
 	filo, err := os.Open(path)
 	filscan := bufio.NewScanner(filo)
 	for filscan.Scan() {
@@ -145,10 +143,8 @@ func spawnContents(path string, xvar int, yvar int, testToast []flour.Bread) {
 	}
 }
 
-func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen int, yhei int) []flour.Bread {
+func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen int, yhei int) {
 	flour.ToastLogger("spawnIndex")
-	slice := flour.Dough(xvar+1, yvar+1)
-	slice = flour.Oven(slice, "=", xvar, yvar)
 	filo, err := os.Open(path)
 	filscan := bufio.NewScanner(filo)
 	for filscan.Scan() {
@@ -160,7 +156,7 @@ func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen i
 	if err != nil {
 		//fmt.Println("Something went wrong!")
 	}
-	return slice
+	//return slice
 
 }
 func spawnContext(view string, testToast []flour.Bread) {
