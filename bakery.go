@@ -17,7 +17,7 @@ import (
 )
 
 func readStdin(out chan string, in chan bool) {
-	flour.ToastLogger("readStdin")
+	//flour.ToastLogger("readStdin")
 	//no buffering
 	exec.Command("stty", "-F", "/dev/tty", "cbreak", "min", "1").Run()
 	//no visible output
@@ -61,7 +61,7 @@ func getNote(testToast []flour.Bread, fipath string) {
 }
 
 func spatter(xvar int, yvar int, testToast []flour.Bread) {
-	flour.ToastLogger("spatter")
+	//flour.ToastLogger("spatter")
 	rand.Seed(12)
 	welcome := "MARCHELL"
 	wel := strings.Split(welcome, "")
@@ -79,7 +79,7 @@ func spatter(xvar int, yvar int, testToast []flour.Bread) {
 }
 
 func welcome(testToast []flour.Bread) {
-	flour.ToastLogger("welcome")
+	//flour.ToastLogger("welcome")
 	welcome := "WELCOME_TO_DEEGEE"
 	wel := strings.Split(welcome, "")
 	for i := 0; i < len(welcome); i++ {
@@ -93,7 +93,7 @@ func welcome(testToast []flour.Bread) {
 	//fmt.Printf("\n<:o.o:>")
 }
 func copyToast(welcome string, xvar int, yvar int, yend int, testToast []flour.Bread) {
-	flour.ToastLogger("copyToast")
+	//flour.ToastLogger("copyToast")
 	wel := strings.Split(welcome, "")
 	if yend != 0 {
 		for x := yend; x > 0; x-- {
@@ -109,7 +109,7 @@ func copyToast(welcome string, xvar int, yvar int, yend int, testToast []flour.B
 }
 
 func flat(label string, testToast []flour.Bread) {
-	flour.ToastLogger("flat")
+	//flour.ToastLogger("flat")
 	for i := range testToast {
 		testToast[i].Label = label
 		testToast[i].Dirty = true
@@ -121,7 +121,7 @@ func flat(label string, testToast []flour.Bread) {
 }
 
 func spawnButton(label string, xvar int, yvar int, testToast []flour.Bread) {
-	flour.ToastLogger("spawnButton")
+	//flour.ToastLogger("spawnButton")
 	copyToast("=====", xvar, yvar, 1, testToast)
 	copyToast(("| " + label + " |"), xvar, yvar+1, 1, testToast)
 	copyToast("=====", xvar, yvar+2, 1, testToast)
@@ -129,7 +129,7 @@ func spawnButton(label string, xvar int, yvar int, testToast []flour.Bread) {
 }
 
 func spawnContents(path string, xvar int, yvar int, testToast []flour.Bread) {
-	flour.ToastLogger("spawnContents")
+	//flour.ToastLogger("spawnContents")
 	filo, err := os.Open(path)
 	filscan := bufio.NewScanner(filo)
 	for filscan.Scan() {
@@ -144,7 +144,7 @@ func spawnContents(path string, xvar int, yvar int, testToast []flour.Bread) {
 }
 
 func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen int, yhei int) {
-	flour.ToastLogger("spawnIndex")
+	//flour.ToastLogger("spawnIndex")
 	filo, err := os.Open(path)
 	filscan := bufio.NewScanner(filo)
 	for filscan.Scan() {

@@ -23,6 +23,7 @@ type Flour interface {
 }
 
 func CleanFlecks(loaf []Bread) []Bread {
+	//ToastLogger("CleanFlecks")
 	for i := range loaf {
 		if loaf[i].Label != "_" {
 			loaf[i].Dirty = false
@@ -31,6 +32,7 @@ func CleanFlecks(loaf []Bread) []Bread {
 	return loaf
 }
 func MakeCleanFlecks(loaf []Bread) []Bread {
+	//ToastLogger("MakeCleanFlecks")
 	for i := range loaf {
 		if loaf[i].Dirty == true {
 			loaf[i].Label = "_"
@@ -39,8 +41,9 @@ func MakeCleanFlecks(loaf []Bread) []Bread {
 	}
 	return loaf
 }
+
 func Toast(loaf []Bread) {
-	ToastLogger("Toast")
+	//ToastLogger("Toast")
 	var displaytoast string
 	for i := range loaf {
 		if loaf[i].Dirty {
@@ -58,15 +61,17 @@ func Toast(loaf []Bread) {
 }
 
 func Fleck(index int, loaf []Bread) string {
+	//ToastLogger("Fleck")
 	text := fmt.Sprint("\x1b[", loaf[index].Y, ";", loaf[index].X, "H", loaf[index].Label, "\x1b[0m")
 	return text
 }
 func PrintFleck(index int, loaf []Bread) {
+	//ToastLogger("PrintFleck")
 	text := fmt.Sprint("\x1b[", loaf[index].Y, ";", loaf[index].X, "H", loaf[index].Label, "\x1b[0m")
 	fmt.Printf(text)
 }
 func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
-	ToastLogger("Oven")
+	//ToastLogger("Oven")
 	x := 0
 	y := 0
 	for index := range butt {
@@ -109,7 +114,7 @@ func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 }
 
 func BreadGetter(x int, y int, loaf []Bread) Bread {
-	ToastLogger("BreadGetter")
+	//ToastLogger("BreadGetter")
 	//Gets the bread at position x, y
 	var val Bread
 
@@ -125,7 +130,7 @@ func BreadGetter(x int, y int, loaf []Bread) Bread {
 }
 
 func BreadSetter(x int, y int, loaf []Bread, val Bread) []Bread {
-	ToastLogger("BreadSetter")
+	//ToastLogger("BreadSetter")
 	//sets the Bread at position x, y
 	for i := range loaf {
 		if loaf[i].Y == y {
@@ -140,14 +145,14 @@ func BreadSetter(x int, y int, loaf []Bread, val Bread) []Bread {
 
 }
 func Dough(width int, height int) []Bread {
-	ToastLogger("Dough")
+	//ToastLogger("Dough")
 	var butt []Bread
 	butt = make([]Bread, width*height)
 
 	return butt
 }
 func DoughMax() (int, int, []Bread) {
-	ToastLogger("DoughMax")
+	//ToastLogger("DoughMax")
 	var butt []Bread
 	height, err := terminaldimensions.Height()
 	width, err := terminaldimensions.Width()
