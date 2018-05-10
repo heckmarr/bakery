@@ -148,10 +148,12 @@ func spawnContext(view string, testToast []flour.Bread) {
 	//put different context triggers here
 	switch view {
 	case "ouo":
-		flat("+", testToast)
+		flat("_", testToast)
 		//testToast = flour.CleanFlecks(testToast)
-		win := flour.SpawnWin(10, 10)
+		win := flour.SpawnWin(11, 11)
+		win = flour.CopyToast("@@@@@", 3, 6, 3, win)
 		testToast = flour.RelWin(0.5, 0.5, 1, 1, win, testToast)
+		testToast = flour.RelWin(0.25, 0.25, 1, 1, win, testToast)
 		flour.Toast(testToast)
 	case "owo":
 		//flat("_", testToast)
