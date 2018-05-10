@@ -94,6 +94,7 @@ func RelWin(widthP float64, heightP float64, heightPadding float64, widthPadding
 	for i := range win {
 		CopySubToast(win[i].Label, win[i].X, win[i].Y, xbegI, xendI, ybegI, yendI, testToast)
 	}
+
 	return testToast, winLoaf
 }
 
@@ -114,6 +115,13 @@ func CopySubToast(welcome string, xvar int, yvar int, xbeg int, xend int, ybeg i
 				//			}
 			}
 		}
+	}
+	return testToast
+}
+
+func CopyInToast(toast []Bread, testToast []Bread) []Bread {
+	for i := range toast {
+		testToast = CopyToast(toast[i].Label, toast[i].X, toast[i].Y, 1, testToast)
 	}
 	return testToast
 }
