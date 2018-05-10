@@ -144,14 +144,16 @@ func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen i
 	//return slice
 
 }
-func spawnContext(view string, testToast []flour.Bread) {
+func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 	//put different context triggers here
 	switch view {
 	case "ouo":
-		flat("+", testToast)
+		//flat("_", testToast)
 		//testToast = flour.CleanFlecks(testToast)
-		win := flour.SpawnWin(5, 5)
-		testToast = flour.RelWin(0.5, 0.5, 5, 5, win, testToast)
+		win, winLoaf := flour.SpawnWin(11, 11)
+		win = flour.CopyToast("@@@@@", 3, 6, 3, win)
+		testToast, _ := flour.RelWin(0.5, 0.5, 1, 1, win, testToast, testLoaf, true)
+		testToast, _ = flour.RelWin(0.25, 0.25, 1, 1, win, testToast, winLoaf, false)
 		flour.Toast(testToast)
 	case "owo":
 		//flat("_", testToast)
@@ -172,14 +174,27 @@ func spawnContext(view string, testToast []flour.Bread) {
 		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
 		//	cmd.Run()
 		testToast = flour.CleanFlecks(testToast)
-
+		button, _ := flour.SpawnWin(5, 5)
+		container, containerLoaf := flour.SpawnWin(80, 23)
 		//flat("_", testToast)
-		spawnButton("$", 59, 2, testToast)
-		spawnButton("@", 59, 19, testToast)
-		spawnButton("#", 1, 2, testToast)
-		spawnButton("4", 1, 19, testToast)
-		spawnButton("5", 74, 2, testToast)
-		spawnButton("6", 74, 19, testToast)
+		button = flour.CopyToast("$", 2, 3, 1, button)
+		testToast, _ := flour.RelWin(0.33, 0.05, 1, 1, button, container, containerLoaf, true)
+		//spawnButton("$", 59, 2, testToast)
+		button = flour.CopyToast("@", 2, 3, 1, button)
+		testToast, _ = flour.RelWin(0.33, 0.85, 1, 1, button, container, containerLoaf, true)
+		//spawnButton("@", 59, 19, testToast)
+		button = flour.CopyToast("#", 2, 3, 1, button)
+		testToast, _ = flour.RelWin(0.03, 0.85, 1, 1, button, container, containerLoaf, true)
+		//spawnButton("#", 1, 2, testToast)
+		button = flour.CopyToast("4", 2, 3, 1, button)
+		testToast, _ = flour.RelWin(0.03, 0.05, 1, 1, button, container, containerLoaf, true)
+		//spawnButton("4", 1, 19, testToast)
+		button = flour.CopyToast("5", 2, 3, 1, button)
+		testToast, _ = flour.RelWin(0.85, 0.05, 1, 1, button, container, containerLoaf, true)
+		//spawnButton("5", 74, 2, testToast)
+		button = flour.CopyToast("6", 2, 3, 1, button)
+		testToast, _ = flour.RelWin(0.85, 0.85, 1, 1, button, container, containerLoaf, true)
+		//spawnButton("6", 74, 19, testToast)
 		//update this with the autonoodly filename
 		for {
 			spawnIndex("poptart/101/localtoast.txt", 5, 4, testToast, 25, 14)
@@ -197,7 +212,7 @@ func main() {
 	//init can be changed
 	//	xvar := 81
 	//	yvar := 23
-	xvar, yvar, testToast := flour.DoughMax()
+	xvar, yvar, testToast, testLoaf := flour.DoughMax()
 	fmt.Println(xvar)
 	fmt.Println(yvar)
 	testToast = flour.Oven(testToast, "_", xvar, yvar)
@@ -274,7 +289,7 @@ func main() {
 					}
 					//flour.CleanFlecks(testToast)
 					//flat("_", testToast)
-					spawnContext("owo", testToast)
+					spawnContext("owo", testToast, testLoaf)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
 					//fmt.Printf("0\n<:o.o:>")
 					flour.CopyToast("#", 4, 5+xpos, 1, testToast)
@@ -304,7 +319,7 @@ func main() {
 					//}
 					//flour.CleanFlecks(testToast)
 					//flat("_", testToast)
-					spawnContext("owo", testToast)
+					spawnContext("owo", testToast, testLoaf)
 					//spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
 					//fmt.Printf("0\n<:o.o:>")
@@ -329,7 +344,7 @@ func main() {
 			//flour.CleanFlecks(testToast)
 			flat("_", testToast)
 
-			spawnContext("owo", testToast)
+			spawnContext("owo", testToast, testLoaf)
 			//from here
 			//turn this into spawn_content
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
@@ -339,14 +354,14 @@ func main() {
 		case "owo":
 			//flat("_", testToast)
 			//fmt.Printf("_<:o.o:>")
-			spawnContext("owo", testToast)
+			spawnContext("owo", testToast, testLoaf)
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 		case "ouo":
-			spawnContext("ouo", testToast)
+			spawnContext("ouo", testToast, testLoaf)
 		case "ono":
 			//flat("_", testToast)
 			//fmt.Printf("_<:o.o:>")
-			spawnContext("ono", testToast)
+			spawnContext("ono", testToast, testLoaf)
 		case "spatter":
 			spatter(xvar, yvar, testToast)
 		case "welcome":

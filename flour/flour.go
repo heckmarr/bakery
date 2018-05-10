@@ -16,6 +16,9 @@ type Bread struct {
 	Nl    bool
 	Dirty bool
 }
+type Loaf struct {
+	Height, Width int
+}
 
 type Flour interface {
 	Dough()
@@ -43,32 +46,47 @@ func MakeCleanFlecks(loaf []Bread) []Bread {
 	}
 	return loaf
 }
-func SpawnWin(xvar int, yvar int) []Bread {
+func SpawnWin(xvar int, yvar int) ([]Bread, Loaf) {
 	//ToastLogger("SpawnWin")
+	var winLoaf Loaf
+	winLoaf.Height = yvar
+	winLoaf.Width = xvar
 	win := Dough(xvar, yvar)
 	win = Oven(win, "*", xvar, yvar)
-	return win
+	return win, winLoaf
 }
 
 //RelWin Copies a window with size and height relative to the size of the toast
-//passed to the []Bread passed
-func RelWin(widthP float64, heightP float64, width float64, height float64, win []Bread, testToast []Bread) []Bread {
-	//	xvar := math.Floor(width*widthP + (width))
-	tHeight, err := terminaldimensions.Height()
-	tWidth, err := terminaldimensions.Width()
-	if err != nil {
-		fmt.Println("terminal sizing error!")
+//passed to the Loaf passed, or if the last value is false, the relative size of
+//the terminal in which it is called.
+func RelWin(widthP float64, heightP float64, heightPadding float64, widthPadding float64, win []Bread, testToast []Bread, winLoaf Loaf, relativeToParent bool) ([]Bread, Loaf) {
+
+	var tHeight64 float64
+	var tWidth64 float64
+	if !relativeToParent {
+		tHeight, err := terminaldimensions.Height()
+		tWidth, err := terminaldimensions.Width()
+		if err != nil {
+			fmt.Println("terminal sizing error!")
+
+		}
+		tHeight64 = float64(tHeight)
+		tWidth64 = float64(tWidth)
+
+	} else {
+		tHeight := winLoaf.Height
+		tWidth := winLoaf.Width
+		tHeight64 = float64(tHeight)
+		tWidth64 = float64(tWidth)
+
 	}
-	tHeight64 := float64(tHeight)
-	tWidth64 := float64(tWidth)
 
 	xbeg := math.Floor((tWidth64 * widthP))
-	xend := math.Floor(xbeg + width)
-	//	yvar := math.Floor(height*heightP + (height))
+	xend := math.Floor(xbeg + widthPadding)
+
 	ybeg := math.Floor((tHeight64 * heightP))
-	yend := math.Floor(ybeg + height)
-	//	xvarI := int(xvar)
-	//	yvarI := int(yvar)
+	yend := math.Floor(ybeg + heightPadding)
+
 	xendI := int(xend)
 	yendI := int(yend)
 	ybegI := int(ybeg)
@@ -76,18 +94,7 @@ func RelWin(widthP float64, heightP float64, width float64, height float64, win 
 	for i := range win {
 		CopySubToast(win[i].Label, win[i].X, win[i].Y, xbegI, xendI, ybegI, yendI, testToast)
 	}
-	//	if yend != 0 {
-	//		for x := yendI; x > 0; x-- {
-	//			for i := 0; i < xendI; i++ {
-	//				BreadSetter(int(xvar), int(yvar), testToast, win[i])
-	//				slice := BreadGetter(xvarI+i, yvarI-x, win)
-	//				slice.Label = "_"
-	//				slice.Dirty = true
-	//				testToast = BreadSetter(xvarI+i, yvarI-x, testToast, slice)
-	//			}
-	//		}
-	//	}
-	return testToast
+	return testToast, winLoaf
 }
 
 //CopySubToast copies the string passed into the values of a []Bread given
@@ -95,8 +102,8 @@ func CopySubToast(welcome string, xvar int, yvar int, xbeg int, xend int, ybeg i
 	//ToastLogger("CopyToast")
 	//wel := strings.Split(welcome, "")
 	if yend != 0 {
-		for x := ybeg; x < yend; x++ {
-			for i := xbeg; i < xend; i++ {
+		for x := ybeg - int(float64(yvar)*0.5); x < yend-int(float64(yvar)*0.5); x++ {
+			for i := xbeg - int(float64(xvar)*0.5); i < xend-int(float64(xvar)*0.5); i++ {
 				//                           DO STUFF HERE
 				//			if x < yend && x > yend {
 				//slice := BreadGetter(0, 0, testToast)
@@ -237,9 +244,10 @@ func Dough(width int, height int) []Bread {
 
 	return butt
 }
-func DoughMax() (int, int, []Bread) {
+func DoughMax() (int, int, []Bread, Loaf) {
 	//ToastLogger("DoughMax")
 	var butt []Bread
+	var loaf Loaf
 	height, err := terminaldimensions.Height()
 	width, err := terminaldimensions.Width()
 	if err != nil {
@@ -247,14 +255,15 @@ func DoughMax() (int, int, []Bread) {
 		//fmt.Println(strconv.Atoi(string(height)))
 		//fmt.Println(strconv.Atoi(string(width)))
 	}
-
+	loaf.Height = int(height)
+	loaf.Width = int(width)
 	//fmt.Println("Dough all mooshy!")
 	//the nines can be changed
 	heightInt := int(height)
 	widthInt := int(width)
 	butt = make([]Bread, widthInt*heightInt)
 
-	return widthInt, heightInt, butt
+	return widthInt, heightInt, butt, loaf
 
 }
 
