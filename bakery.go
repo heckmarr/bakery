@@ -207,8 +207,10 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		//spawnButton("6", 74, 19, testToast)
 		//update this with the autonoodly filename
 		for {
-			spawnIndex("poptart/101/localtoast.txt", 5, 4, testToast, 25, 14)
 			spawnIndex("poptart/101/localtoast.txt", 5, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/localtoast.txt", 5, 26, testToast, 25, 14)
+			spawnIndex("poptart/101/localtoast.txt", 80, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/localtoast.txt", 80, 26, testToast, 25, 14)
 			//fmt.Printf("0\n<:o.o:>")
 			//Update the screen
 			flour.Toast(testToast)
