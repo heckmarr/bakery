@@ -49,7 +49,7 @@ func MakeCleanFlecks(loaf []Bread) []Bread {
 func SpawnWin(xvar int, yvar int) ([]Bread, Loaf) {
 	//ToastLogger("SpawnWin")
 	var winLoaf Loaf
-	winLoaf.Height = int(math.Floor(float64(yvar / xvar)))
+	winLoaf.Height = yvar
 	winLoaf.Width = xvar
 	win := Dough(xvar, yvar)
 	win = Oven(win, "*", xvar, yvar)
@@ -59,7 +59,7 @@ func SpawnWin(xvar int, yvar int) ([]Bread, Loaf) {
 //RelWin Copies a window with size and height relative to the size of the toast
 //passed to the Loaf passed, or if the last value is false, the relative size of
 //the terminal in which it is called.
-func RelWin(widthP float64, heightP float64, height float64, width float64, win []Bread, testToast []Bread, winLoaf Loaf, relativeToParent bool) ([]Bread, Loaf) {
+func RelWin(widthP float64, heightP float64, heightPadding float64, widthPadding float64, win []Bread, testToast []Bread, winLoaf Loaf, relativeToParent bool) ([]Bread, Loaf) {
 
 	var tHeight64 float64
 	var tWidth64 float64
@@ -82,10 +82,10 @@ func RelWin(widthP float64, heightP float64, height float64, width float64, win 
 	}
 
 	xbeg := math.Floor((tWidth64 * widthP))
-	xend := math.Floor(xbeg + width)
+	xend := math.Floor(xbeg + widthPadding)
 
 	ybeg := math.Floor((tHeight64 * heightP))
-	yend := math.Floor(ybeg + height)
+	yend := math.Floor(ybeg + heightPadding)
 
 	xendI := int(xend)
 	yendI := int(yend)
