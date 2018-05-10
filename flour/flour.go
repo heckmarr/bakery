@@ -57,12 +57,10 @@ func SpawnWin(xvar int, yvar int) ([]Bread, Loaf) {
 }
 
 //RelWin Copies a window with size and height relative to the size of the toast
-//passed to the []Bread passed
+//passed to the Loaf passed, or if the last value is false, the relative size of
+//the terminal in which it is called.
 func RelWin(widthP float64, heightP float64, height float64, width float64, win []Bread, testToast []Bread, winLoaf Loaf, relativeToParent bool) ([]Bread, Loaf) {
-	//	xvar := math.Floor(width*widthP + (width))
 
-	//	var tHeight uint
-	//	var tWidth uint
 	var tHeight64 float64
 	var tWidth64 float64
 	if !relativeToParent {
@@ -83,13 +81,12 @@ func RelWin(widthP float64, heightP float64, height float64, width float64, win 
 
 	}
 
-	xbeg := math.Floor((tWidth64 * widthP) - width*0.5)
+	xbeg := math.Floor((tWidth64 * widthP))
 	xend := math.Floor(xbeg + width)
-	//	yvar := math.Floor(height*heightP + (height))
-	ybeg := math.Floor((tHeight64 * heightP) - width*0.5)
+
+	ybeg := math.Floor((tHeight64 * heightP))
 	yend := math.Floor(ybeg + height)
-	//	xvarI := int(xvar)
-	//	yvarI := int(yvar)
+
 	xendI := int(xend)
 	yendI := int(yend)
 	ybegI := int(ybeg)
@@ -97,17 +94,6 @@ func RelWin(widthP float64, heightP float64, height float64, width float64, win 
 	for i := range win {
 		CopySubToast(win[i].Label, win[i].X, win[i].Y, xbegI, xendI, ybegI, yendI, testToast)
 	}
-	//	if yend != 0 {
-	//		for x := yendI; x > 0; x-- {
-	//			for i := 0; i < xendI; i++ {
-	//				BreadSetter(int(xvar), int(yvar), testToast, win[i])
-	//				slice := BreadGetter(xvarI+i, yvarI-x, win)
-	//				slice.Label = "_"
-	//				slice.Dirty = true
-	//				testToast = BreadSetter(xvarI+i, yvarI-x, testToast, slice)
-	//			}
-	//		}
-	//	}
 	return testToast, winLoaf
 }
 
