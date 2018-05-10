@@ -49,7 +49,7 @@ func MakeCleanFlecks(loaf []Bread) []Bread {
 func SpawnWin(xvar int, yvar int) ([]Bread, Loaf) {
 	//ToastLogger("SpawnWin")
 	var winLoaf Loaf
-	winLoaf.Height = yvar
+	winLoaf.Height = int(math.Floor(float64(yvar / xvar)))
 	winLoaf.Width = xvar
 	win := Dough(xvar, yvar)
 	win = Oven(win, "*", xvar, yvar)
@@ -58,7 +58,7 @@ func SpawnWin(xvar int, yvar int) ([]Bread, Loaf) {
 
 //RelWin Copies a window with size and height relative to the size of the toast
 //passed to the []Bread passed
-func RelWin(widthP float64, heightP float64, width float64, height float64, win []Bread, testToast []Bread, winLoaf Loaf, relativeToParent bool) ([]Bread, Loaf) {
+func RelWin(widthP float64, heightP float64, height float64, width float64, win []Bread, testToast []Bread, winLoaf Loaf, relativeToParent bool) ([]Bread, Loaf) {
 	//	xvar := math.Floor(width*widthP + (width))
 
 	//	var tHeight uint
@@ -86,7 +86,7 @@ func RelWin(widthP float64, heightP float64, width float64, height float64, win 
 	xbeg := math.Floor((tWidth64 * widthP) - width*0.5)
 	xend := math.Floor(xbeg + width)
 	//	yvar := math.Floor(height*heightP + (height))
-	ybeg := math.Floor((tHeight64 * heightP) - height*0.5)
+	ybeg := math.Floor((tHeight64 * heightP) - width*0.5)
 	yend := math.Floor(ybeg + height)
 	//	xvarI := int(xvar)
 	//	yvarI := int(yvar)
@@ -258,9 +258,10 @@ func Dough(width int, height int) []Bread {
 
 	return butt
 }
-func DoughMax() (int, int, []Bread) {
+func DoughMax() (int, int, []Bread, Loaf) {
 	//ToastLogger("DoughMax")
 	var butt []Bread
+	var loaf Loaf
 	height, err := terminaldimensions.Height()
 	width, err := terminaldimensions.Width()
 	if err != nil {
@@ -268,14 +269,15 @@ func DoughMax() (int, int, []Bread) {
 		//fmt.Println(strconv.Atoi(string(height)))
 		//fmt.Println(strconv.Atoi(string(width)))
 	}
-
+	loaf.Height = int(height)
+	loaf.Width = int(width)
 	//fmt.Println("Dough all mooshy!")
 	//the nines can be changed
 	heightInt := int(height)
 	widthInt := int(width)
 	butt = make([]Bread, widthInt*heightInt)
 
-	return widthInt, heightInt, butt
+	return widthInt, heightInt, butt, loaf
 
 }
 

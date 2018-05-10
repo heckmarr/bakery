@@ -144,7 +144,7 @@ func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen i
 	//return slice
 
 }
-func spawnContext(view string, testToast []flour.Bread) {
+func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 	//put different context triggers here
 	switch view {
 	case "ouo":
@@ -152,7 +152,7 @@ func spawnContext(view string, testToast []flour.Bread) {
 		//testToast = flour.CleanFlecks(testToast)
 		win, winLoaf := flour.SpawnWin(11, 11)
 		win = flour.CopyToast("@@@@@", 3, 6, 3, win)
-		testToast, _ := flour.RelWin(0.5, 0.5, 1, 1, win, testToast, winLoaf, false)
+		testToast, _ := flour.RelWin(0.5, 0.5, 1, 1, win, testToast, testLoaf, true)
 		testToast, _ = flour.RelWin(0.25, 0.25, 1, 1, win, testToast, winLoaf, false)
 		flour.Toast(testToast)
 	case "owo":
@@ -199,7 +199,7 @@ func main() {
 	//init can be changed
 	//	xvar := 81
 	//	yvar := 23
-	xvar, yvar, testToast := flour.DoughMax()
+	xvar, yvar, testToast, testLoaf := flour.DoughMax()
 	fmt.Println(xvar)
 	fmt.Println(yvar)
 	testToast = flour.Oven(testToast, "_", xvar, yvar)
@@ -276,7 +276,7 @@ func main() {
 					}
 					//flour.CleanFlecks(testToast)
 					//flat("_", testToast)
-					spawnContext("owo", testToast)
+					spawnContext("owo", testToast, testLoaf)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
 					//fmt.Printf("0\n<:o.o:>")
 					flour.CopyToast("#", 4, 5+xpos, 1, testToast)
@@ -306,7 +306,7 @@ func main() {
 					//}
 					//flour.CleanFlecks(testToast)
 					//flat("_", testToast)
-					spawnContext("owo", testToast)
+					spawnContext("owo", testToast, testLoaf)
 					//spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
 					//fmt.Printf("0\n<:o.o:>")
@@ -331,7 +331,7 @@ func main() {
 			//flour.CleanFlecks(testToast)
 			flat("_", testToast)
 
-			spawnContext("owo", testToast)
+			spawnContext("owo", testToast, testLoaf)
 			//from here
 			//turn this into spawn_content
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
@@ -341,14 +341,14 @@ func main() {
 		case "owo":
 			//flat("_", testToast)
 			//fmt.Printf("_<:o.o:>")
-			spawnContext("owo", testToast)
+			spawnContext("owo", testToast, testLoaf)
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 		case "ouo":
-			spawnContext("ouo", testToast)
+			spawnContext("ouo", testToast, testLoaf)
 		case "ono":
 			//flat("_", testToast)
 			//fmt.Printf("_<:o.o:>")
-			spawnContext("ono", testToast)
+			spawnContext("ono", testToast, testLoaf)
 		case "spatter":
 			spatter(xvar, yvar, testToast)
 		case "welcome":
