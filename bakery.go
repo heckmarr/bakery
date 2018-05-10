@@ -175,7 +175,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		//	cmd.Run()
 		testToast = flour.CleanFlecks(testToast)
 		button, _ := flour.SpawnWin(5, 5)
-		container, containerLoaf := flour.SpawnWin(80, 23)
+		container, containerLoaf := flour.SpawnWin(100, 38)
 		//flat("_", testToast)
 		button = flour.CopyToast("$", 2, 3, 1, button)
 		container, _ = flour.RelWin(0.33, 0.05, 1, 1, button, container, containerLoaf, true)
@@ -198,7 +198,11 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		//bag, bagLoaf = flour.RelWin(0.03, 0.03, 1, 1, container, bag, bagLoaf, true)
 		testToast, _ = flour.RelWin(0.03, 0.05, 1, 1, container, testToast, testLoaf, true)
 
-		testToast, _ = flour.RelWin(0.5, 0.5, 1, 1, container, testToast, testLoaf, true)
+		testToast, _ = flour.RelWin(0.03, 0.55, 1, 1, container, testToast, testLoaf, true)
+
+		testToast, _ = flour.RelWin(0.55, 0.05, 1, 1, container, testToast, testLoaf, true)
+
+		testToast, _ = flour.RelWin(0.55, 0.55, 1, 1, container, testToast, testLoaf, true)
 
 		//spawnButton("6", 74, 19, testToast)
 		//update this with the autonoodly filename
