@@ -1,7 +1,6 @@
 package main
 
 import (
-	terminaldimensions "github.com/wayneashleyberry/terminal-dimensions"
 	"localtoast.net/localtoast/bakery/flour"
 	//	"gitlab.com/localtoast/bakery/oven"
 	//	"gitlab.com/localtoast/bakery/loaf"
@@ -151,28 +150,10 @@ func spawnContext(view string, testToast []flour.Bread) {
 	case "ouo":
 		//flat("_", testToast)
 		//testToast = flour.CleanFlecks(testToast)
-<<<<<<< HEAD
-		heightU, _ := terminaldimensions.Height()
-		widthU, _ := terminaldimensions.Width()
-		heightI := int(heightU)
-		widthI := int(widthU)
-
-		win, winLoaf := flour.SpawnWin(heightI, widthI)
-		//subWin, _ := flour.SpawnWin(2, 2)
-		fmt.Println(winLoaf.Height)
-		flat("+", win)
-		//win = flour.CopyToast("@@@@@", widthI, heightI, heightI, win)
-		//	width := float64(winLoaf.Width)
-		//	height := float64(winLoaf.Height)
-		testToast, winLoaf = flour.RelWin(1, 1, 1, 1, win, testToast, winLoaf, true)
-		//testToast, winLoaf = flour.RelWin(0.5, 0.5, 1, 1, subWin, testToast, winLoaf, true)
-		//testToast, winLoaf = flour.RelWin(0.25, 0.25, 1, 1, win, testToast, winLoaf, true)
-=======
-		win := flour.SpawnWin(11, 11)
+		win, winLoaf := flour.SpawnWin(11, 11)
 		win = flour.CopyToast("@@@@@", 3, 6, 3, win)
-		testToast = flour.RelWin(0.5, 0.5, 1, 1, win, testToast)
-		testToast = flour.RelWin(0.25, 0.25, 1, 1, win, testToast)
->>>>>>> parent of b1cf118... centering!
+		testToast, _ := flour.RelWin(0.5, 0.5, 1, 1, win, testToast, winLoaf, false)
+		testToast, _ = flour.RelWin(0.25, 0.25, 1, 1, win, testToast, winLoaf, false)
 		flour.Toast(testToast)
 	case "owo":
 		//flat("_", testToast)
