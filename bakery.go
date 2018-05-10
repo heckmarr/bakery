@@ -1,6 +1,7 @@
 package main
 
 import (
+	terminaldimensions "github.com/wayneashleyberry/terminal-dimensions"
 	"localtoast.net/localtoast/bakery/flour"
 	//	"gitlab.com/localtoast/bakery/oven"
 	//	"gitlab.com/localtoast/bakery/loaf"
@@ -148,12 +149,23 @@ func spawnContext(view string, testToast []flour.Bread) {
 	//put different context triggers here
 	switch view {
 	case "ouo":
-		flat("_", testToast)
+		//flat("_", testToast)
 		//testToast = flour.CleanFlecks(testToast)
-		win := flour.SpawnWin(11, 11)
-		win = flour.CopyToast("@@@@@", 3, 8, 5, win)
-		testToast = flour.RelWin(0.5, 0.5, 1, 1, win, testToast)
-		testToast = flour.RelWin(0.25, 0.25, 1, 1, win, testToast)
+		heightU, _ := terminaldimensions.Height()
+		widthU, _ := terminaldimensions.Width()
+		heightI := int(heightU)
+		widthI := int(widthU)
+
+		win, winLoaf := flour.SpawnWin(heightI, widthI)
+		//subWin, _ := flour.SpawnWin(2, 2)
+		fmt.Println(winLoaf.Height)
+		flat("+", win)
+		//win = flour.CopyToast("@@@@@", widthI, heightI, heightI, win)
+		//	width := float64(winLoaf.Width)
+		//	height := float64(winLoaf.Height)
+		testToast, winLoaf = flour.RelWin(1, 1, 1, 1, win, testToast, winLoaf, true)
+		//testToast, winLoaf = flour.RelWin(0.5, 0.5, 1, 1, subWin, testToast, winLoaf, true)
+		//testToast, winLoaf = flour.RelWin(0.25, 0.25, 1, 1, win, testToast, winLoaf, true)
 		flour.Toast(testToast)
 	case "owo":
 		//flat("_", testToast)

@@ -16,6 +16,9 @@ type Bread struct {
 	Nl    bool
 	Dirty bool
 }
+type Loaf struct {
+	Height, Width int
+}
 
 type Flour interface {
 	Dough()
@@ -43,24 +46,42 @@ func MakeCleanFlecks(loaf []Bread) []Bread {
 	}
 	return loaf
 }
-func SpawnWin(xvar int, yvar int) []Bread {
+func SpawnWin(xvar int, yvar int) ([]Bread, Loaf) {
 	//ToastLogger("SpawnWin")
+	var winLoaf Loaf
+	winLoaf.Height = yvar
+	winLoaf.Width = xvar
 	win := Dough(xvar, yvar)
 	win = Oven(win, "*", xvar, yvar)
-	return win
+	return win, winLoaf
 }
 
 //RelWin Copies a window with size and height relative to the size of the toast
 //passed to the []Bread passed
-func RelWin(widthP float64, heightP float64, width float64, height float64, win []Bread, testToast []Bread) []Bread {
+func RelWin(widthP float64, heightP float64, width float64, height float64, win []Bread, testToast []Bread, winLoaf Loaf, relativeToParent bool) ([]Bread, Loaf) {
 	//	xvar := math.Floor(width*widthP + (width))
-	tHeight, err := terminaldimensions.Height()
-	tWidth, err := terminaldimensions.Width()
-	if err != nil {
-		fmt.Println("terminal sizing error!")
+
+	//	var tHeight uint
+	//	var tWidth uint
+	var tHeight64 float64
+	var tWidth64 float64
+	if !relativeToParent {
+		tHeight, err := terminaldimensions.Height()
+		tWidth, err := terminaldimensions.Width()
+		if err != nil {
+			fmt.Println("terminal sizing error!")
+
+		}
+		tHeight64 = float64(tHeight)
+		tWidth64 = float64(tWidth)
+
+	} else {
+		tHeight := winLoaf.Height
+		tWidth := winLoaf.Width
+		tHeight64 = float64(tHeight)
+		tWidth64 = float64(tWidth)
+
 	}
-	tHeight64 := float64(tHeight)
-	tWidth64 := float64(tWidth)
 
 	xbeg := math.Floor((tWidth64 * widthP) - width*0.5)
 	xend := math.Floor(xbeg + width)
@@ -87,7 +108,7 @@ func RelWin(widthP float64, heightP float64, width float64, height float64, win 
 	//			}
 	//		}
 	//	}
-	return testToast
+	return testToast, winLoaf
 }
 
 //CopySubToast copies the string passed into the values of a []Bread given
