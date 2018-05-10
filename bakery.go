@@ -151,6 +151,7 @@ func spawnContext(view string, testToast []flour.Bread) {
 	case "ouo":
 		//flat("_", testToast)
 		//testToast = flour.CleanFlecks(testToast)
+<<<<<<< HEAD
 		heightU, _ := terminaldimensions.Height()
 		widthU, _ := terminaldimensions.Width()
 		heightI := int(heightU)
@@ -166,6 +167,12 @@ func spawnContext(view string, testToast []flour.Bread) {
 		testToast, winLoaf = flour.RelWin(1, 1, 1, 1, win, testToast, winLoaf, true)
 		//testToast, winLoaf = flour.RelWin(0.5, 0.5, 1, 1, subWin, testToast, winLoaf, true)
 		//testToast, winLoaf = flour.RelWin(0.25, 0.25, 1, 1, win, testToast, winLoaf, true)
+=======
+		win := flour.SpawnWin(11, 11)
+		win = flour.CopyToast("@@@@@", 3, 6, 3, win)
+		testToast = flour.RelWin(0.5, 0.5, 1, 1, win, testToast)
+		testToast = flour.RelWin(0.25, 0.25, 1, 1, win, testToast)
+>>>>>>> parent of b1cf118... centering!
 		flour.Toast(testToast)
 	case "owo":
 		//flat("_", testToast)
