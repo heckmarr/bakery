@@ -151,7 +151,7 @@ func spawnContext(view string, testToast []flour.Bread) {
 		flat("_", testToast)
 		//testToast = flour.CleanFlecks(testToast)
 		win := flour.SpawnWin(11, 11)
-		win = flour.CopyToast("@@@@@", 3, 6, 3, win)
+		win = flour.CopyToast("@@@@@", 3, 8, 5, win)
 		testToast = flour.RelWin(0.5, 0.5, 1, 1, win, testToast)
 		testToast = flour.RelWin(0.25, 0.25, 1, 1, win, testToast)
 		flour.Toast(testToast)
