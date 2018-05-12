@@ -2,6 +2,7 @@ package main
 
 import (
 	"localtoast.net/localtoast/bakery/flour"
+	"localtoast.net/localtoast/bakery/poptart"
 	//	"gitlab.com/localtoast/bakery/oven"
 	//	"gitlab.com/localtoast/bakery/loaf"
 	//	"gitlab.com/localtoast/bakery/dough"
@@ -169,6 +170,8 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		//Update the screen
 		flour.Toast(testToast)
 		//testToast = flour.CleanFlecks(testToast)
+	case "owu":
+		poptart.Poptart()
 	case "ono":
 		//	ctx := context.Background()
 		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
@@ -207,12 +210,14 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		//spawnButton("6", 74, 19, testToast)
 		//update this with the autonoodly filename
 		for {
-			spawnIndex("poptart/101/localtoast.txt", 5, 5, testToast, 25, 14)
-			spawnIndex("poptart/101/localtoast.txt", 5, 26, testToast, 25, 14)
-			spawnIndex("poptart/101/localtoast.txt", 80, 5, testToast, 25, 14)
-			spawnIndex("poptart/101/localtoast.txt", 80, 26, testToast, 25, 14)
+
+			spawnIndex("poptart/101/local.txt", 5, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/local.txt", 5, 26, testToast, 25, 14)
+			spawnIndex("poptart/101/local.txt", 80, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/local.txt", 80, 26, testToast, 25, 14)
 			//fmt.Printf("0\n<:o.o:>")
 			//Update the screen
+			poptart.Poptart()
 			flour.Toast(testToast)
 			//testToast = flour.CleanFlecks(testToast)
 		}
