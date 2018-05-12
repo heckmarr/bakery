@@ -10,7 +10,8 @@ import (
 )
 
 func Poptart() {
-	image, err := imaging.Open("poptart/101/image.png")
+
+	image, err := imaging.Open("poptart/101/test.jpeg")
 	if err != nil {
 		fmt.Println("Error opening image.")
 	}
@@ -19,7 +20,7 @@ func Poptart() {
 	size := 16
 	filter := imaging.NearestNeighbor
 	image = imaging.Resize(image, size, size, filter)
-	imaging.Save(image, "poptart/101/greyImage.png")
+	//imaging.Save(image, "poptart/101/greyImage.jpeg")
 	asciiFile, err := os.Create("poptart/101/local.txt")
 	if err != nil {
 		fmt.Println("Error opening file.")
@@ -34,7 +35,7 @@ func Poptart() {
 		for row := 1; row <= size; row++ {
 			_, g, _, _ := image.At(row, column).RGBA()
 			asciinum := int(g) / (25 * 32)
-			num := asciinum / 24
+			num := asciinum / 8
 			_, err := asciiImage.WriteString(asciicode[num])
 			//fmt.Println(bytesWritten)
 			if err != nil {
@@ -44,5 +45,4 @@ func Poptart() {
 		asciiImage.WriteString("\n")
 	}
 	asciiImage.Flush()
-
 }
