@@ -9,9 +9,9 @@ import (
 	"github.com/disintegration/imaging"
 )
 
-func Poptart() {
+func Poptart(filename string) {
 
-	image, err := imaging.Open("poptart/101/test.jpeg")
+	image, err := imaging.Open(filename)
 	if err != nil {
 		fmt.Println("Error opening image.")
 	}
@@ -21,7 +21,8 @@ func Poptart() {
 	filter := imaging.NearestNeighbor
 	image = imaging.Resize(image, size, size, filter)
 	//imaging.Save(image, "poptart/101/greyImage.jpeg")
-	asciiFile, err := os.Create("poptart/101/local.txt")
+	fileString := fmt.Sprint(filename[0:18] + ".txt")
+	asciiFile, err := os.Create(fileString)
 	if err != nil {
 		fmt.Println("Error opening file.")
 	}
