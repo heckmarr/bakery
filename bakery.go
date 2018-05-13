@@ -237,7 +237,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//fmt.Printf("0\n<:o.o:>")
 			//Update the screen
 			//			poptart.Pop("/dev/video1", in)
-			poptart.Pop("/dev/video0")
+			go poptart.Pop("/dev/video1")
 
 			poptart.Poptart("poptart/101/test00.jpeg")
 
