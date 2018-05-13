@@ -140,7 +140,7 @@ func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen i
 	}
 
 	if err != nil {
-		//fmt.Println("Something went wrong!")
+		fmt.Println("Something went wrong!")
 	}
 	//return slice
 
@@ -170,6 +170,28 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		//Update the screen
 		flour.Toast(testToast)
 		//testToast = flour.CleanFlecks(testToast)
+	case "ewe":
+		poptart.Glaze("/dev/video0")
+		poptart.Poptart("poptart/101/test00.jpeg")
+		poptart.Poptart("poptart/101/test01.jpeg")
+		poptart.Poptart("poptart/101/test02.jpeg")
+		poptart.Poptart("poptart/101/test03.jpeg")
+		poptart.Poptart("poptart/101/test04.jpeg")
+		poptart.Poptart("poptart/101/test05.jpeg")
+		poptart.Poptart("poptart/101/test06.jpeg")
+		poptart.Poptart("poptart/101/test07.jpeg")
+		poptart.Poptart("poptart/101/test08.jpeg")
+		poptart.Poptart("poptart/101/test09.jpeg")
+		indexes := strings.Split("0,1,2,3,4,5,6,7,8,9,0", ",")
+		for {
+			for i := 0; i < 10; i++ {
+				filename := fmt.Sprint("poptart/101/test0" + indexes[i] + ".txt")
+				//fmt.Println(filename)
+				spawnIndex(filename, 5, 5, testToast, 25, 14)
+				//spawnIndex("poptart/101/test00.txt", 5, 5, testToast, 25, 14)
+				flour.Toast(testToast)
+			}
+		}
 	case "ono":
 		//	ctx := context.Background()
 		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
@@ -208,16 +230,16 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		//update this with the autonoodly filename
 		for {
 
-			spawnIndex("poptart/101/local.txt", 5, 5, testToast, 25, 14)
-			spawnIndex("poptart/101/local.txt", 5, 26, testToast, 25, 14)
-			spawnIndex("poptart/101/local.txt", 80, 5, testToast, 25, 14)
-			spawnIndex("poptart/101/local.txt", 80, 26, testToast, 25, 14)
+			spawnIndex("poptart/101/test00.txt", 5, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/test00.txt", 5, 26, testToast, 25, 14)
+			spawnIndex("poptart/101/test00.txt", 80, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/test00.txt", 80, 26, testToast, 25, 14)
 			//fmt.Printf("0\n<:o.o:>")
 			//Update the screen
 			//			poptart.Pop("/dev/video1", in)
-			poptart.Pop("/dev/video1")
+			poptart.Pop("/dev/video0")
 
-			poptart.Poptart()
+			poptart.Poptart("poptart/101/test00.jpeg")
 
 			flour.Toast(testToast)
 			//testToast = flour.CleanFlecks(testToast)
@@ -369,6 +391,8 @@ func main() {
 			spawnIndex("breadbox/000", 5, 4, testToast, 25, 14)
 			spawnIndex("breadbox/001", 5, 5, testToast, 25, 14)
 			//do things with them
+		case "ewe":
+			spawnContext("ewe", testToast, testLoaf)
 		case "owo":
 			//flat("_", testToast)
 			//fmt.Printf("_<:o.o:>")
