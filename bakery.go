@@ -170,6 +170,9 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		//Update the screen
 		flour.Toast(testToast)
 		//testToast = flour.CleanFlecks(testToast)
+	case "ewe":
+		poptart.Glaze("/dev/video0")
+
 	case "ono":
 		//	ctx := context.Background()
 		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
