@@ -30,17 +30,52 @@ func DetectFace(img gocv.Mat, classify gocv.CascadeClassifier) gocv.Mat {
 	return img
 }
 
+//Contour converts the image to grayscale, calculates contours in binary format
+//and draws the results to the image
 func Contour(img gocv.Mat) gocv.Mat {
 	green := color.RGBA{0, 255, 0, 0}
 	greyMat := gocv.NewMat()
 	gocv.CvtColor(img, &greyMat, gocv.ColorRGBAToGray)
 	contourMat := gocv.NewMat()
-	gocv.AdaptiveThreshold(greyMat, &contourMat, 155, gocv.AdaptiveThresholdMean, gocv.ThresholdBinary, 5, 3)
+	gocv.AdaptiveThreshold(greyMat, &contourMat, 15, gocv.AdaptiveThresholdMean, gocv.ThresholdBinary, 5, 3)
 	CalcContours := gocv.FindContours(contourMat, 1, 1)
 
 	gocv.DrawContours(&contourMat, CalcContours, 1, green, 4)
 
 	return contourMat
+}
+
+//ResizeAndGray resizes a Mat image, converts it to grayscale and returns it
+func ResizeAndGray(img gocv.Mat) gocv.Mat {
+	smallMat := gocv.NewMat()
+	var point image.Point
+	point.X = 64
+	point.Y = 64
+	gocv.Resize(img, &smallMat, point, 64, 64, 2)
+
+	grayMat := gocv.NewMat()
+	gocv.CvtColor(img, &grayMat, gocv.ColorRGBAToGray)
+
+	return grayMat
+}
+
+func DetectHead(img gocv.Mat) gocv.Mat {
+	circleMat := gocv.NewMat()
+	gocv.HoughCirclesWithParams(img, &circleMat, 3, 2, 60, 61, 25, 57, 64)
+
+	blue := color.RGBA{0, 0, 255, 0}
+	//red := color.RGBA{255, 0, 0, 0}
+
+	for i := 0; i < circleMat.Cols(); i++ {
+		v := circleMat.GetVecfAt(0, i)
+		x := int(v[0])
+		y := int(v[1])
+		r := int(v[2])
+		gocv.Circle(&img, image.Pt(x, y), r, blue, 64)
+		//gocv.Circle(&img, image.Pt(x, y), 2, red, 3)
+	}
+
+	return img
 }
 
 //CaptureDetect captures an image from a webcamera as a blocking function.
@@ -61,6 +96,9 @@ func CaptureDetect(webcam *gocv.VideoCapture, path string, classify gocv.Cascade
 			break
 		}
 	}
+	//img = ResizeAndGray(img)
+	img = Contour(img)
+	img = DetectHead(img)
 	//img = Contour(img)
 	//img = DetectFace(img, classify)
 

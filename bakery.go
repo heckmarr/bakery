@@ -230,7 +230,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		testToast, _ = flour.RelWin(0.55, 0.55, 1, 1, container, testToast, testLoaf, true)
 		//spawnButton("6", 74, 19, testToast)
 		//update this with the autonoodly filename
-		webcam, err := gocv.VideoCaptureDevice(1)
+		webcam, err := gocv.VideoCaptureDevice(0)
 		if err != nil {
 			fmt.Println("Error opening webcam")
 		}
