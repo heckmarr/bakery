@@ -10,7 +10,7 @@ import (
 )
 
 //Detect uses a Haar cascade face detection on the supplied gocv.Mat
-func Detect(img gocv.Mat) gocv.Mat {
+func DetectFace(img gocv.Mat) gocv.Mat {
 	classify := gocv.NewCascadeClassifier()
 	defer classify.Close()
 
@@ -30,6 +30,19 @@ func Detect(img gocv.Mat) gocv.Mat {
 	return img
 }
 
+func Contour(img gocv.Mat) gocv.Mat {
+	green := color.RGBA{0, 255, 0, 0}
+	greyMat := gocv.NewMat()
+	gocv.CvtColor(img, &greyMat, gocv.ColorRGBAToGray)
+	contourMat := gocv.NewMat()
+	gocv.AdaptiveThreshold(greyMat, &contourMat, 155, gocv.AdaptiveThresholdMean, gocv.ThresholdBinary, 5, 3)
+	CalcContours := gocv.FindContours(contourMat, 1, 1)
+
+	gocv.DrawContours(&contourMat, CalcContours, 1, green, 4)
+
+	return contourMat
+}
+
 //CaptureDetect captures an image from a webcamera as a blocking function.
 //ie it will wait until the image is ready before it exits. It will also
 //run any detection code we have defined in the Detect function on the image
@@ -47,7 +60,8 @@ func CaptureDetect(path string) bool {
 			break
 		}
 	}
-	img = Detect(img)
+	//img = Detect(img)
+	img = Contour(img)
 	file, err := os.Create(path)
 	defer file.Close()
 	if err != nil {
