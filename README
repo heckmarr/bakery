@@ -3,4 +3,7 @@ To install `go get gitlab.com/localtoast/bakery`
 Make sure to get all the dependencies as well, such as gocv and disintegration/
 imaging
 
-version 1.0
+These are various toys I've built using the gitlab.com/localtoast/flourPower
+repository. Ascii cameras, text editors, fun stuff. Currently ARR because you 
+never know what idea I'm going to have pop out of this. Occasionally when a
+function reaches maturity, I'll fork it and license it. For now, have fun!
