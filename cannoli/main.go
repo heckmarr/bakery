@@ -59,12 +59,13 @@ func ResizeAndGray(img gocv.Mat) gocv.Mat {
 	return grayMat
 }
 
+//DetectHead detects average human-in-front-of-the-computer circles and draws them.
+//Gives a nice effect for asciifying a person
 func DetectHead(img gocv.Mat) gocv.Mat {
 	circleMat := gocv.NewMat()
 	gocv.HoughCirclesWithParams(img, &circleMat, 3, 2, 60, 61, 25, 57, 64)
 
 	blue := color.RGBA{0, 0, 255, 0}
-	//red := color.RGBA{255, 0, 0, 0}
 
 	for i := 0; i < circleMat.Cols(); i++ {
 		v := circleMat.GetVecfAt(0, i)
@@ -72,7 +73,6 @@ func DetectHead(img gocv.Mat) gocv.Mat {
 		y := int(v[1])
 		r := int(v[2])
 		gocv.Circle(&img, image.Pt(x, y), r, blue, 64)
-		//gocv.Circle(&img, image.Pt(x, y), 2, red, 3)
 	}
 
 	return img
