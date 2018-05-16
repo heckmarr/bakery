@@ -1,6 +1,8 @@
 package main
 
 import (
+	"gocv.io/x/gocv"
+	"localtoast.net/localtoast/bakery/cannoli"
 	"localtoast.net/localtoast/bakery/flour"
 	"localtoast.net/localtoast/bakery/poptart"
 	//	"gitlab.com/localtoast/bakery/oven"
@@ -228,18 +230,31 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		testToast, _ = flour.RelWin(0.55, 0.55, 1, 1, container, testToast, testLoaf, true)
 		//spawnButton("6", 74, 19, testToast)
 		//update this with the autonoodly filename
+		webcam, err := gocv.VideoCaptureDevice(1)
+		if err != nil {
+			fmt.Println("Error opening webcam")
+		}
+		defer webcam.Close()
+
+		classify := gocv.NewCascadeClassifier()
+		defer classify.Close()
+
 		for {
 
-			spawnIndex("poptart/101/test00.txt", 5, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/matt00.txt", 5, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 5, 26, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 80, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 80, 26, testToast, 25, 14)
 			//fmt.Printf("0\n<:o.o:>")
 			//Update the screen
 			//			poptart.Pop("/dev/video1", in)
-			poptart.Pop("/dev/video0")
-
-			poptart.Poptart("poptart/101/test00.jpeg")
+			//go poptart.Pop("/dev/video1")
+			ok := cannoli.CaptureDetect(webcam, "poptart/101/matt00.jpeg", classify)
+			if !ok {
+				fmt.Println("Error capturing picture")
+			}
+			//cannoli.Write("poptart/101/mat00.png", img)
+			poptart.Poptart("poptart/101/matt00.jpeg")
 
 			flour.Toast(testToast)
 			//testToast = flour.CleanFlecks(testToast)
