@@ -207,6 +207,8 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 				flour.Toast(testToast)
 			}
 		}
+	case "help":
+		spawnIndex("breadbox/help", 5, 5, testToast, 55, 2)
 	case "ono":
 		//	ctx := context.Background()
 		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
@@ -442,8 +444,10 @@ func main() {
 		case "exit":
 			os.Exit(1)
 			break
+		case "help":
+			spawnContext("help", testToast, testLoaf)
 		default:
-			flour.Toast(testToast)
+			spawnContext("help", testToast, testLoaf)
 			//testToast = flour.CleanFlecks(testToast)
 		}
 	}
