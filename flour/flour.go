@@ -10,16 +10,21 @@ import (
 	"github.com/wayneashleyberry/terminal-dimensions"
 )
 
+//Bread is usually collected into arrays with a string label, dirty flag and its
+//position in the 2d array
 type Bread struct {
 	X, Y  int
 	Label string
 	Nl    bool
 	Dirty bool
 }
+
+//Loaf stores the height and width of a toast
 type Loaf struct {
 	Height, Width int
 }
 
+//Flour is the interface for all flour instances
 type Flour interface {
 	Dough()
 	Toast()
@@ -27,6 +32,8 @@ type Flour interface {
 	Bread()
 }
 
+//CleanFlecks ranges over a loaf and if it is dirty, writes "_" to it
+//and clears the dirty flag
 func CleanFlecks(loaf []Bread) []Bread {
 	//ToastLogger("CleanFlecks")
 	for i := range loaf {
@@ -36,6 +43,9 @@ func CleanFlecks(loaf []Bread) []Bread {
 	}
 	return loaf
 }
+
+//MakeCleanFlecks ranges over a loaf and if it is dirty, writes "_" to it
+//and clears the dirty flag
 func MakeCleanFlecks(loaf []Bread) []Bread {
 	//ToastLogger("MakeCleanFlecks")
 	for i := range loaf {
@@ -46,6 +56,8 @@ func MakeCleanFlecks(loaf []Bread) []Bread {
 	}
 	return loaf
 }
+
+//SpawnWin creates an array of a bread loaf with capacity and length xvar, yvar
 func SpawnWin(xvar int, yvar int) ([]Bread, Loaf) {
 	//ToastLogger("SpawnWin")
 	var winLoaf Loaf
@@ -143,6 +155,9 @@ func CopyToast(welcome string, xvar int, yvar int, yend int, testToast []Bread) 
 	}
 	return testToast
 }
+
+//Toast is the generalized print to screen function, similar to Blit in pygame
+//or other visual based systems.
 func Toast(loaf []Bread) {
 	//ToastLogger("Toast")
 	var displaytoast string
@@ -161,16 +176,22 @@ func Toast(loaf []Bread) {
 	fmt.Printf(displaytoast)
 }
 
+//Fleck copies the character in the loaf to the screen in place
 func Fleck(index int, loaf []Bread) string {
 	//ToastLogger("Fleck")
 	text := fmt.Sprint("\x1b[", loaf[index].Y, ";", loaf[index].X, "H", loaf[index].Label, "\x1b[0m")
 	return text
 }
+
+//Fleck does the same thing as Fleck, but prints it out rather than returning it to be
+//printed later
 func PrintFleck(index int, loaf []Bread) {
 	//ToastLogger("PrintFleck")
 	text := fmt.Sprint("\x1b[", loaf[index].Y, ";", loaf[index].X, "H", loaf[index].Label, "\x1b[0m")
 	fmt.Printf(text)
 }
+
+//Oven initilizes an array breadloaf with default values
 func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 	//ToastLogger("Oven")
 	x := 0
@@ -214,6 +235,7 @@ func Oven(butt []Bread, label string, xvar int, yvar int) []Bread {
 	return butter
 }
 
+//BreadGetter grabs the slice of toast from an array of Bread and returns it
 func BreadGetter(x int, y int, loaf []Bread) Bread {
 	//ToastLogger("BreadGetter")
 	//Gets the bread at position x, y
@@ -230,6 +252,7 @@ func BreadGetter(x int, y int, loaf []Bread) Bread {
 	return val
 }
 
+//BreadSetter sets the given value of a slice of Bread at points x and y
 func BreadSetter(x int, y int, loaf []Bread, val Bread) []Bread {
 	//ToastLogger("BreadSetter")
 	//sets the Bread at position x, y
@@ -245,6 +268,8 @@ func BreadSetter(x int, y int, loaf []Bread, val Bread) []Bread {
 	return loaf
 
 }
+
+//Dough makes and returns an array of Bread with width and height
 func Dough(width int, height int) []Bread {
 	//ToastLogger("Dough")
 	var butt []Bread
@@ -252,6 +277,9 @@ func Dough(width int, height int) []Bread {
 
 	return butt
 }
+
+//DoughMax makes and sets an array of Bread with width and height equal to the
+//current terminal dimensions
 func DoughMax() (int, int, []Bread, Loaf) {
 	//ToastLogger("DoughMax")
 	var butt []Bread
@@ -275,6 +303,9 @@ func DoughMax() (int, int, []Bread, Loaf) {
 
 }
 
+//ToastLogger is called with every flour command and gives helpful insight into
+//what is currently being run. Activate by setting blab to 1 and uncommenting
+//the function calls in all of flour. TODO: Streamline this process.
 func ToastLogger(logger string) {
 	blab := 0
 	loggo, err := os.OpenFile("toast.log", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
