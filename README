@@ -1,29 +1,6 @@
-To install on any 64 bit android phone do the following:
+To install `go get gitlab.com/localtoast/bakery`
 
-install termux from the play store
+Make sure to get all the dependencies as well, such as gocv and disintegration/
+imaging
 
-in termux, run the following commands
-
->pkg install golang
-
->mkdir go
-
->cd go
-
->mkdir src
-
->cd src
-
-Then get the latest release:
-
-go get https://localtoast.net/releases/$PUT LATEST RELEASE HERE$
-
-Then build the project
-
->cd bakery
-
->go build
-
-And run deegee!
-
->./bakery
+version 1.0
