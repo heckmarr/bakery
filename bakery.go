@@ -239,7 +239,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//Update the screen
 			//			poptart.Pop("/dev/video1", in)
 			//go poptart.Pop("/dev/video1")
-			ok := cannoli.Capture("poptart/101/mat00.png")
+			ok := cannoli.CaptureDetect("poptart/101/mat00.png")
 			if !ok {
 				fmt.Println("Error capturing picture")
 			}
