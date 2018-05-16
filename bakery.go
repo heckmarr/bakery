@@ -256,7 +256,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 
 		for {
 
-			spawnIndex("poptart/101/matt00.txt", 5, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/matt00.txt.txt", 5, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 5, 26, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 80, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 80, 26, testToast, 25, 14)
@@ -271,7 +271,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			}
 			//cannoli.Write("poptart/101/mat00.png", img)
 			poptart.Poptart("poptart/101/matt00.jpeg")
-
+			poptart.Person("poptart/101/matt00.txt")
 			flour.Toast(testToast)
 			//testToast = flour.CleanFlecks(testToast)
 		}
