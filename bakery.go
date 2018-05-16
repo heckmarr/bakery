@@ -1,6 +1,7 @@
 package main
 
 import (
+	"localtoast.net/localtoast/bakery/cannoli"
 	"localtoast.net/localtoast/bakery/flour"
 	"localtoast.net/localtoast/bakery/poptart"
 	//	"gitlab.com/localtoast/bakery/oven"
@@ -237,8 +238,12 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//fmt.Printf("0\n<:o.o:>")
 			//Update the screen
 			//			poptart.Pop("/dev/video1", in)
-			go poptart.Pop("/dev/video1")
-
+			//go poptart.Pop("/dev/video1")
+			ok := cannoli.Capture("poptart/101/mat00.png")
+			if !ok {
+				fmt.Println("Error capturing picture")
+			}
+			//cannoli.Write("poptart/101/mat00.png", img)
 			poptart.Poptart("poptart/101/test00.jpeg")
 
 			flour.Toast(testToast)
