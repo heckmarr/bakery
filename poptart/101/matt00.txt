@@ -1,16 +1,16 @@
-..,,,:::;;;;;;; 
-...,,,:,.;;;;;; 
-...,,2222222::: 
-  ..22222222::: 
-   .222222222:: 
-    222222222:, 
-    222222222,, 
-    222222222.. 
-    222222222.. 
-    222222222.. 
-    22222222,.. 
-    22222222  . 
-     222222  .. 
-              . 
-              . 
+rr rrrrrrrrrrrr 
+rrrrrrr rrrrrrr 
+rrrrrrrrrrrrrrr 
+rrrrrrr  rrrrrr 
+ rrrrrrrrrrrrrr 
+ rrrrrrrrrrrrrr 
+rrrrrrrrr rrrrr 
+  rrrrrrrrrrrr  
+rrrrrr rrrrrrrr 
+rrrrrrrr rrrrr  
+rrrrrrrrrrrrrrr 
+rrrrrrrrrrr rrr 
+rrrrrrrrrrrrrrr 
+rrrrrrrrrrrrrrr 
+rrrrrrrrrrrrrrr 
                 
