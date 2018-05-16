@@ -19,6 +19,8 @@ import (
 	"os/exec"
 )
 
+//readStdin uses the "stty" linux command to grab all keyboard input and let
+//the program handle it
 func readStdin(out chan string, in chan bool) {
 	//flour.ToastLogger("readStdin")
 	//no buffering
@@ -36,6 +38,8 @@ func readStdin(out chan string, in chan bool) {
 	}
 }
 
+//getNote gets the note currently at a certain positon on the screen
+//and copies it to the file, "breadbox/toasting"
 func getNote(testToast []flour.Bread, fipath string) {
 	xstart := 35
 	xend := 74
@@ -63,6 +67,7 @@ func getNote(testToast []flour.Bread, fipath string) {
 	}
 }
 
+//spatter randomly spatters the word "MARCHELL" to a toast
 func spatter(xvar int, yvar int, testToast []flour.Bread) {
 	//flour.ToastLogger("spatter")
 	rand.Seed(12)
@@ -81,6 +86,7 @@ func spatter(xvar int, yvar int, testToast []flour.Bread) {
 	}
 }
 
+//welcome copies the words "WELCOME_TO_DEEGEE" to a toast
 func welcome(testToast []flour.Bread) {
 	//flour.ToastLogger("welcome")
 	welcome := "WELCOME_TO_DEEGEE"
@@ -96,6 +102,7 @@ func welcome(testToast []flour.Bread) {
 	//fmt.Printf("\n<:o.o:>")
 }
 
+//flat clears the screen with the character provided
 func flat(label string, testToast []flour.Bread) {
 	//flour.ToastLogger("flat")
 	for i := range testToast {
@@ -108,6 +115,7 @@ func flat(label string, testToast []flour.Bread) {
 	//fmt.Printf("\n<:o.o:>")
 }
 
+//spawnButton copies a set shape to toast
 func spawnButton(label string, xvar int, yvar int, testToast []flour.Bread) {
 	//flour.ToastLogger("spawnButton")
 	flour.CopyToast("=====", xvar, yvar, 1, testToast)
@@ -116,6 +124,7 @@ func spawnButton(label string, xvar int, yvar int, testToast []flour.Bread) {
 
 }
 
+//spawnContents writes out a file to toast
 func spawnContents(path string, xvar int, yvar int, testToast []flour.Bread) {
 	//flour.ToastLogger("spawnContents")
 	filo, err := os.Open(path)
@@ -131,6 +140,7 @@ func spawnContents(path string, xvar int, yvar int, testToast []flour.Bread) {
 	}
 }
 
+//spawnIndex writes out a file to toast.
 func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen int, yhei int) {
 	//flour.ToastLogger("spawnIndex")
 	filo, err := os.Open(path)
@@ -147,6 +157,9 @@ func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen i
 	//return slice
 
 }
+
+//spawnContext switches on the view string and spawns the correct view on to
+//the toast passed in
 func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 	//put different context triggers here
 	switch view {
@@ -249,6 +262,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//Update the screen
 			//			poptart.Pop("/dev/video1", in)
 			//go poptart.Pop("/dev/video1")
+
 			ok := cannoli.CaptureDetect(webcam, "poptart/101/matt00.jpeg", classify)
 			if !ok {
 				fmt.Println("Error capturing picture")

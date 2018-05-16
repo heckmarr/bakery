@@ -9,6 +9,7 @@ import (
 	"github.com/disintegration/imaging"
 )
 
+//Poptart converts an image passed in via filename to an ascii text file.
 func Poptart(filename string) {
 
 	image, err := imaging.Open(filename)
