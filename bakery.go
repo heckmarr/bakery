@@ -231,7 +231,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		//update this with the autonoodly filename
 		for {
 
-			spawnIndex("poptart/101/test00.txt", 5, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/matt00.txt", 5, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 5, 26, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 80, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 80, 26, testToast, 25, 14)
@@ -239,12 +239,12 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//Update the screen
 			//			poptart.Pop("/dev/video1", in)
 			//go poptart.Pop("/dev/video1")
-			ok := cannoli.CaptureDetect("poptart/101/mat00.png")
+			ok := cannoli.CaptureDetect("poptart/101/matt00.jpeg")
 			if !ok {
 				fmt.Println("Error capturing picture")
 			}
 			//cannoli.Write("poptart/101/mat00.png", img)
-			poptart.Poptart("poptart/101/test00.jpeg")
+			poptart.Poptart("poptart/101/matt00.jpeg")
 
 			flour.Toast(testToast)
 			//testToast = flour.CleanFlecks(testToast)

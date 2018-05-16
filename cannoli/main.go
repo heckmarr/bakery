@@ -9,7 +9,7 @@ import (
 	"gocv.io/x/gocv"
 )
 
-//Detect uses a Haar cascade face detection on the supplied gocv.Mat
+//DetectFace uses a Haar cascade face detection on the supplied gocv.Mat
 func DetectFace(img gocv.Mat) gocv.Mat {
 	classify := gocv.NewCascadeClassifier()
 	defer classify.Close()
@@ -20,10 +20,10 @@ func DetectFace(img gocv.Mat) gocv.Mat {
 
 	rect := classify.DetectMultiScale(img)
 	fmt.Println("Found " + string(len(rect)) + " faces")
-	green := color.RGBA{0, 0, 255, 0}
+	green := color.RGBA{255, 255, 255, 255}
 	for _, r := range rect {
 		size := gocv.GetTextSize("Human", gocv.FontHersheyPlain, 1.2, 2)
-		gocv.Rectangle(&img, r, green, 5)
+		gocv.Rectangle(&img, r, green, 200)
 		pt := image.Pt(r.Min.X+(r.Min.X/2)-(size.X/2), r.Min.Y-2)
 		gocv.PutText(&img, "Human", pt, gocv.FontHersheyPlain, 1.2, green, 2)
 	}
@@ -60,8 +60,8 @@ func CaptureDetect(path string) bool {
 			break
 		}
 	}
-	//img = Detect(img)
-	img = Contour(img)
+	img = DetectFace(img)
+	//img = Contour(img)
 	file, err := os.Create(path)
 	defer file.Close()
 	if err != nil {
