@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/pebbe/zmq4"
 	"gitlab.com/localtoast/flourPower"
 	"gocv.io/x/gocv"
 	"localtoast.net/localtoast/bakery/cannoli"
@@ -247,6 +248,33 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		for {
 			//fmt.Println("CBREAK to exit")
 		}
+	case "zmq":
+		request, err := zmq4.NewSocket(zmq4.REQ)
+		if err != nil {
+			fmt.Println("Error creating request socket.")
+		}
+		reply, err := zmq4.NewSocket(zmq4.REP)
+		if err != nil {
+			fmt.Println("Error creating reply socket.")
+		}
+		reply.Bind("inproc://oil/endpoint")
+		request.Connect("inproc://oil/endpoint")
+		request.SendMessage("hello")
+
+		message, err := reply.RecvMessage(zmq4.SNDMORE)
+		fmt.Println(message[0])
+		if err != nil {
+			fmt.Println("Timeout error.")
+		}
+		for {
+			request.SendMessage("hello")
+
+			message, err := reply.RecvMessage(zmq4.SNDMORE)
+			fmt.Println(message)
+			if err != nil {
+				fmt.Println("Timeout error.")
+			}
+		}
 	case "help":
 		spawnIndex("breadbox/help", 5, 5, testToast, 55, 2)
 	case "ono":
@@ -487,6 +515,8 @@ func main() {
 			break
 		case "testColour":
 			spawnContext("testColour", testToast, testLoaf)
+		case "zmq":
+			spawnContext("zmq", testToast, testLoaf)
 		case "help":
 			spawnContext("help", testToast, testLoaf)
 		default:
