@@ -406,7 +406,8 @@ func main() {
 		case "spawn":
 			flat("_", testToast)
 			time.Sleep(1 * time.Second)
-			flour.CopyToast("DEEGEE", 35, 11, 1, testToast)
+			words := "DEEGEE"
+			flour.CopyToast(words, 35, 11, 1, testToast)
 			flour.Toast(testToast)
 			//fmt.Printf("_<:o.o:>")
 			time.Sleep(1 * time.Second)
