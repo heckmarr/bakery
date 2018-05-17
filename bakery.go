@@ -257,18 +257,12 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		if err != nil {
 			fmt.Println("Error creating reply socket.")
 		}
-		reply.Bind("inproc://oil/endpoint")
-		request.Connect("inproc://oil/endpoint")
-		request.SendMessage("hello")
+		request.Bind("tcp://127.0.0.1:5555")
+		reply.Connect("tcp://127.0.0.1:5555")
 
-		message, err := reply.RecvMessage(zmq4.SNDMORE)
-		fmt.Println(message[0])
-		if err != nil {
-			fmt.Println("Timeout error.")
-		}
-		for {
+		for i := 0; i < 1; i++ {
 			request.SendMessage("hello")
-
+			fmt.Println("Message sent")
 			message, err := reply.RecvMessage(zmq4.SNDMORE)
 			fmt.Println(message)
 			if err != nil {
