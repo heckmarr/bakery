@@ -208,6 +208,45 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 				flour.Toast(testToast, "red", "blue")
 			}
 		}
+	case "testColour":
+		hello := "WELCOME"
+		for i, v := range hello {
+			switch i {
+			case 0:
+				fore := "red"
+				back := "black"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 1:
+				fore := "black"
+				back := "red"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 2:
+				fore := "red"
+				back := "green"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 3:
+				fore := "red"
+				back := "yellow"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 4:
+				fore := "black"
+				back := "blue"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 5:
+				fore := "black"
+				back := "magenta"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 6:
+				fore := "red"
+				back := "cyan"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			}
+
+		}
+		flour.Toast(testToast, "none", "none")
+		for {
+			//fmt.Println("CBREAK to exit")
+		}
 	case "help":
 		spawnIndex("breadbox/help", 5, 5, testToast, 55, 2)
 	case "ono":
@@ -446,6 +485,8 @@ func main() {
 		case "exit":
 			os.Exit(1)
 			break
+		case "testColour":
+			spawnContext("testColour", testToast, testLoaf)
 		case "help":
 			spawnContext("help", testToast, testLoaf)
 		default:
