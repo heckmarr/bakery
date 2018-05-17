@@ -1,9 +1,10 @@
 package main
 
 import (
+	"gitlab.com/localtoast/flourPower"
 	"gocv.io/x/gocv"
 	"localtoast.net/localtoast/bakery/cannoli"
-	"localtoast.net/localtoast/bakery/flour"
+	//"localtoast.net/localtoast/bakery/flour"
 	"localtoast.net/localtoast/bakery/poptart"
 	//	"gitlab.com/localtoast/bakery/oven"
 	//	"gitlab.com/localtoast/bakery/loaf"
@@ -97,7 +98,7 @@ func welcome(testToast []flour.Bread) {
 		slice.Label = string(wel[i])
 		testToast = flour.BreadSetter(30+i, 11, testToast, slice)
 	}
-	flour.Toast(testToast)
+	flour.Toast(testToast, "green", "blue")
 	testToast = flour.CleanFlecks(testToast)
 	//fmt.Printf("\n<:o.o:>")
 }
@@ -111,7 +112,7 @@ func flat(label string, testToast []flour.Bread) {
 		//flour.CopyToast(label, testToast[i].X, testToast[i].Y, testToast[i].Y+1, testToast)
 
 	}
-	flour.Toast(testToast)
+	flour.Toast(testToast, "green", "black")
 	//fmt.Printf("\n<:o.o:>")
 }
 
@@ -170,7 +171,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		win = flour.CopyToast("@@@@@", 3, 6, 3, win)
 		testToast, _ := flour.RelWin(0.5, 0.5, 1, 1, win, testToast, testLoaf, true)
 		testToast, _ = flour.RelWin(0.25, 0.25, 1, 1, win, testToast, winLoaf, false)
-		flour.Toast(testToast)
+		flour.Toast(testToast, "green", "black")
 	case "owo":
 		//flat("_", testToast)
 		testToast = flour.CleanFlecks(testToast)
@@ -183,7 +184,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		spawnIndex("breadbox/000", 5, 4, testToast, 25, 14)
 		spawnIndex("breadbox/001", 5, 5, testToast, 25, 14)
 		//Update the screen
-		flour.Toast(testToast)
+		flour.Toast(testToast, "green", "blue")
 		//testToast = flour.CleanFlecks(testToast)
 	case "ewe":
 		poptart.Glaze("/dev/video0")
@@ -204,8 +205,47 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 				//fmt.Println(filename)
 				spawnIndex(filename, 5, 5, testToast, 25, 14)
 				//spawnIndex("poptart/101/test00.txt", 5, 5, testToast, 25, 14)
-				flour.Toast(testToast)
+				flour.Toast(testToast, "red", "blue")
 			}
+		}
+	case "testColour":
+		hello := "WELCOME"
+		for i, v := range hello {
+			switch i {
+			case 0:
+				fore := "red"
+				back := "black"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 1:
+				fore := "black"
+				back := "red"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 2:
+				fore := "red"
+				back := "green"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 3:
+				fore := "red"
+				back := "yellow"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 4:
+				fore := "black"
+				back := "blue"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 5:
+				fore := "black"
+				back := "magenta"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			case 6:
+				fore := "red"
+				back := "cyan"
+				flour.CopyColourToast(string(v), 5+i, 5, 6, fore, back, testToast)
+			}
+
+		}
+		flour.Toast(testToast, "none", "none")
+		for {
+			//fmt.Println("CBREAK to exit")
 		}
 	case "help":
 		spawnIndex("breadbox/help", 5, 5, testToast, 55, 2)
@@ -272,7 +312,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//cannoli.Write("poptart/101/mat00.png", img)
 			poptart.Poptart("poptart/101/matt00.jpeg")
 			poptart.Person("poptart/101/matt00.txt")
-			flour.Toast(testToast)
+			flour.Toast(testToast, "red", "blue")
 			//testToast = flour.CleanFlecks(testToast)
 		}
 	}
@@ -292,7 +332,7 @@ func main() {
 
 	//just toasting something
 	for {
-		flour.Toast(testToast)
+		flour.Toast(testToast, "green", "black")
 		//testToast = flour.CleanFlecks(testToast)
 		//fmt.Printf("\n<:o.o:>")
 		fmt.Scan(&input)
@@ -307,7 +347,7 @@ func main() {
 			xpos := 0
 			go readStdin(stdin, kill)
 			for {
-				flour.Toast(testToast)
+				flour.Toast(testToast, "green", "black")
 				//testToast = flour.CleanFlecks(testToast)
 				//fmt.Printf("0\n<:o.o:>")
 				//fmt.Printf("_")
@@ -337,7 +377,7 @@ func main() {
 			go readStdin(stdin, kill)
 			for {
 
-				flour.Toast(testToast)
+				flour.Toast(testToast, "red", "black")
 				//testToast = flour.CleanFlecks(testToast)
 				//fmt.Printf("0\n<:o.o:>")
 				//fmt.Printf("_")
@@ -405,8 +445,9 @@ func main() {
 		case "spawn":
 			flat("_", testToast)
 			time.Sleep(1 * time.Second)
-			flour.CopyToast("DEEGEE", 35, 11, 1, testToast)
-			flour.Toast(testToast)
+			words := "DEEGEE"
+			flour.CopyToast(words, 35, 11, 1, testToast)
+			flour.Toast(testToast, "red", "blue")
 			//fmt.Printf("_<:o.o:>")
 			time.Sleep(1 * time.Second)
 			spatter(xvar, yvar, testToast)
@@ -444,6 +485,8 @@ func main() {
 		case "exit":
 			os.Exit(1)
 			break
+		case "testColour":
+			spawnContext("testColour", testToast, testLoaf)
 		case "help":
 			spawnContext("help", testToast, testLoaf)
 		default:
