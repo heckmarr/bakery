@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/pebbe/zmq4"
 	"gitlab.com/localtoast/flourPower"
 	"gocv.io/x/gocv"
 	"localtoast.net/localtoast/bakery/cannoli"
 	//"localtoast.net/localtoast/bakery/flour"
+	olive "localtoast.net/localtoast/bakery/oil"
 	"localtoast.net/localtoast/bakery/poptart"
 	//	"gitlab.com/localtoast/bakery/oven"
 	//	"gitlab.com/localtoast/bakery/loaf"
@@ -249,30 +249,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//fmt.Println("CBREAK to exit")
 		}
 	case "zmq":
-		request, err := zmq4.NewSocket(zmq4.REQ)
-		if err != nil {
-			fmt.Println("Error creating request socket.")
-		}
-		reply, err := zmq4.NewSocket(zmq4.REP)
-		if err != nil {
-			fmt.Println("Error creating reply socket.")
-		}
-		request.Connect("tcp://192.168.0.101:5555")
-		reply.Bind("tcp://192.168.0.103:5555")
-
-		for i := 0; i < 1; i++ {
-			//message := olive.PrepareMsg(testToast)
-			colourMessage := flour.PrepareToast(testToast, "red", "blue")
-			//fmt.Println(message)
-			request.SendMessage(colourMessage)
-			fmt.Println("Message sent")
-			mess, err := request.RecvMessage(zmq4.SNDMORE)
-			//mess, err := reply.RecvMessage(zmq4.SNDMORE)
-			fmt.Println(mess[0])
-			if err != nil {
-				fmt.Println("Timeout error.")
-			}
-		}
+		olive.CreateServer(testToast)
 	case "help":
 		spawnIndex("breadbox/help", 5, 5, testToast, 55, 2)
 	case "ono":

@@ -21,27 +21,33 @@ func PrepareMsg(testToast []flour.Bread) string {
 	return message
 }
 
-func CreateServer(ctx zmq4.Context) {
-
-	request, err := ctx.NewSocket(zmq4.REQ)
+func CreateServer(testToast []flour.Bread) {
+	//	ctx, err := zmq4.NewContext()
+	//	if err != nil {
+	//		fmt.Println("Error creating new zmq Context.")
+	//	}
+	request, err := zmq4.NewSocket(zmq4.REQ)
 	if err != nil {
 		fmt.Println("Error creating request socket.")
 	}
-	reply, err := ctx.NewSocket(zmq4.REP)
+	reply, err := zmq4.NewSocket(zmq4.REP)
 	if err != nil {
 		fmt.Println("Error creating reply socket.")
 	}
-	reply.Bind("oil/endpoint")
-	request.Connect("oil/endpoint")
-	request.SendBytes([]byte("hello"), zmq4.Flag(0))
-	poller := zmq4.NewPoller()
-	poller.Add(reply, 0)
-	for {
-		replyState, err := poller.Poll(100)
+	request.Connect("tcp://192.168.0.101:5555")
+	reply.Bind("tcp://192.168.0.103:5555")
+
+	for i := 0; i < 1; i++ {
+		//message := olive.PrepareMsg(testToast)
+		colourMessage := flour.PrepareToast(testToast, "red", "blue")
+		//fmt.Println(message)
+		request.SendMessage(colourMessage)
+		fmt.Println("Message sent")
+		mess, err := request.RecvMessage(zmq4.SNDMORE)
+		//mess, err := reply.RecvMessage(zmq4.SNDMORE)
+		fmt.Println(mess[0])
 		if err != nil {
-			fmt.Println("Timeout on polling.")
+			fmt.Println("Timeout error.")
 		}
-		message, err := replyState[0].Socket.RecvMessage(0)
-		fmt.Println(message)
 	}
 }
