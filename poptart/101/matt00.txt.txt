@@ -1,16 +1,16 @@
                 
-                
-                
-                
-                
-PE              
-RS              
-ONP             
-ERS             
-ONPER           
-SONPER          
-SON PE          
-RSO NP          
-E RSON          
-PERSO           
+    PERSO       
+    NPERS       
+   ONPERSO      
+    NPERSO      
+    NPERSO      
+     NPER       
+SONP       ER   
+SONP      ERSO  
+NP ER     S ON  
+PERSO     N PE  
+RSONP     ERSO  
+ NP ER     SO   
+ NP E           
+RSONP           
                 
