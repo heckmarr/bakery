@@ -4,11 +4,21 @@ import (
 	"fmt"
 
 	"github.com/pebbe/zmq4"
+	flour "gitlab.com/localtoast/flourPower"
 )
 
 func InitOlive() zmq4.Context {
 	var context zmq4.Context
 	return context
+}
+
+func PrepareMsg(testToast []flour.Bread) string {
+	var message string
+	for _, v := range testToast {
+		mess := v.Label
+		message += mess
+	}
+	return message
 }
 
 func CreateServer(ctx zmq4.Context) {
