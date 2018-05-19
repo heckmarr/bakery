@@ -189,16 +189,16 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		//testToast = flour.CleanFlecks(testToast)
 	case "ewe":
 		poptart.Glaze("/dev/video0")
-		poptart.Poptart("poptart/101/test00.jpeg")
-		poptart.Poptart("poptart/101/test01.jpeg")
-		poptart.Poptart("poptart/101/test02.jpeg")
-		poptart.Poptart("poptart/101/test03.jpeg")
-		poptart.Poptart("poptart/101/test04.jpeg")
-		poptart.Poptart("poptart/101/test05.jpeg")
-		poptart.Poptart("poptart/101/test06.jpeg")
-		poptart.Poptart("poptart/101/test07.jpeg")
-		poptart.Poptart("poptart/101/test08.jpeg")
-		poptart.Poptart("poptart/101/test09.jpeg")
+		poptart.Small("poptart/101/test00.jpeg")
+		poptart.Small("poptart/101/test01.jpeg")
+		poptart.Small("poptart/101/test02.jpeg")
+		poptart.Small("poptart/101/test03.jpeg")
+		poptart.Small("poptart/101/test04.jpeg")
+		poptart.Small("poptart/101/test05.jpeg")
+		poptart.Small("poptart/101/test06.jpeg")
+		poptart.Small("poptart/101/test07.jpeg")
+		poptart.Small("poptart/101/test08.jpeg")
+		poptart.Small("poptart/101/test09.jpeg")
 		indexes := strings.Split("0,1,2,3,4,5,6,7,8,9,0", ",")
 		for {
 			for i := 0; i < 10; i++ {
@@ -275,13 +275,9 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		container, _ = flour.RelWin(0.85, 0.85, 1, 1, button, container, containerLoaf, true)
 		//bag, bagLoaf := flour.SpawnWin(testLoaf.Height, testLoaf.Width)
 		//bag, bagLoaf = flour.RelWin(0.03, 0.03, 1, 1, container, bag, bagLoaf, true)
-		testToast, _ = flour.RelWin(0.03, 0.05, 1, 1, container, testToast, testLoaf, true)
+		testToast, _ = flour.RelWin(0.03, 0.99, 1, 1, container, testToast, testLoaf, true)
 
-		testToast, _ = flour.RelWin(0.03, 0.55, 1, 1, container, testToast, testLoaf, true)
-
-		testToast, _ = flour.RelWin(0.55, 0.05, 1, 1, container, testToast, testLoaf, true)
-
-		testToast, _ = flour.RelWin(0.55, 0.55, 1, 1, container, testToast, testLoaf, true)
+		testToast, _ = flour.RelWin(0.55, 0.99, 1, 1, container, testToast, testLoaf, true)
 		//spawnButton("6", 74, 19, testToast)
 		//update this with the autonoodly filename
 		webcam, err := gocv.VideoCaptureDevice(0)
@@ -290,29 +286,18 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		}
 		defer webcam.Close()
 
-		classify := gocv.NewCascadeClassifier()
-		defer classify.Close()
-
 		for {
 			olive.CreateServer(testToast)
-			spawnIndex("poptart/101/matt00.txt.txt", 5, 5, testToast, 25, 14)
-			spawnIndex("poptart/101/client.txt", 5, 26, testToast, 25, 14)
-			spawnIndex("poptart/101/test00.txt", 80, 5, testToast, 25, 14)
-			spawnIndex("poptart/101/test00.txt", 80, 26, testToast, 25, 14)
-			//fmt.Printf("0\n<:o.o:>")
-			//Update the screen
-			//			poptart.Pop("/dev/video1", in)
-			//go poptart.Pop("/dev/video1")
+			spawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/client.txt", 80, 5, testToast, 25, 14)
 
-			ok := cannoli.CaptureDetect(webcam, "poptart/101/matt00.jpeg", classify)
+			ok := cannoli.Capture(webcam, "poptart/101/server.jpeg")
 			if !ok {
 				fmt.Println("Error capturing picture")
 			}
-			//cannoli.Write("poptart/101/mat00.png", img)
-			poptart.Poptart("poptart/101/matt00.jpeg")
-			poptart.Person("poptart/101/matt00.txt")
+			poptart.Big("poptart/101/server.jpeg")
 			flour.Toast(testToast, "red", "blue")
-			//testToast = flour.CleanFlecks(testToast)
+
 		}
 
 	case "zmq":
@@ -380,7 +365,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 				fmt.Println("Error capturing picture")
 			}
 			//cannoli.Write("poptart/101/mat00.png", img)
-			poptart.Poptart("poptart/101/matt00.jpeg")
+			poptart.Small("poptart/101/matt00.jpeg")
 			poptart.Person("poptart/101/matt00.txt")
 			flour.Toast(testToast, "red", "blue")
 			//testToast = flour.CleanFlecks(testToast)

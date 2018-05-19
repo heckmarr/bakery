@@ -113,3 +113,32 @@ func CaptureDetect(webcam *gocv.VideoCapture, path string, classify gocv.Cascade
 	}
 	return ok
 }
+
+//Capture captures an image from a webcamera as a blocking function.
+//ie it will wait until the image is ready before it exits.
+func Capture(webcam *gocv.VideoCapture, path string) bool {
+	//webcam, _ := gocv.VideoCaptureDevice(1)
+	//defer webcam.Close()
+	img := gocv.NewMat()
+	defer img.Close()
+
+	//blocking read function
+	for ok := webcam.Read(&img); !ok; ok = webcam.Read(&img) {
+		if !ok {
+			//fmt.Println("Device not ready.")
+		} else {
+			break
+		}
+	}
+
+	file, err := os.Create(path)
+	defer file.Close()
+	if err != nil {
+		fmt.Println("Error creating file.")
+	}
+	ok := gocv.IMWrite(path, img)
+	if !ok {
+		fmt.Println("Error writing file.")
+	}
+	return ok
+}
