@@ -5,7 +5,6 @@ import (
 	"gitlab.com/localtoast/flourPower"
 	"gocv.io/x/gocv"
 	"localtoast.net/localtoast/bakery/cannoli"
-	"localtoast.net/localtoast/bakery/oil"
 	//"localtoast.net/localtoast/bakery/flour"
 	"localtoast.net/localtoast/bakery/poptart"
 	//	"gitlab.com/localtoast/bakery/oven"
@@ -262,9 +261,10 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		reply.Bind("tcp://192.168.0.103:5555")
 
 		for i := 0; i < 1; i++ {
-			message := olive.PrepareMsg(testToast)
+			//message := olive.PrepareMsg(testToast)
+			colourMessage := flour.PrepareToast(testToast, "red", "blue")
 			//fmt.Println(message)
-			request.SendMessage(message)
+			request.SendMessage(colourMessage)
 			fmt.Println("Message sent")
 			mess, err := request.RecvMessage(zmq4.SNDMORE)
 			//mess, err := reply.RecvMessage(zmq4.SNDMORE)
