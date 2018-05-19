@@ -96,8 +96,8 @@ func CaptureDetect(webcam *gocv.VideoCapture, path string, classify gocv.Cascade
 			break
 		}
 	}
-	//img = ResizeAndGray(img)
-	img = Contour(img)
+	img = ResizeAndGray(img)
+	//img = Contour(img)
 	img = DetectHead(img)
 	//img = Contour(img)
 	//img = DetectFace(img, classify)
