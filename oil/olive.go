@@ -1,7 +1,9 @@
 package olive
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 
 	"github.com/pebbe/zmq4"
 	flour "gitlab.com/localtoast/flourPower"
@@ -36,7 +38,12 @@ func CreateServer(testToast []flour.Bread) {
 	}
 	request.Connect("tcp://192.168.0.101:5555")
 	reply.Bind("tcp://192.168.0.103:5555")
-
+	file, err := os.Create("poptart/101/client.txt")
+	defer file.Close()
+	if err != nil {
+		fmt.Println("Error creating message file.")
+	}
+	writer := bufio.NewWriter(file)
 	for i := 0; i < 1; i++ {
 		//message := olive.PrepareMsg(testToast)
 		colourMessage := flour.PrepareToast(testToast, "red", "blue")
@@ -45,7 +52,9 @@ func CreateServer(testToast []flour.Bread) {
 		fmt.Println("Message sent")
 		mess, err := request.RecvMessage(zmq4.SNDMORE)
 		//mess, err := reply.RecvMessage(zmq4.SNDMORE)
-		fmt.Println(mess[0])
+		writer.WriteString(mess[0])
+		writer.Flush()
+		//fmt.Println(mess[0])
 		if err != nil {
 			fmt.Println("Timeout error.")
 		}
