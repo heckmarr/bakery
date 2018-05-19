@@ -5,6 +5,7 @@ import (
 	"gitlab.com/localtoast/flourPower"
 	"gocv.io/x/gocv"
 	"localtoast.net/localtoast/bakery/cannoli"
+	"localtoast.net/localtoast/bakery/oil"
 	//"localtoast.net/localtoast/bakery/flour"
 	"localtoast.net/localtoast/bakery/poptart"
 	//	"gitlab.com/localtoast/bakery/oven"
@@ -257,14 +258,17 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		if err != nil {
 			fmt.Println("Error creating reply socket.")
 		}
-		request.Bind("tcp://127.0.0.1:5555")
-		reply.Connect("tcp://127.0.0.1:5555")
+		request.Connect("tcp://192.168.0.101:5555")
+		reply.Bind("tcp://192.168.0.103:5555")
 
 		for i := 0; i < 1; i++ {
-			request.SendMessage("hello")
+			message := olive.PrepareMsg(testToast)
+			//fmt.Println(message)
+			request.SendMessage(message)
 			fmt.Println("Message sent")
-			message, err := reply.RecvMessage(zmq4.SNDMORE)
-			fmt.Println(message)
+			mess, err := request.RecvMessage(zmq4.SNDMORE)
+			//mess, err := reply.RecvMessage(zmq4.SNDMORE)
+			fmt.Println(mess[0])
 			if err != nil {
 				fmt.Println("Timeout error.")
 			}
