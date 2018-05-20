@@ -341,7 +341,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		for {
 			olive.CreateServer(testToast)
 			spawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
-			spawnIndex("poptart/101/client.txt", 80, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
 
 			ok := cannoli.Capture(webcam, "poptart/101/server.jpeg")
 			if !ok {
