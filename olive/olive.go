@@ -24,21 +24,14 @@ func PrepareMsg(testToast []flour.Bread) string {
 }
 
 func CreateServer(testToast []flour.Bread) {
-	//	ctx, err := zmq4.NewContext()
-	//	if err != nil {
-	//		fmt.Println("Error creating new zmq Context.")
-	//	}
+
 	request, err := zmq4.NewSocket(zmq4.REQ)
 	if err != nil {
 		fmt.Println("Error creating request socket.")
 	}
-	reply, err := zmq4.NewSocket(zmq4.REP)
-	if err != nil {
-		fmt.Println("Error creating reply socket.")
-	}
 	request.Connect("tcp://192.168.0.101:5555")
-	reply.Bind("tcp://192.168.0.103:5555")
-	file, err := os.Create("poptart/101/client.txt")
+	//request.Connect("tcp://127.0.0.1:5555")
+	file, err := os.Create("poptart/101/serve0.txt")
 	defer file.Close()
 	if err != nil {
 		fmt.Println("Error creating message file.")
@@ -54,6 +47,38 @@ func CreateServer(testToast []flour.Bread) {
 		//mess, err := reply.RecvMessage(zmq4.SNDMORE)
 		writer.WriteString(mess[0])
 		writer.Flush()
+		//fmt.Println(mess[0])
+		if err != nil {
+			fmt.Println("Timeout error.")
+		}
+	}
+}
+
+func CreateClient(testToast []flour.Bread) {
+
+	request, err := zmq4.NewSocket(zmq4.REQ)
+	if err != nil {
+		fmt.Println("Error creating request socket.")
+	}
+	request.Connect("tcp://192.168.0.101:5555")
+	//request.Connect("tcp://127.0.0.1:5555")
+
+	file, err := os.Create("poptart/101/client.txt")
+	defer file.Close()
+	if err != nil {
+		fmt.Println("Error creating message file.")
+	}
+	writer := bufio.NewWriter(file)
+	for {
+		mess, err := request.RecvMessage(zmq4.SNDMORE)
+		//mess, err := reply.RecvMessage(zmq4.SNDMORE)
+		writer.WriteString(mess[0])
+		writer.Flush()
+		//message := olive.PrepareMsg(testToast)
+		colourMessage := flour.PrepareToast(testToast, "red", "blue")
+		//fmt.Println(message)
+		request.SendMessage(colourMessage)
+		fmt.Println("Message sent")
 		//fmt.Println(mess[0])
 		if err != nil {
 			fmt.Println("Timeout error.")

@@ -248,6 +248,58 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		for {
 			//fmt.Println("CBREAK to exit")
 		}
+	case "oco":
+		//	ctx := context.Background()
+		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
+		//	cmd.Run()
+		testToast = flour.CleanFlecks(testToast)
+		button, _ := flour.SpawnWin(5, 5)
+		container, containerLoaf := flour.SpawnWin(100, 38)
+		//flat("_", testToast)
+		button = flour.CopyToast("$", 2, 3, 1, button)
+		container, _ = flour.RelWin(0.33, 0.05, 1, 1, button, container, containerLoaf, true)
+		//spawnButton("$", 59, 2, testToast)
+		button = flour.CopyToast("@", 2, 3, 1, button)
+		container, _ = flour.RelWin(0.33, 0.85, 1, 1, button, container, containerLoaf, true)
+		//spawnButton("@", 59, 19, testToast)
+		button = flour.CopyToast("#", 2, 3, 1, button)
+		container, _ = flour.RelWin(0.03, 0.85, 1, 1, button, container, containerLoaf, true)
+		//spawnButton("#", 1, 2, testToast)
+		button = flour.CopyToast("4", 2, 3, 1, button)
+		container, _ = flour.RelWin(0.03, 0.05, 1, 1, button, container, containerLoaf, true)
+		//spawnButton("4", 1, 19, testToast)
+		button = flour.CopyToast("5", 2, 3, 1, button)
+		container, _ = flour.RelWin(0.85, 0.05, 1, 1, button, container, containerLoaf, true)
+		//spawnButton("5", 74, 2, testToast)
+		button = flour.CopyToast("6", 2, 3, 1, button)
+		container, _ = flour.RelWin(0.85, 0.85, 1, 1, button, container, containerLoaf, true)
+		//bag, bagLoaf := flour.SpawnWin(testLoaf.Height, testLoaf.Width)
+		//bag, bagLoaf = flour.RelWin(0.03, 0.03, 1, 1, container, bag, bagLoaf, true)
+		testToast, _ = flour.RelWin(0.03, 0.99, 1, 1, container, testToast, testLoaf, true)
+
+		testToast, _ = flour.RelWin(0.55, 0.99, 1, 1, container, testToast, testLoaf, true)
+		//spawnButton("6", 74, 19, testToast)
+		//update this with the autonoodly filename
+		webcam, err := gocv.VideoCaptureDevice(0)
+		if err != nil {
+			fmt.Println("Error opening webcam")
+		}
+		defer webcam.Close()
+
+		for {
+			olive.CreateClient(testToast)
+			spawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
+
+			ok := cannoli.Capture(webcam, "poptart/101/server.jpeg")
+			if !ok {
+				fmt.Println("Error capturing picture")
+			}
+			poptart.Big("poptart/101/server.jpeg")
+			flour.Toast(testToast, "red", "blue")
+
+		}
+
 	case "ozo":
 		//	ctx := context.Background()
 		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
@@ -525,6 +577,8 @@ func main() {
 			//fmt.Printf("_<:o.o:>")
 			spawnContext("owo", testToast, testLoaf)
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
+		case "oco":
+			spawnContext("oco", testToast, testLoaf)
 		case "ozo":
 			spawnContext("ozo", testToast, testLoaf)
 		case "ouo":
