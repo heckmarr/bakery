@@ -18,14 +18,14 @@ var (
 	hmm     = "/usr/local/share/pocketsphinx/model/en-us/en-us"
 	dict    = "/usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict"
 	lm      = "/usr/local/share/pocketsphinx/model/en-us/en-us.lm.bin"
-	logfile = "dev/null"
+	logfile = "/dev/null"
 	//	logfile = app.StringOpt("log", "taste.log", "Log file to write log to.")
 	stdout = false
 
 //	outraw  = app.StringOpt("outraw", "", "Specify output dir for RAW recorded sound files (s16le). Directory must exist.")
 )
 
-func Listen() {
+func Listen() ([]int16, *portaudio.Stream, *sphinx.Decoder) {
 	portaudio.Initialize()
 	defer portaudio.Terminate()
 	//defer listener.Close()
@@ -56,34 +56,21 @@ func Listen() {
 	stream.Start()
 	defer stream.Stop()
 	fmt.Println("Processing")
-	for {
-		decoder.StartUtt()
-		stream.Read()
-
-		decoder.ProcessRaw(in, false, false)
-		if decoder.IsInSpeech() {
-			fmt.Println("Listening...")
-			decoder.ProcessRaw(in, false, true)
-			decoder.EndUtt()
-
-			fmt.Println(decoder.Hypothesis())
-			fmt.Println("Done listening!")
-		}
+	return in, stream, decoder
+}
+func Interpret(in []int16, stream *portaudio.Stream, decoder *sphinx.Decoder) string {
+	decoder.StartUtt()
+	stream.Read()
+	var word string
+	decoder.ProcessRaw(in, false, false)
+	if decoder.IsInSpeech() {
+		//		fmt.Println("Listening...")
+		decoder.ProcessRaw(in, false, true)
 		decoder.EndUtt()
-		//_, err := stream.AvailableToRead()
-		//if err != nil {
-		//	fmt.Println("Stream unable to read.")
-		//}
-		//fmt.Println(stream.Info())
-		//fmt.Println(in)
-		//fmt.Println(decoder.UttDuration())
 
-		//		fmt.Println(stream.Time())
+		word, _ = decoder.Hypothesis()
+		//		fmt.Println("Done listening!")
 	}
-
-	//stream.Stop()
-	for {
-		//fmt.Println("End listening.")
-	}
-
+	decoder.EndUtt()
+	return word
 }

@@ -333,6 +333,8 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		testToast, _ = flour.RelWin(0.55, 0.99, 1, 1, container, testToast, testLoaf, true)
 		//spawnButton("6", 74, 19, testToast)
 		//update this with the autonoodly filename
+		in, stream, decoder := taste.Listen()
+
 		webcam, err := gocv.VideoCaptureDevice(0)
 		if err != nil {
 			fmt.Println("Error opening webcam")
@@ -343,7 +345,8 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			olive.CreateServer(testToast)
 			spawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
-
+			words := taste.Interpret(in, stream, decoder)
+			flour.CopyColourToast(words, 1, 1, len(words), "red", "yellow", testToast)
 			ok := cannoli.Capture(webcam, "poptart/101/server.jpeg")
 			if !ok {
 				fmt.Println("Error capturing picture")
