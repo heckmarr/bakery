@@ -3,16 +3,15 @@ package taste
 import (
 	"fmt"
 
+	"github.com/gordonklaus/portaudio"
 	"github.com/jawher/mow.cli"
 	"github.com/xlab/pocketsphinx-go/sphinx"
-	"github.com/xlab/portaudio-go/portaudio"
 )
 
 const (
 	samplesPerChannel = 512
 	sampleRate        = 16000
 	channels          = 1
-	sampleFormat      = portaudio.PaInt16
 )
 
 var (
@@ -41,14 +40,30 @@ func Listen() {
 	if err != nil {
 		fmt.Println("Error creating decoder!")
 	}
-	var stream *portaudio.Stream
-	error := portaudio.OpenDefaultStream(&stream, channels, 0, sampleFormat, sampleRate,
-		samplesPerChannel, nil, nil)
 
-	fmt.Println(error)
+	//	file, err := os.Create("taste/sound.wav")
+	//	fileReader := bufio.NewWriter(file)
 
-	portaudio.StartStream(stream)
+	in := make([]int16, 1024)
+	stream, err := portaudio.OpenDefaultStream(1, 0, 16000, len(in), in)
+	defer stream.Close()
+	if err != nil {
+		fmt.Println("Error opening default stream.")
+	}
+
+	stream.Start()
+
+	fmt.Println("Processing")
 	decoder.StartUtt()
+	for i := 0; i < 1; i++ {
+		stream.Read()
+		decoder.EndUtt()
+		stream.Stop()
+		fmt.Println(decoder.UttDuration())
+		decoder.ProcessRaw(in, true, true)
+		fmt.Println(decoder.Hypothesis())
+
+	}
 	for {
 
 	}
