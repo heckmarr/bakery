@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	samplesPerChannel = 512
+	samplesPerChannel = 1024
 	sampleRate        = 16000
 	channels          = 1
 )
@@ -25,8 +25,8 @@ var (
 )
 
 func Listen() {
-	listener := portaudio.Initialize()
-	fmt.Println(listener)
+	portaudio.Initialize()
+	defer portaudio.Terminate()
 	//defer listener.Close()
 	cfg := sphinx.NewConfig(
 		sphinx.HMMDirOption(*hmm),
@@ -41,10 +41,9 @@ func Listen() {
 		fmt.Println("Error creating decoder!")
 	}
 
-	//	file, err := os.Create("taste/sound.wav")
-	//	fileReader := bufio.NewWriter(file)
-
-	in := make([]int16, 1024)
+	//file, err := os.Create("taste/sound.wav")
+	//fileWriter := bufio.NewWriter(file)
+	in := make([]int16, 10240)
 	stream, err := portaudio.OpenDefaultStream(1, 0, 16000, len(in), in)
 	defer stream.Close()
 	if err != nil {
@@ -55,17 +54,20 @@ func Listen() {
 
 	fmt.Println("Processing")
 	decoder.StartUtt()
-	for i := 0; i < 1; i++ {
+	for i := 0; i < 16; i++ {
+
 		stream.Read()
-		decoder.EndUtt()
-		stream.Stop()
-		fmt.Println(decoder.UttDuration())
-		decoder.ProcessRaw(in, true, true)
+		//fmt.Println(stream.Info())
+		//fmt.Println(in)
+		//fmt.Println(decoder.UttDuration())
+		decoder.ProcessRaw(in, false, true)
 		fmt.Println(decoder.Hypothesis())
 
 	}
+	decoder.EndUtt()
+	stream.Stop()
 	for {
-
+		//fmt.Println("End listening.")
 	}
 
 }
