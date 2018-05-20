@@ -18,7 +18,7 @@ var (
 	hmm     = "/usr/local/share/pocketsphinx/model/en-us/en-us"
 	dict    = "/usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict"
 	lm      = "/usr/local/share/pocketsphinx/model/en-us/en-us.lm.bin"
-	logfile = "taste/taste.log"
+	logfile = "dev/null"
 	//	logfile = app.StringOpt("log", "taste.log", "Log file to write log to.")
 	stdout = false
 
