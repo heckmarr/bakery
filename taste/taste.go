@@ -27,7 +27,7 @@ var (
 
 func Listen() ([]int16, *portaudio.Stream, *sphinx.Decoder) {
 	portaudio.Initialize()
-	defer portaudio.Terminate()
+	//	defer portaudio.Terminate()
 	//defer listener.Close()
 	cfg := sphinx.NewConfig(
 		sphinx.HMMDirOption(hmm),
@@ -54,9 +54,14 @@ func Listen() ([]int16, *portaudio.Stream, *sphinx.Decoder) {
 	}
 
 	stream.Start()
-	defer stream.Stop()
+	//	defer stream.Stop()
 	fmt.Println("Processing")
 	return in, stream, decoder
+}
+func Plug(stream *portaudio.Stream, decoder *sphinx.Decoder) {
+	stream.Stop()
+	stream.Close()
+	portaudio.Terminate()
 }
 func Interpret(in []int16, stream *portaudio.Stream, decoder *sphinx.Decoder) string {
 	decoder.StartUtt()

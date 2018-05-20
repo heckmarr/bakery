@@ -334,7 +334,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		//spawnButton("6", 74, 19, testToast)
 		//update this with the autonoodly filename
 		in, stream, decoder := taste.Listen()
-
+		defer taste.Plug(stream, decoder)
 		webcam, err := gocv.VideoCaptureDevice(0)
 		if err != nil {
 			fmt.Println("Error opening webcam")
@@ -346,7 +346,10 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			spawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
 			words := taste.Interpret(in, stream, decoder)
-			flour.CopyColourToast(words, 1, 1, len(words), "red", "yellow", testToast)
+			if words != "" {
+				fmt.Println(words)
+			}
+			flour.CopyColourToast(words, 1, 6, len(words), "red", "yellow", testToast)
 			ok := cannoli.Capture(webcam, "poptart/101/server.jpeg")
 			if !ok {
 				fmt.Println("Error capturing picture")
@@ -356,7 +359,14 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 
 		}
 	case "taste":
-		taste.Listen()
+		in, stream, decoder := taste.Listen()
+		defer taste.Plug(stream, decoder)
+		for {
+			words := taste.Interpret(in, stream, decoder)
+			if words != "" {
+				fmt.Println(words)
+			}
+		}
 	case "zmq":
 		olive.CreateServer(testToast)
 	case "help":
