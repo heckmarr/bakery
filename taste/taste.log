@@ -1,0 +1,589 @@
+INFO: pocketsphinx.c(152): Parsed model-specific feature parameters from /usr/local/share/pocketsphinx/model/en-us/en-us/feat.params
+Current configuration:
+[NAME]			[DEFLT]		[VALUE]
+-agc			none		none
+-agcthresh		2.0		2.000000e+00
+-allphone				
+-allphone_ci		yes		yes
+-alpha			0.97		9.700000e-01
+-ascale			20.0		2.000000e+01
+-aw			1		1
+-backtrace		no		no
+-beam			1e-48		1.000000e-48
+-bestpath		yes		yes
+-bestpathlw		9.5		9.500000e+00
+-ceplen			13		13
+-cmn			live		batch
+-cmninit		40,3,-1		41.00,-5.29,-0.12,5.09,2.48,-4.07,-1.37,-1.78,-5.08,-2.05,-6.45,-1.42,1.17
+-compallsen		no		no
+-dict					/usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict
+-dictcase		no		no
+-dither			no		no
+-doublebw		no		no
+-ds			1		1
+-fdict					
+-feat			1s_c_d_dd	1s_c_d_dd
+-featparams				
+-fillprob		1e-8		1.000000e-08
+-frate			100		100
+-fsg					
+-fsgusealtpron		yes		yes
+-fsgusefiller		yes		yes
+-fwdflat		yes		yes
+-fwdflatbeam		1e-64		1.000000e-64
+-fwdflatefwid		4		4
+-fwdflatlw		8.5		8.500000e+00
+-fwdflatsfwin		25		25
+-fwdflatwbeam		7e-29		7.000000e-29
+-fwdtree		yes		yes
+-hmm					/usr/local/share/pocketsphinx/model/en-us/en-us
+-input_endian		little		little
+-jsgf					
+-keyphrase				
+-kws					
+-kws_delay		10		10
+-kws_plp		1e-1		1.000000e-01
+-kws_threshold		1e-30		1.000000e-30
+-latsize		5000		5000
+-lda					
+-ldadim			0		0
+-lifter			0		22
+-lm					/usr/local/share/pocketsphinx/model/en-us/en-us.lm.bin
+-lmctl					
+-lmname					
+-logbase		1.0001		1.000100e+00
+-logfn					taste/taste.log
+-logspec		no		no
+-lowerf			133.33334	1.300000e+02
+-lpbeam			1e-40		1.000000e-40
+-lponlybeam		7e-29		7.000000e-29
+-lw			6.5		6.500000e+00
+-maxhmmpf		30000		30000
+-maxwpf			-1		-1
+-mdef					
+-mean					
+-mfclogdir				
+-min_endfr		0		0
+-mixw					
+-mixwfloor		0.0000001	1.000000e-07
+-mllr					
+-mmap			yes		yes
+-ncep			13		13
+-nfft			512		512
+-nfilt			40		25
+-nwpen			1.0		1.000000e+00
+-pbeam			1e-48		1.000000e-48
+-pip			1.0		1.000000e+00
+-pl_beam		1e-10		1.000000e-10
+-pl_pbeam		1e-10		1.000000e-10
+-pl_pip			1.0		1.000000e+00
+-pl_weight		3.0		3.000000e+00
+-pl_window		5		5
+-rawlogdir				
+-remove_dc		no		no
+-remove_noise		yes		yes
+-remove_silence		yes		yes
+-round_filters		yes		yes
+-samprate		16000		1.600000e+04
+-seed			-1		-1
+-sendump				
+-senlogdir				
+-senmgau				
+-silprob		0.005		5.000000e-03
+-smoothspec		no		no
+-svspec					0-12/13-25/26-38
+-tmat					
+-tmatfloor		0.0001		1.000000e-04
+-topn			4		4
+-topn_beam		0		0
+-toprule				
+-transform		legacy		dct
+-unit_area		yes		yes
+-upperf			6855.4976	6.800000e+03
+-uw			1.0		1.000000e+00
+-vad_postspeech		50		50
+-vad_prespeech		20		20
+-vad_startspeech	10		10
+-vad_threshold		3.0		3.000000e+00
+-var					
+-varfloor		0.0001		1.000000e-04
+-varnorm		no		no
+-verbose		no		no
+-warp_params				
+-warp_type		inverse_linear	inverse_linear
+-wbeam			7e-29		7.000000e-29
+-wip			0.65		6.500000e-01
+-wlen			0.025625	2.562500e-02
+
+INFO: feat.c(715): Initializing feature stream to type: '1s_c_d_dd', ceplen=13, CMN='batch', VARNORM='no', AGC='none'
+INFO: acmod.c(162): Using subvector specification 0-12/13-25/26-38
+INFO: mdef.c(518): Reading model definition: /usr/local/share/pocketsphinx/model/en-us/en-us/mdef
+INFO: mdef.c(531): Found byte-order mark BMDF, assuming this is a binary mdef file
+INFO: bin_mdef.c(336): Reading binary model definition: /usr/local/share/pocketsphinx/model/en-us/en-us/mdef
+INFO: bin_mdef.c(516): 42 CI-phone, 137053 CD-phone, 3 emitstate/phone, 126 CI-sen, 5126 Sen, 29324 Sen-Seq
+INFO: tmat.c(149): Reading HMM transition probability matrices: /usr/local/share/pocketsphinx/model/en-us/en-us/transition_matrices
+INFO: acmod.c(113): Attempting to use PTM computation module
+INFO: ms_gauden.c(127): Reading mixture gaussian parameter: /usr/local/share/pocketsphinx/model/en-us/en-us/means
+INFO: ms_gauden.c(242): 42 codebook, 3 feature, size: 
+INFO: ms_gauden.c(244):  128x13
+INFO: ms_gauden.c(244):  128x13
+INFO: ms_gauden.c(244):  128x13
+INFO: ms_gauden.c(127): Reading mixture gaussian parameter: /usr/local/share/pocketsphinx/model/en-us/en-us/variances
+INFO: ms_gauden.c(242): 42 codebook, 3 feature, size: 
+INFO: ms_gauden.c(244):  128x13
+INFO: ms_gauden.c(244):  128x13
+INFO: ms_gauden.c(244):  128x13
+INFO: ms_gauden.c(304): 222 variance values floored
+INFO: ptm_mgau.c(475): Loading senones from dump file /usr/local/share/pocketsphinx/model/en-us/en-us/sendump
+INFO: ptm_mgau.c(499): BEGIN FILE FORMAT DESCRIPTION
+INFO: ptm_mgau.c(562): Rows: 128, Columns: 5126
+INFO: ptm_mgau.c(594): Using memory-mapped I/O for senones
+INFO: ptm_mgau.c(837): Maximum top-N: 4
+INFO: phone_loop_search.c(114): State beam -225 Phone exit beam -225 Insertion penalty 0
+INFO: dict.c(320): Allocating 138883 * 32 bytes (4340 KiB) for word entries
+INFO: dict.c(333): Reading main dictionary: /usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict
+INFO: dict.c(213): Dictionary size 134782, allocated 1016 KiB for strings, 1680 KiB for phones
+INFO: dict.c(336): 134782 words read
+INFO: dict.c(358): Reading filler dictionary: /usr/local/share/pocketsphinx/model/en-us/en-us/noisedict
+INFO: dict.c(213): Dictionary size 134787, allocated 0 KiB for strings, 0 KiB for phones
+INFO: dict.c(361): 5 words read
+INFO: dict2pid.c(396): Building PID tables for dictionary
+INFO: dict2pid.c(406): Allocating 42^3 * 2 bytes (144 KiB) for word-initial triphones
+INFO: dict2pid.c(132): Allocated 42672 bytes (41 KiB) for word-final triphones
+INFO: dict2pid.c(196): Allocated 42672 bytes (41 KiB) for single-phone word triphones
+INFO: ngram_model_trie.c(354): Trying to read LM in trie binary format
+INFO: ngram_search_fwdtree.c(74): Initializing search tree
+INFO: ngram_search_fwdtree.c(101): 791 unique initial diphones
+INFO: ngram_search_fwdtree.c(186): Creating search channels
+INFO: ngram_search_fwdtree.c(323): Max nonroot chan increased to 152608
+INFO: ngram_search_fwdtree.c(333): Created 723 root, 152480 non-root channels, 53 single-phone words
+INFO: ngram_search_fwdflat.c(157): fwdflat: min_ef_width = 4, max_sf_win = 25
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 41.00 -5.29 -0.12  5.09  2.48 -4.07 -1.37 -1.78 -5.08 -2.05 -6.45 -1.42  1.17 >
+INFO: cmn_live.c(138): Update to   < 25.92 34.29 12.17  1.11 -8.70 -6.89 -1.20 12.72  5.44  6.57 -1.57 -0.27  0.91 >
+INFO: cmn_live.c(120): Update from < 25.92 34.29 12.17  1.11 -8.70 -6.89 -1.20 12.72  5.44  6.57 -1.57 -0.27  0.91 >
+INFO: cmn_live.c(138): Update to   < 25.92 34.29 12.17  1.11 -8.70 -6.89 -1.20 12.72  5.44  6.57 -1.57 -0.27  0.91 >
+INFO: ngram_search_fwdtree.c(1550):      771 words recognized (13/fr)
+INFO: ngram_search_fwdtree.c(1552):   118869 senones evaluated (1981/fr)
+INFO: ngram_search_fwdtree.c(1556):   214251 channels searched (3570/fr), 26204 1st, 26555 last
+INFO: ngram_search_fwdtree.c(1559):     1534 words for which last channels evaluated (25/fr)
+INFO: ngram_search_fwdtree.c(1561):     4363 candidate words for entering last phone (72/fr)
+INFO: ngram_search_fwdtree.c(1564): fwdtree 0.48 CPU 0.792 xRT
+INFO: ngram_search_fwdtree.c(1567): fwdtree 0.48 wall 0.792 xRT
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 52 words
+INFO: ngram_search_fwdflat.c(948):      353 words recognized (6/fr)
+INFO: ngram_search_fwdflat.c(950):    45842 senones evaluated (764/fr)
+INFO: ngram_search_fwdflat.c(952):    53076 channels searched (884/fr)
+INFO: ngram_search_fwdflat.c(954):     2721 words searched (45/fr)
+INFO: ngram_search_fwdflat.c(957):     1702 word transitions (28/fr)
+INFO: ngram_search_fwdflat.c(960): fwdflat 0.12 CPU 0.197 xRT
+INFO: ngram_search_fwdflat.c(963): fwdflat 0.12 wall 0.198 xRT
+INFO: ngram_search.c(1197): </s> not found in last frame, using we.58 instead
+INFO: ngram_search.c(1250): lattice start node <s>.0 end node we.4
+INFO: ngram_search.c(1276): Eliminated 59 nodes before end node
+INFO: ngram_search.c(1381): Lattice has 90 nodes, 1 links
+INFO: ps_lattice.c(1374): Bestpath score: -472
+INFO: ps_lattice.c(1378): Normalizer P(O) = alpha(we:4:58) = -150417
+INFO: ps_lattice.c(1435): Joint P(O,S) = -150417 P(S|O) = 0
+INFO: ngram_search.c(872): bestpath 0.00 CPU 0.001 xRT
+INFO: ngram_search.c(875): bestpath 0.00 wall 0.001 xRT
+ERROR: "pocketsphinx.c", line 1131: Utterance is not started
+INFO: cmn_live.c(120): Update from < 25.92 34.29 12.17  1.11 -8.70 -6.89 -1.20 12.72  5.44  6.57 -1.57 -0.27  0.91 >
+INFO: cmn_live.c(138): Update to   < 25.92 34.29 12.17  1.11 -8.70 -6.89 -1.20 12.72  5.44  6.57 -1.57 -0.27  0.91 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 25.92 34.29 12.17  1.11 -8.70 -6.89 -1.20 12.72  5.44  6.57 -1.57 -0.27  0.91 >
+INFO: cmn_live.c(138): Update to   < 25.46 20.99  5.41  5.40 -5.94 -1.05 -5.58  1.70 -2.48  7.66  0.52 -2.47 -3.02 >
+INFO: cmn_live.c(120): Update from < 25.46 20.99  5.41  5.40 -5.94 -1.05 -5.58  1.70 -2.48  7.66  0.52 -2.47 -3.02 >
+INFO: cmn_live.c(138): Update to   < 25.46 20.99  5.41  5.40 -5.94 -1.05 -5.58  1.70 -2.48  7.66  0.52 -2.47 -3.02 >
+INFO: ngram_search_fwdtree.c(1550):     2500 words recognized (44/fr)
+INFO: ngram_search_fwdtree.c(1552):   162651 senones evaluated (2854/fr)
+INFO: ngram_search_fwdtree.c(1556):   971690 channels searched (17047/fr), 27145 1st, 77416 last
+INFO: ngram_search_fwdtree.c(1559):     4339 words for which last channels evaluated (76/fr)
+INFO: ngram_search_fwdtree.c(1561):    67760 candidate words for entering last phone (1188/fr)
+INFO: ngram_search_fwdtree.c(1564): fwdtree 1.71 CPU 3.002 xRT
+INFO: ngram_search_fwdtree.c(1567): fwdtree 1.72 wall 3.014 xRT
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 146 words
+INFO: ngram_search_fwdflat.c(948):     1230 words recognized (22/fr)
+INFO: ngram_search_fwdflat.c(950):    76995 senones evaluated (1351/fr)
+INFO: ngram_search_fwdflat.c(952):   153375 channels searched (2690/fr)
+INFO: ngram_search_fwdflat.c(954):     7014 words searched (123/fr)
+INFO: ngram_search_fwdflat.c(957):     5455 word transitions (95/fr)
+INFO: ngram_search_fwdflat.c(960): fwdflat 0.30 CPU 0.521 xRT
+INFO: ngram_search_fwdflat.c(963): fwdflat 0.30 wall 0.526 xRT
+INFO: ngram_search.c(1197): </s> not found in last frame, using what.55 instead
+INFO: ngram_search.c(1250): lattice start node <s>.0 end node what(2).11
+INFO: ngram_search.c(1276): Eliminated 40 nodes before end node
+INFO: ngram_search.c(1381): Lattice has 224 nodes, 28 links
+INFO: ps_lattice.c(1374): Bestpath score: -725
+INFO: ps_lattice.c(1378): Normalizer P(O) = alpha(what(2):11:55) = -170503
+INFO: ps_lattice.c(1435): Joint P(O,S) = -176023 P(S|O) = -5520
+INFO: ngram_search.c(872): bestpath 0.00 CPU 0.002 xRT
+INFO: ngram_search.c(875): bestpath 0.00 wall 0.002 xRT
+ERROR: "pocketsphinx.c", line 1131: Utterance is not started
+INFO: cmn_live.c(120): Update from < 25.46 20.99  5.41  5.40 -5.94 -1.05 -5.58  1.70 -2.48  7.66  0.52 -2.47 -3.02 >
+INFO: cmn_live.c(138): Update to   < 25.46 20.99  5.41  5.40 -5.94 -1.05 -5.58  1.70 -2.48  7.66  0.52 -2.47 -3.02 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 25.46 20.99  5.41  5.40 -5.94 -1.05 -5.58  1.70 -2.48  7.66  0.52 -2.47 -3.02 >
+INFO: cmn_live.c(138): Update to   < 25.46 20.99  5.41  5.40 -5.94 -1.05 -5.58  1.70 -2.48  7.66  0.52 -2.47 -3.02 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 25.46 20.99  5.41  5.40 -5.94 -1.05 -5.58  1.70 -2.48  7.66  0.52 -2.47 -3.02 >
+INFO: cmn_live.c(138): Update to   < 25.46 20.99  5.41  5.40 -5.94 -1.05 -5.58  1.70 -2.48  7.66  0.52 -2.47 -3.02 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 25.46 20.99  5.41  5.40 -5.94 -1.05 -5.58  1.70 -2.48  7.66  0.52 -2.47 -3.02 >
+INFO: cmn_live.c(138): Update to   < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: ngram_search.c(467): Resized score stack to 200000 entries
+INFO: ngram_search.c(459): Resized backpointer table to 10000 entries
+INFO: cmn_live.c(120): Update from < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: cmn_live.c(138): Update to   < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: ngram_search_fwdtree.c(1550):     5754 words recognized (77/fr)
+INFO: ngram_search_fwdtree.c(1552):   259667 senones evaluated (3462/fr)
+INFO: ngram_search_fwdtree.c(1556):  1363565 channels searched (18180/fr), 44306 1st, 171058 last
+INFO: ngram_search_fwdtree.c(1559):     9259 words for which last channels evaluated (123/fr)
+INFO: ngram_search_fwdtree.c(1561):    56122 candidate words for entering last phone (748/fr)
+INFO: ngram_search_fwdtree.c(1564): fwdtree 2.15 CPU 2.871 xRT
+INFO: ngram_search_fwdtree.c(1567): fwdtree 3.10 wall 4.136 xRT
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 346 words
+INFO: ngram_search_fwdflat.c(948):     3145 words recognized (42/fr)
+INFO: ngram_search_fwdflat.c(950):   125186 senones evaluated (1669/fr)
+INFO: ngram_search_fwdflat.c(952):   367242 channels searched (4896/fr)
+INFO: ngram_search_fwdflat.c(954):    19035 words searched (253/fr)
+INFO: ngram_search_fwdflat.c(957):    13058 word transitions (174/fr)
+INFO: ngram_search_fwdflat.c(960): fwdflat 0.95 CPU 1.267 xRT
+INFO: ngram_search_fwdflat.c(963): fwdflat 0.95 wall 1.269 xRT
+INFO: ngram_search.c(1250): lattice start node <s>.0 end node </s>.32
+INFO: ngram_search.c(1276): Eliminated 0 nodes before end node
+INFO: ngram_search.c(1381): Lattice has 418 nodes, 3891 links
+INFO: ps_lattice.c(1374): Bestpath score: -2184
+INFO: ps_lattice.c(1378): Normalizer P(O) = alpha(</s>:32:73) = -176240
+INFO: ps_lattice.c(1435): Joint P(O,S) = -231051 P(S|O) = -54811
+INFO: ngram_search.c(872): bestpath 0.05 CPU 0.074 xRT
+INFO: ngram_search.c(875): bestpath 0.05 wall 0.073 xRT
+ERROR: "pocketsphinx.c", line 1131: Utterance is not started
+INFO: cmn_live.c(120): Update from < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: cmn_live.c(138): Update to   < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: cmn_live.c(138): Update to   < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: cmn_live.c(138): Update to   < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: cmn_live.c(138): Update to   < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: cmn_live.c(138): Update to   < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 23.70 17.09  6.96  6.82 -6.57 -1.84 -7.68 -0.40 -4.64  6.90  0.83 -1.31 -2.38 >
+INFO: cmn_live.c(138): Update to   < 21.58 15.19  7.77  6.49 -4.22 -0.83 -4.73  0.27 -3.93  4.29 -0.60  0.45 -0.36 >
+INFO: cmn_live.c(120): Update from < 21.58 15.19  7.77  6.49 -4.22 -0.83 -4.73  0.27 -3.93  4.29 -0.60  0.45 -0.36 >
+INFO: cmn_live.c(138): Update to   < 21.58 15.19  7.77  6.49 -4.22 -0.83 -4.73  0.27 -3.93  4.29 -0.60  0.45 -0.36 >
+INFO: ngram_search_fwdtree.c(1550):     3711 words recognized (30/fr)
+INFO: ngram_search_fwdtree.c(1552):   256775 senones evaluated (2088/fr)
+INFO: ngram_search_fwdtree.c(1556):  1028435 channels searched (8361/fr), 70593 1st, 107567 last
+INFO: ngram_search_fwdtree.c(1559):     6274 words for which last channels evaluated (51/fr)
+INFO: ngram_search_fwdtree.c(1561):    72022 candidate words for entering last phone (585/fr)
+INFO: ngram_search_fwdtree.c(1564): fwdtree 1.69 CPU 1.373 xRT
+INFO: ngram_search_fwdtree.c(1567): fwdtree 2.70 wall 2.193 xRT
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 168 words
+INFO: ngram_search_fwdflat.c(948):     2432 words recognized (20/fr)
+INFO: ngram_search_fwdflat.c(950):    89426 senones evaluated (727/fr)
+INFO: ngram_search_fwdflat.c(952):   197780 channels searched (1607/fr)
+INFO: ngram_search_fwdflat.c(954):    10273 words searched (83/fr)
+INFO: ngram_search_fwdflat.c(957):     5809 word transitions (47/fr)
+INFO: ngram_search_fwdflat.c(960): fwdflat 0.45 CPU 0.368 xRT
+INFO: ngram_search_fwdflat.c(963): fwdflat 0.45 wall 0.368 xRT
+INFO: ngram_search.c(1250): lattice start node <s>.0 end node </s>.119
+INFO: ngram_search.c(1276): Eliminated 1 nodes before end node
+INFO: ngram_search.c(1381): Lattice has 291 nodes, 1755 links
+INFO: ps_lattice.c(1374): Bestpath score: -3643
+INFO: ps_lattice.c(1378): Normalizer P(O) = alpha(</s>:119:121) = -193973
+INFO: ps_lattice.c(1435): Joint P(O,S) = -220808 P(S|O) = -26835
+INFO: ngram_search.c(872): bestpath 0.02 CPU 0.015 xRT
+INFO: ngram_search.c(875): bestpath 0.02 wall 0.015 xRT
+ERROR: "pocketsphinx.c", line 1131: Utterance is not started
+INFO: cmn_live.c(120): Update from < 21.58 15.19  7.77  6.49 -4.22 -0.83 -4.73  0.27 -3.93  4.29 -0.60  0.45 -0.36 >
+INFO: cmn_live.c(138): Update to   < 21.58 15.19  7.77  6.49 -4.22 -0.83 -4.73  0.27 -3.93  4.29 -0.60  0.45 -0.36 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.58 15.19  7.77  6.49 -4.22 -0.83 -4.73  0.27 -3.93  4.29 -0.60  0.45 -0.36 >
+INFO: cmn_live.c(138): Update to   < 21.58 15.19  7.77  6.49 -4.22 -0.83 -4.73  0.27 -3.93  4.29 -0.60  0.45 -0.36 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.58 15.19  7.77  6.49 -4.22 -0.83 -4.73  0.27 -3.93  4.29 -0.60  0.45 -0.36 >
+INFO: cmn_live.c(138): Update to   < 21.39 13.86  6.05  7.38 -3.52 -1.00 -5.67 -0.05 -3.06  4.29 -0.97  0.48 -0.92 >
+INFO: cmn_live.c(120): Update from < 21.39 13.86  6.05  7.38 -3.52 -1.00 -5.67 -0.05 -3.06  4.29 -0.97  0.48 -0.92 >
+INFO: cmn_live.c(138): Update to   < 21.39 13.86  6.05  7.38 -3.52 -1.00 -5.67 -0.05 -3.06  4.29 -0.97  0.48 -0.92 >
+INFO: ngram_search_fwdtree.c(1550):     1670 words recognized (40/fr)
+INFO: ngram_search_fwdtree.c(1552):   139181 senones evaluated (3314/fr)
+INFO: ngram_search_fwdtree.c(1556):   721181 channels searched (17170/fr), 25773 1st, 60335 last
+INFO: ngram_search_fwdtree.c(1559):     3252 words for which last channels evaluated (77/fr)
+INFO: ngram_search_fwdtree.c(1561):    40209 candidate words for entering last phone (957/fr)
+INFO: ngram_search_fwdtree.c(1564): fwdtree 1.12 CPU 2.658 xRT
+INFO: ngram_search_fwdtree.c(1567): fwdtree 1.12 wall 2.663 xRT
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 101 words
+INFO: ngram_search_fwdflat.c(948):     1389 words recognized (33/fr)
+INFO: ngram_search_fwdflat.c(950):    45200 senones evaluated (1076/fr)
+INFO: ngram_search_fwdflat.c(952):    86460 channels searched (2058/fr)
+INFO: ngram_search_fwdflat.c(954):     3955 words searched (94/fr)
+INFO: ngram_search_fwdflat.c(957):     3714 word transitions (88/fr)
+INFO: ngram_search_fwdflat.c(960): fwdflat 0.22 CPU 0.521 xRT
+INFO: ngram_search_fwdflat.c(963): fwdflat 0.22 wall 0.522 xRT
+INFO: ngram_search.c(1250): lattice start node <s>.0 end node </s>.33
+INFO: ngram_search.c(1276): Eliminated 2 nodes before end node
+INFO: ngram_search.c(1381): Lattice has 186 nodes, 1147 links
+INFO: ps_lattice.c(1374): Bestpath score: -2186
+INFO: ps_lattice.c(1378): Normalizer P(O) = alpha(</s>:33:40) = -123528
+INFO: ps_lattice.c(1435): Joint P(O,S) = -162506 P(S|O) = -38978
+INFO: ngram_search.c(872): bestpath 0.01 CPU 0.028 xRT
+INFO: ngram_search.c(875): bestpath 0.01 wall 0.025 xRT
+ERROR: "pocketsphinx.c", line 1131: Utterance is not started
+INFO: cmn_live.c(120): Update from < 21.39 13.86  6.05  7.38 -3.52 -1.00 -5.67 -0.05 -3.06  4.29 -0.97  0.48 -0.92 >
+INFO: cmn_live.c(138): Update to   < 21.39 13.86  6.05  7.38 -3.52 -1.00 -5.67 -0.05 -3.06  4.29 -0.97  0.48 -0.92 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.39 13.86  6.05  7.38 -3.52 -1.00 -5.67 -0.05 -3.06  4.29 -0.97  0.48 -0.92 >
+INFO: cmn_live.c(138): Update to   < 21.39 13.86  6.05  7.38 -3.52 -1.00 -5.67 -0.05 -3.06  4.29 -0.97  0.48 -0.92 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.39 13.86  6.05  7.38 -3.52 -1.00 -5.67 -0.05 -3.06  4.29 -0.97  0.48 -0.92 >
+INFO: cmn_live.c(138): Update to   < 21.39 13.86  6.05  7.38 -3.52 -1.00 -5.67 -0.05 -3.06  4.29 -0.97  0.48 -0.92 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.39 13.86  6.05  7.38 -3.52 -1.00 -5.67 -0.05 -3.06  4.29 -0.97  0.48 -0.92 >
+INFO: cmn_live.c(138): Update to   < 20.83 12.61  5.54  8.37 -3.02 -1.81 -6.08  0.08 -2.47  3.78 -0.82  0.50 -1.57 >
+INFO: cmn_live.c(120): Update from < 20.83 12.61  5.54  8.37 -3.02 -1.81 -6.08  0.08 -2.47  3.78 -0.82  0.50 -1.57 >
+INFO: cmn_live.c(138): Update to   < 20.83 12.61  5.54  8.37 -3.02 -1.81 -6.08  0.08 -2.47  3.78 -0.82  0.50 -1.57 >
+INFO: ngram_search_fwdtree.c(1550):      798 words recognized (14/fr)
+INFO: ngram_search_fwdtree.c(1552):   197375 senones evaluated (3463/fr)
+INFO: ngram_search_fwdtree.c(1556):   726137 channels searched (12739/fr), 37790 1st, 32392 last
+INFO: ngram_search_fwdtree.c(1559):     1940 words for which last channels evaluated (34/fr)
+INFO: ngram_search_fwdtree.c(1561):    28385 candidate words for entering last phone (497/fr)
+INFO: ngram_search_fwdtree.c(1564): fwdtree 1.26 CPU 2.213 xRT
+INFO: ngram_search_fwdtree.c(1567): fwdtree 1.91 wall 3.343 xRT
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 31 words
+INFO: ngram_search_fwdflat.c(948):      608 words recognized (11/fr)
+INFO: ngram_search_fwdflat.c(950):    34749 senones evaluated (610/fr)
+INFO: ngram_search_fwdflat.c(952):    34483 channels searched (604/fr)
+INFO: ngram_search_fwdflat.c(954):     1783 words searched (31/fr)
+INFO: ngram_search_fwdflat.c(957):     1224 word transitions (21/fr)
+INFO: ngram_search_fwdflat.c(960): fwdflat 0.11 CPU 0.193 xRT
+INFO: ngram_search_fwdflat.c(963): fwdflat 0.11 wall 0.194 xRT
+INFO: ngram_search.c(1250): lattice start node <s>.0 end node </s>.30
+INFO: ngram_search.c(1276): Eliminated 0 nodes before end node
+INFO: ngram_search.c(1381): Lattice has 114 nodes, 159 links
+INFO: ps_lattice.c(1374): Bestpath score: -1685
+INFO: ps_lattice.c(1378): Normalizer P(O) = alpha(</s>:30:55) = -135930
+INFO: ps_lattice.c(1435): Joint P(O,S) = -154805 P(S|O) = -18875
+INFO: ngram_search.c(872): bestpath 0.00 CPU 0.002 xRT
+INFO: ngram_search.c(875): bestpath 0.00 wall 0.002 xRT
+ERROR: "pocketsphinx.c", line 1131: Utterance is not started
+INFO: cmn_live.c(120): Update from < 20.83 12.61  5.54  8.37 -3.02 -1.81 -6.08  0.08 -2.47  3.78 -0.82  0.50 -1.57 >
+INFO: cmn_live.c(138): Update to   < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: cmn_live.c(120): Update from < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: cmn_live.c(138): Update to   < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: ngram_search_fwdtree.c(1550):     2357 words recognized (19/fr)
+INFO: ngram_search_fwdtree.c(1552):   307662 senones evaluated (2501/fr)
+INFO: ngram_search_fwdtree.c(1556):  1399479 channels searched (11377/fr), 75797 1st, 79902 last
+INFO: ngram_search_fwdtree.c(1559):     4381 words for which last channels evaluated (35/fr)
+INFO: ngram_search_fwdtree.c(1561):   123498 candidate words for entering last phone (1004/fr)
+INFO: ngram_search_fwdtree.c(1564): fwdtree 2.32 CPU 1.883 xRT
+INFO: ngram_search_fwdtree.c(1567): fwdtree 2.32 wall 1.883 xRT
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 89 words
+INFO: ngram_search_fwdflat.c(948):     1710 words recognized (14/fr)
+INFO: ngram_search_fwdflat.c(950):    68217 senones evaluated (555/fr)
+INFO: ngram_search_fwdflat.c(952):    97501 channels searched (792/fr)
+INFO: ngram_search_fwdflat.c(954):     5132 words searched (41/fr)
+INFO: ngram_search_fwdflat.c(957):     2746 word transitions (22/fr)
+INFO: ngram_search_fwdflat.c(960): fwdflat 0.27 CPU 0.217 xRT
+INFO: ngram_search_fwdflat.c(963): fwdflat 0.27 wall 0.218 xRT
+INFO: ngram_search.c(1250): lattice start node <s>.0 end node </s>.119
+INFO: ngram_search.c(1276): Eliminated 1 nodes before end node
+INFO: ngram_search.c(1381): Lattice has 290 nodes, 2010 links
+INFO: ps_lattice.c(1374): Bestpath score: -3084
+INFO: ps_lattice.c(1378): Normalizer P(O) = alpha(</s>:119:121) = -144520
+INFO: ps_lattice.c(1435): Joint P(O,S) = -190003 P(S|O) = -45483
+INFO: ngram_search.c(872): bestpath 0.02 CPU 0.014 xRT
+INFO: ngram_search.c(875): bestpath 0.02 wall 0.013 xRT
+ERROR: "pocketsphinx.c", line 1131: Utterance is not started
+INFO: cmn_live.c(120): Update from < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: cmn_live.c(138): Update to   < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: cmn_live.c(138): Update to   < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: cmn_live.c(138): Update to   < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: cmn_live.c(138): Update to   < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: cmn_live.c(138): Update to   < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: cmn_live.c(138): Update to   < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: cmn_live.c(138): Update to   < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.06 12.17  3.84 10.40 -1.96 -0.95 -7.87 -1.51 -1.45  6.89 -0.20 -1.97  0.13 >
+INFO: cmn_live.c(138): Update to   < 21.47 12.80  3.82 10.45 -1.93 -0.45 -7.53 -1.16 -2.40  5.47 -1.91 -2.19 -0.41 >
+INFO: cmn_live.c(120): Update from < 21.47 12.80  3.82 10.45 -1.93 -0.45 -7.53 -1.16 -2.40  5.47 -1.91 -2.19 -0.41 >
+INFO: cmn_live.c(138): Update to   < 21.47 12.80  3.82 10.45 -1.93 -0.45 -7.53 -1.16 -2.40  5.47 -1.91 -2.19 -0.41 >
+INFO: ngram_search_fwdtree.c(1550):     3893 words recognized (39/fr)
+INFO: ngram_search_fwdtree.c(1552):   219730 senones evaluated (2219/fr)
+INFO: ngram_search_fwdtree.c(1556):  1153337 channels searched (11649/fr), 46123 1st, 139334 last
+INFO: ngram_search_fwdtree.c(1559):     7287 words for which last channels evaluated (73/fr)
+INFO: ngram_search_fwdtree.c(1561):    81998 candidate words for entering last phone (828/fr)
+INFO: ngram_search_fwdtree.c(1564): fwdtree 1.92 CPU 1.941 xRT
+INFO: ngram_search_fwdtree.c(1567): fwdtree 3.10 wall 3.131 xRT
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 203 words
+INFO: ngram_search_fwdflat.c(948):     3026 words recognized (31/fr)
+INFO: ngram_search_fwdflat.c(950):   104762 senones evaluated (1058/fr)
+INFO: ngram_search_fwdflat.c(952):   247964 channels searched (2504/fr)
+INFO: ngram_search_fwdflat.c(954):    12366 words searched (124/fr)
+INFO: ngram_search_fwdflat.c(957):     7797 word transitions (78/fr)
+INFO: ngram_search_fwdflat.c(960): fwdflat 0.58 CPU 0.585 xRT
+INFO: ngram_search_fwdflat.c(963): fwdflat 0.58 wall 0.585 xRT
+INFO: ngram_search.c(1250): lattice start node <s>.0 end node </s>.95
+INFO: ngram_search.c(1276): Eliminated 1 nodes before end node
+INFO: ngram_search.c(1381): Lattice has 383 nodes, 2733 links
+INFO: ps_lattice.c(1374): Bestpath score: -3751
+INFO: ps_lattice.c(1378): Normalizer P(O) = alpha(</s>:95:97) = -211600
+INFO: ps_lattice.c(1435): Joint P(O,S) = -247316 P(S|O) = -35716
+INFO: ngram_search.c(872): bestpath 0.04 CPU 0.036 xRT
+INFO: ngram_search.c(875): bestpath 0.03 wall 0.035 xRT
+ERROR: "pocketsphinx.c", line 1131: Utterance is not started
+INFO: cmn_live.c(120): Update from < 21.47 12.80  3.82 10.45 -1.93 -0.45 -7.53 -1.16 -2.40  5.47 -1.91 -2.19 -0.41 >
+INFO: cmn_live.c(138): Update to   < 21.47 12.80  3.82 10.45 -1.93 -0.45 -7.53 -1.16 -2.40  5.47 -1.91 -2.19 -0.41 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.47 12.80  3.82 10.45 -1.93 -0.45 -7.53 -1.16 -2.40  5.47 -1.91 -2.19 -0.41 >
+INFO: cmn_live.c(138): Update to   < 21.47 12.80  3.82 10.45 -1.93 -0.45 -7.53 -1.16 -2.40  5.47 -1.91 -2.19 -0.41 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.47 12.80  3.82 10.45 -1.93 -0.45 -7.53 -1.16 -2.40  5.47 -1.91 -2.19 -0.41 >
+INFO: cmn_live.c(138): Update to   < 21.47 12.80  3.82 10.45 -1.93 -0.45 -7.53 -1.16 -2.40  5.47 -1.91 -2.19 -0.41 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 21.47 12.80  3.82 10.45 -1.93 -0.45 -7.53 -1.16 -2.40  5.47 -1.91 -2.19 -0.41 >
+INFO: cmn_live.c(138): Update to   < 20.52 12.13  3.94  9.35 -2.00 -0.45 -6.88 -0.66 -2.03  5.40 -1.77 -1.94 -0.37 >
+INFO: cmn_live.c(120): Update from < 20.52 12.13  3.94  9.35 -2.00 -0.45 -6.88 -0.66 -2.03  5.40 -1.77 -1.94 -0.37 >
+INFO: cmn_live.c(138): Update to   < 20.52 12.13  3.94  9.35 -2.00 -0.45 -6.88 -0.66 -2.03  5.40 -1.77 -1.94 -0.37 >
+INFO: ngram_search_fwdtree.c(1550):      515 words recognized (9/fr)
+INFO: ngram_search_fwdtree.c(1552):   204605 senones evaluated (3590/fr)
+INFO: ngram_search_fwdtree.c(1556):   978577 channels searched (17168/fr), 38319 1st, 14098 last
+INFO: ngram_search_fwdtree.c(1559):     1367 words for which last channels evaluated (23/fr)
+INFO: ngram_search_fwdtree.c(1561):    46051 candidate words for entering last phone (807/fr)
+INFO: ngram_search_fwdtree.c(1564): fwdtree 1.75 CPU 3.070 xRT
+INFO: ngram_search_fwdtree.c(1567): fwdtree 1.76 wall 3.086 xRT
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 5 words
+INFO: ngram_search_fwdflat.c(948):      295 words recognized (5/fr)
+INFO: ngram_search_fwdflat.c(950):     7073 senones evaluated (124/fr)
+INFO: ngram_search_fwdflat.c(952):     4314 channels searched (75/fr)
+INFO: ngram_search_fwdflat.c(954):      480 words searched (8/fr)
+INFO: ngram_search_fwdflat.c(957):      207 word transitions (3/fr)
+INFO: ngram_search_fwdflat.c(960): fwdflat 0.06 CPU 0.103 xRT
+INFO: ngram_search_fwdflat.c(963): fwdflat 0.06 wall 0.104 xRT
+INFO: ngram_search.c(1250): lattice start node <s>.0 end node </s>.48
+INFO: ngram_search.c(1276): Eliminated 2 nodes before end node
+INFO: ngram_search.c(1381): Lattice has 95 nodes, 282 links
+INFO: ps_lattice.c(1374): Bestpath score: -1372
+INFO: ps_lattice.c(1378): Normalizer P(O) = alpha(</s>:48:55) = -81727
+INFO: ps_lattice.c(1435): Joint P(O,S) = -92034 P(S|O) = -10307
+INFO: ngram_search.c(872): bestpath 0.00 CPU 0.002 xRT
+INFO: ngram_search.c(875): bestpath 0.00 wall 0.002 xRT
+ERROR: "pocketsphinx.c", line 1131: Utterance is not started
+INFO: cmn_live.c(88): Update from < 20.52 12.13  3.94  9.35 -2.00 -0.45 -6.88 -0.66 -2.03  5.40 -1.77 -1.94 -0.37 >
+INFO: cmn_live.c(105): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdtree.c(1550):     4665 words recognized (45/fr)
+INFO: ngram_search_fwdtree.c(1552):   279458 senones evaluated (2687/fr)
+INFO: ngram_search_fwdtree.c(1556):  1388469 channels searched (13350/fr), 66776 1st, 121603 last
+INFO: ngram_search_fwdtree.c(1559):     7407 words for which last channels evaluated (71/fr)
+INFO: ngram_search_fwdtree.c(1561):    61811 candidate words for entering last phone (594/fr)
+INFO: ngram_search_fwdtree.c(1564): fwdtree 2.38 CPU 2.292 xRT
+INFO: ngram_search_fwdtree.c(1567): fwdtree 2.39 wall 2.295 xRT
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 202 words
+INFO: ngram_search_fwdflat.c(948):     2641 words recognized (25/fr)
+INFO: ngram_search_fwdflat.c(950):   119933 senones evaluated (1153/fr)
+INFO: ngram_search_fwdflat.c(952):   280580 channels searched (2697/fr)
+INFO: ngram_search_fwdflat.c(954):    13210 words searched (127/fr)
+INFO: ngram_search_fwdflat.c(957):     8542 word transitions (82/fr)
+INFO: ngram_search_fwdflat.c(960): fwdflat 0.57 CPU 0.552 xRT
+INFO: ngram_search_fwdflat.c(963): fwdflat 0.57 wall 0.552 xRT
+INFO: ngram_search.c(1250): lattice start node <s>.0 end node </s>.100
+INFO: ngram_search.c(1276): Eliminated 1 nodes before end node
+INFO: ngram_search.c(1381): Lattice has 423 nodes, 5642 links
+INFO: ps_lattice.c(1374): Bestpath score: -4413
+INFO: ps_lattice.c(1378): Normalizer P(O) = alpha(</s>:100:102) = -226916
+INFO: ps_lattice.c(1435): Joint P(O,S) = -250445 P(S|O) = -23529
+INFO: ngram_search.c(872): bestpath 0.11 CPU 0.109 xRT
+INFO: ngram_search.c(875): bestpath 0.11 wall 0.109 xRT
+ERROR: "pocketsphinx.c", line 1131: Utterance is not started
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
+INFO: cmn_live.c(120): Update from < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: cmn_live.c(138): Update to   < 19.93 12.51  4.54  7.98 -2.79 -1.61 -6.55  0.50 -1.12  5.73 -1.50 -1.72 -0.74 >
+INFO: ngram_search_fwdflat.c(302): Utterance vocabulary contains 0 words
