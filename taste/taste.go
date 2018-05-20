@@ -3,6 +3,7 @@ package taste
 import (
 	"fmt"
 
+	"github.com/jawher/mow.cli"
 	"github.com/xlab/pocketsphinx-go/sphinx"
 	"github.com/xlab/portaudio-go/portaudio"
 )
@@ -24,12 +25,10 @@ var (
 	outraw  = app.StringOpt("outraw", "", "Specify output dir for RAW recorded sound files (s16le). Directory must exist.")
 )
 
-func listen() {
-	listener, err := portaudio.Initialize()
-	if err != nil {
-		fmt.Println("Error initializing listener.")
-	}
-	defer listener.Terminate()
+func Listen() {
+	listener := portaudio.Initialize()
+	fmt.Println(listener)
+	//defer listener.Close()
 	cfg := sphinx.NewConfig(
 		sphinx.HMMDirOption(*hmm),
 		sphinx.DictFileOption(*dict),
@@ -43,12 +42,15 @@ func listen() {
 		fmt.Println("Error creating decoder!")
 	}
 	var stream *portaudio.Stream
-	if err := portaudio.OpenDefaultStream(&stream, channels, 0, sampleFormat, sampleRate,
-		samplesPerChannel, l.paCallback, nil); paError(err) {
-		log.Fatalln("PortAudio error:", paErrorText(err))
-	}
+	error := portaudio.OpenDefaultStream(&stream, channels, 0, sampleFormat, sampleRate,
+		samplesPerChannel, nil, nil)
+
+	fmt.Println(error)
+
 	portaudio.StartStream(stream)
 	decoder.StartUtt()
-	
+	for {
+
+	}
 
 }
