@@ -51,21 +51,34 @@ func Listen() {
 	}
 
 	stream.Start()
-
+	defer stream.Stop()
 	fmt.Println("Processing")
-	decoder.StartUtt()
-	for i := 0; i < 16; i++ {
-
+	for {
+		decoder.StartUtt()
 		stream.Read()
+
+		decoder.ProcessRaw(in, false, false)
+		if decoder.IsInSpeech() {
+			fmt.Println("Listening...")
+			decoder.ProcessRaw(in, false, true)
+			decoder.EndUtt()
+
+			fmt.Println(decoder.Hypothesis())
+			fmt.Println("Done listening!")
+		}
+		decoder.EndUtt()
+		//_, err := stream.AvailableToRead()
+		//if err != nil {
+		//	fmt.Println("Stream unable to read.")
+		//}
 		//fmt.Println(stream.Info())
 		//fmt.Println(in)
 		//fmt.Println(decoder.UttDuration())
-		decoder.ProcessRaw(in, false, true)
-		fmt.Println(decoder.Hypothesis())
 
+		//		fmt.Println(stream.Time())
 	}
-	decoder.EndUtt()
-	stream.Stop()
+
+	//stream.Stop()
 	for {
 		//fmt.Println("End listening.")
 	}
