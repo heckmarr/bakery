@@ -7,6 +7,7 @@ import (
 	//"localtoast.net/localtoast/bakery/flour"
 	"localtoast.net/localtoast/bakery/olive"
 	"localtoast.net/localtoast/bakery/poptart"
+	"localtoast.net/localtoast/bakery/taste"
 	//	"gitlab.com/localtoast/bakery/oven"
 	//	"gitlab.com/localtoast/bakery/loaf"
 	//	"gitlab.com/localtoast/bakery/dough"
@@ -351,7 +352,8 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			flour.Toast(testToast, "red", "blue")
 
 		}
-
+	case "taste":
+		taste.Listen()
 	case "zmq":
 		olive.CreateServer(testToast)
 	case "help":
@@ -581,6 +583,8 @@ func main() {
 			spawnContext("oco", testToast, testLoaf)
 		case "ozo":
 			spawnContext("ozo", testToast, testLoaf)
+		case "taste":
+			spawnContext("taste", testToast, testLoaf)
 		case "ouo":
 			spawnContext("ouo", testToast, testLoaf)
 		case "ono":
