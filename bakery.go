@@ -441,7 +441,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 				fmt.Println("Error capturing picture")
 			}
 			if args && len(view) >= 3 {
-				if view[2] == "-facerec" {
+				if view[2] == "-personrec" {
 					classify := gocv.NewCascadeClassifier()
 					defer classify.Close()
 					cannoli.CaptureDetect(webcam, "poptart/101/server.jpeg", classify)

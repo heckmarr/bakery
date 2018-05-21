@@ -1,32 +1,32 @@
-ssXXXXXXXXXAAAAAAAAAAAAAAAAXXXs 
-ssXXXXXXXXXXAAAAAAAAAAAAXXXXXss 
-ssssXXXXXXXXXAAAAAAAAXXXXXXXssr 
-rssssssrsXXXXAAXXXXXXXXXXXsssrr 
-rrssssssriXXrAssXXXXXXXssssrrrr 
-rrrrrrssssi;sAsXsXXXsssssrrrrii 
-iirrrrrrri;rrXrXXssssssrrriiiii 
-iiiiiiii;:;riA:ssssssrrriiiiii; 
-iiiiiiiiii;;iXrsssrrrriiiiii;;; 
-;;;;iiiiiiirsAAssrri:,,iii;;;;: 
-;;;;;;iiiiiirXrrrii,..,::i;;;;; 
-;;;;;;;;iiiiriiiii..,:::;iii;;; 
-::;;;;;;iiiiiiiiii.. ,::iiii;;; 
-:::;;;;;iiiiiiiiii. .:irX:iii;; 
-:::;;;;;iiiiiiiiii  :;is2.iii;; 
-:::;;;;;iiiiiiiiii , r;sA,;:,,, 
-:::;;;;;;;;:::::::,,.;,iAX:,,,, 
-..,,,:::::::::::::,,,X;s;X::::: 
-  ,::::::::;;;;;;;::,2sXAr;:::: 
-  ,::::::;;;;;;;;;,:,XrAA;;:::: 
-  ,:::::::;;;;;;;;,,,ssAA;;;::: 
-  ::::::::;;;;;;;;,.,riAi;;:::: 
-  ::::::::;;;;;;;;;.,rsX;..;::: 
-  ::::::::  ..;;,,,.,rsXi,.:::: 
-  :::::::: ..::...,..isX;;,:::: 
-  :::::::: .:,,......iss;;::;:: 
-  ::::::::;,.,,... ..ir;,:,,:,: 
-  ::::::::;.,,,,.  .,,,:.:..,:r 
- :::::::::, .,,, .  .,,,;,... : 
- :::::::::...,,, . .  ..,,.. ,. 
- ,:::::::: ,,,.,.  .. ,.,,.   . 
+XAAAAA2222222222222222222222AAA 
+XXAAA222222222222222222222AAAAX 
+XXXAA2222222222222222222AAAAAXX 
+sXXXX222222222222A2AAAAAAAAAXXs 
+ssXXX2222222222222AAAAAAAXXXsss 
+sssss22222222222222AAAXXXXssssr 
+rrsss2222222222222222X222sssrrr 
+rrrr2222222222222222222222rrrri 
+irrr22222222222A22222222222riii 
+iiiir2222222222222222222222iiii 
+iiiii22222222222222222222222iii 
+;iiii22222222222222222222222iii 
+;;;;ii2222222222222222222222iii 
+;;;;iii2222r2222222222222222iii 
+;;;;iii2222222222222222222222ii 
+;;;;iii222222222222222222222222 
+;;;;;iii22222222222222222222222 
+,,,::::::2222222222222222222222 
+  ::::;;;;22;222222222222222222 
+  :::;;;;;;;i2222i2222222222;;2 
+  ::;;;;;;;;ii222i2222222222;;2 
+  ::;;;;;;222i222222222222222;2 
+  ;;;;;;;2222222222222222222222 
+  ;;;;;;22222222222222222222222 
+  ;;;;;222222222222222222222222 
+  ;;;;;222222222222222222222222 
+  ;;;;;222i22222222222222222222 
+  ;;;;;222i22222222222222222222 
+ ;;;;;;222222222222222222222222 
+ ;;;;;;22222222222222222222222. 
+ ::;;;::2222222222222222222222. 
                                 
