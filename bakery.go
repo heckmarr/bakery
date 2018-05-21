@@ -5,6 +5,8 @@ import (
 	"gocv.io/x/gocv"
 	"localtoast.net/localtoast/bakery/cannoli"
 	//"localtoast.net/localtoast/bakery/flour"
+	"github.com/gordonklaus/portaudio"
+	"github.com/xlab/pocketsphinx-go/sphinx"
 	"localtoast.net/localtoast/bakery/olive"
 	"localtoast.net/localtoast/bakery/poptart"
 	"localtoast.net/localtoast/bakery/taste"
@@ -302,9 +304,55 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		}
 
 	case "ozo":
-		//	ctx := context.Background()
-		//	cmd := exec.CommandContext(ctx, "poptart/poptart.py")
-		//	cmd.Run()
+		/////////////////////////////BEGIN SPHINX CODE/////////////////////////////
+		const (
+			samplesPerChannel = 1024
+			sampleRate        = 16000
+			channels          = 1
+		)
+		//	app     = cli.App("tasteTest", "This is a test system to see how well sphinx works with golang.")
+		hmm := "/usr/local/share/pocketsphinx/model/en-us/en-us"
+		dict := "/usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict"
+		lm := "/usr/local/share/pocketsphinx/model/en-us/en-us.lm.bin"
+		logfile := "/dev/null"
+		//	logfile = app.StringOpt("log", "taste.log", "Log file to write log to.")
+		stdout := false
+
+		//	outraw  = app.StringOpt("outraw", "", "Specify output dir for RAW recorded sound files (s16le). Directory must exist.")
+
+		portaudio.Initialize()
+		defer portaudio.Terminate()
+		//	defer portaudio.Terminate()
+		//defer listener.Close()
+		cfg := sphinx.NewConfig(
+			sphinx.HMMDirOption(hmm),
+			sphinx.DictFileOption(dict),
+			sphinx.LMFileOption(lm),
+			sphinx.SampleRateOption(sampleRate),
+		)
+		if stdout == false {
+			sphinx.LogFileOption(logfile)(cfg)
+		}
+		fmt.Println("Loading CMU sphinx...")
+		decoder, err := sphinx.NewDecoder(cfg)
+		if err != nil {
+			fmt.Println("Error creating decoder!")
+		}
+
+		//file, err := os.Create("taste/sound.wav")
+		//fileWriter := bufio.NewWriter(file)
+		in := make([]int16, 10240)
+		stream, err := portaudio.OpenDefaultStream(1, 0, 16000, len(in), in)
+		defer stream.Close()
+		if err != nil {
+			fmt.Println("Error opening default stream.")
+		}
+
+		stream.Start()
+		defer stream.Stop()
+		fmt.Println("Processing")
+		/////////////////////////////END SPHINX CODE////////////////////////////
+
 		testToast = flour.CleanFlecks(testToast)
 		button, _ := flour.SpawnWin(5, 5)
 		container, containerLoaf := flour.SpawnWin(100, 38)
@@ -331,10 +379,6 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		testToast, _ = flour.RelWin(0.03, 0.99, 1, 1, container, testToast, testLoaf, true)
 
 		testToast, _ = flour.RelWin(0.55, 0.99, 1, 1, container, testToast, testLoaf, true)
-		//spawnButton("6", 74, 19, testToast)
-		//update this with the autonoodly filename
-		in, stream, decoder := taste.Listen()
-		defer taste.Plug(stream, decoder)
 		webcam, err := gocv.VideoCaptureDevice(0)
 		if err != nil {
 			fmt.Println("Error opening webcam")
@@ -342,14 +386,30 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		defer webcam.Close()
 
 		for {
+			decoder.StartUtt()
+			fmt.Println("Listening...")
+			stream.Read()
+			var words string
+			decoder.ProcessRaw(in, false, true)
+			words, _ = decoder.Hypothesis()
+			//fmt.Println("Heard " + words)
+			if decoder.IsInSpeech() {
+				//fmt.Println("Listening...")
+				decoder.ProcessRaw(in, false, true)
+				decoder.EndUtt()
+
+				words, _ = decoder.Hypothesis()
+				//		fmt.Println("Done listening!")
+			}
+			decoder.EndUtt()
 			olive.CreateServer(testToast)
 			spawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
-			words := taste.Interpret(in, stream, decoder)
+			//words := taste.Interpret(in, stream, decoder)
 			if words != "" {
 				fmt.Println(words)
 			}
-			flour.CopyColourToast(words, 1, 6, len(words), "red", "yellow", testToast)
+			flour.CopyColourToast(words, 50, 7, 1, "red", "yellow", testToast)
 			ok := cannoli.Capture(webcam, "poptart/101/server.jpeg")
 			if !ok {
 				fmt.Println("Error capturing picture")
