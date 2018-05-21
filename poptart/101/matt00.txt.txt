@@ -1,16 +1,16 @@
-  PERS ONPE     
-  RS ONPE       
-  RSONPERSONP   
-  ERSON PERSON  
-    PERSONPERS  
-      ONPERSON  
-       PERSONP  
-        ERSONP  
-        ERSONP  
-        ERSONP  
-     ERSONPERS  
-    ONPERSONPE  
-    RSONPERSON  
-    PERSONPE RS 
-    ONPERSONPE  
+  PERS          
+  ONPERSO       
+  NPERSONP      
+  ERSONPER      
+  SONPER SON    
+  PERSONPERS    
+   ONPERSONPE   
+     RSONPERS   
+     ONPERSONP  
+    ER SONPERS  
+     ONPERSONP  
+    ERSONPERSO  
+    N PERSONPER 
+    S ON PER SO 
+    NPERSONP ER 
                 
