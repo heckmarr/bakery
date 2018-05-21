@@ -24,7 +24,7 @@ import (
 	"os/exec"
 )
 
-//readStdin uses the "stty" linux command to grab all keyboard input and let
+//readStdin uses the "stty" linux command to grab all keyboard inputs and let
 //the program handle it
 func readStdin(out chan string, in chan bool) {
 	//flour.ToastLogger("readStdin")
@@ -165,10 +165,16 @@ func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen i
 
 //spawnContext switches on the view string and spawns the correct view on to
 //the toast passed in
-func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
+func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 	//put different context triggers here
-	splitView := strings.Split(view, " ")
-	switch splitView[0] {
+	var args bool
+	if len(view) < 2 {
+		args = false
+	} else {
+		args = true
+	}
+
+	switch view[0] {
 	case "ouo":
 		//flat("_", testToast)
 		//testToast = flour.CleanFlecks(testToast)
@@ -305,53 +311,62 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		}
 
 	case "ozo":
-		/////////////////////////////BEGIN SPHINX CODE/////////////////////////////
-		const (
-			samplesPerChannel = 1024
-			sampleRate        = 16000
-			channels          = 1
-		)
-		//	app     = cli.App("tasteTest", "This is a test system to see how well sphinx works with golang.")
-		hmm := "/usr/local/share/pocketsphinx/model/en-us/en-us"
-		dict := "/usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict"
-		lm := "/usr/local/share/pocketsphinx/model/en-us/en-us.lm.bin"
-		logfile := "/dev/null"
-		//	logfile = app.StringOpt("log", "taste.log", "Log file to write log to.")
-		stdout := false
+		var decoder *sphinx.Decoder
+		var in []int16
+		var err error
+		var stream *portaudio.Stream
 
-		//	outraw  = app.StringOpt("outraw", "", "Specify output dir for RAW recorded sound files (s16le). Directory must exist.")
+		if args && len(view) >= 2 {
+			if view[1] == "-sphinx" {
+				/////////////////////////////BEGIN SPHINX CODE/////////////////////////////
+				const (
+					samplesPerChannel = 1024
+					sampleRate        = 16000
+					channels          = 1
+				)
+				//	app     = cli.App("tasteTest", "This is a test system to see how well sphinx works with golang.")
+				hmm := "/usr/local/share/pocketsphinx/model/en-us/en-us"
+				dict := "/usr/local/share/pocketsphinx/model/en-us/cmudict-en-us.dict"
+				lm := "/usr/local/share/pocketsphinx/model/en-us/en-us.lm.bin"
+				logfile := "/dev/null"
+				//	logfile = app.StringOpt("log", "taste.log", "Log file to write log to.")
+				stdout := false
 
-		portaudio.Initialize()
-		defer portaudio.Terminate()
-		//	defer portaudio.Terminate()
-		//defer listener.Close()
-		cfg := sphinx.NewConfig(
-			sphinx.HMMDirOption(hmm),
-			sphinx.DictFileOption(dict),
-			sphinx.LMFileOption(lm),
-			sphinx.SampleRateOption(sampleRate),
-		)
-		if stdout == false {
-			sphinx.LogFileOption(logfile)(cfg)
+				//	outraw  = app.StringOpt("outraw", "", "Specify output dir for RAW recorded sound files (s16le). Directory must exist.")
+
+				portaudio.Initialize()
+				defer portaudio.Terminate()
+				//	defer portaudio.Terminate()
+				//defer listener.Close()
+				cfg := sphinx.NewConfig(
+					sphinx.HMMDirOption(hmm),
+					sphinx.DictFileOption(dict),
+					sphinx.LMFileOption(lm),
+					sphinx.SampleRateOption(sampleRate),
+				)
+				if stdout == false {
+					sphinx.LogFileOption(logfile)(cfg)
+				}
+				fmt.Println("Loading CMU sphinx...")
+				decoder, err = sphinx.NewDecoder(cfg)
+				if err != nil {
+					fmt.Println("Error creating decoder!")
+				}
+
+				//file, err := os.Create("taste/sound.wav")
+				//fileWriter := bufio.NewWriter(file)
+				in = make([]int16, 10240)
+				stream, err = portaudio.OpenDefaultStream(1, 0, 16000, len(in), in)
+				defer stream.Close()
+				if err != nil {
+					fmt.Println("Error opening default stream.")
+				}
+
+				stream.Start()
+				defer stream.Stop()
+				fmt.Println("Processing")
+			}
 		}
-		fmt.Println("Loading CMU sphinx...")
-		decoder, err := sphinx.NewDecoder(cfg)
-		if err != nil {
-			fmt.Println("Error creating decoder!")
-		}
-
-		//file, err := os.Create("taste/sound.wav")
-		//fileWriter := bufio.NewWriter(file)
-		in := make([]int16, 10240)
-		stream, err := portaudio.OpenDefaultStream(1, 0, 16000, len(in), in)
-		defer stream.Close()
-		if err != nil {
-			fmt.Println("Error opening default stream.")
-		}
-
-		stream.Start()
-		defer stream.Stop()
-		fmt.Println("Processing")
 		/////////////////////////////END SPHINX CODE////////////////////////////
 
 		testToast = flour.CleanFlecks(testToast)
@@ -385,32 +400,42 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			fmt.Println("Error opening webcam")
 		}
 		defer webcam.Close()
-
 		for {
-			decoder.StartUtt()
-			fmt.Println("Listening...")
-			stream.Read()
-			var words string
-			decoder.ProcessRaw(in, false, true)
-			words, _ = decoder.Hypothesis()
-			//fmt.Println("Heard " + words)
-			if decoder.IsInSpeech() {
-				//fmt.Println("Listening...")
-				decoder.ProcessRaw(in, false, true)
-				decoder.EndUtt()
+			if args {
+				if view[1] == "-sphinx" {
+					decoder.StartUtt()
+					//fmt.Println("Listening...")
+					stream.Read()
+					var words string
+					decoder.ProcessRaw(in, false, true)
+					words, _ = decoder.Hypothesis()
+					//fmt.Println("Heard " + words)
+					if decoder.IsInSpeech() {
+						//fmt.Println("Listening...")
+						decoder.ProcessRaw(in, false, true)
+						decoder.EndUtt()
 
-				words, _ = decoder.Hypothesis()
-				//		fmt.Println("Done listening!")
+						words, _ = decoder.Hypothesis()
+						//		fmt.Println("Done listening!")
+					}
+					decoder.EndUtt()
+					if words != "" {
+						fmt.Println(words)
+					}
+					flour.CopyColourToast(words, 50, 7, 1, "red", "yellow", testToast)
+				}
 			}
-			decoder.EndUtt()
+			//hack to keep decoder alive
+			//if args && len(view) > 2 {
+			//	decoder.StartUtt()
+			//	decoder.EndUtt()
+			//}
+			//end hack
 			olive.CreateServer(testToast)
 			spawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
 			//words := taste.Interpret(in, stream, decoder)
-			if words != "" {
-				fmt.Println(words)
-			}
-			flour.CopyColourToast(words, 50, 7, 1, "red", "yellow", testToast)
+
 			ok := cannoli.Capture(webcam, "poptart/101/server.jpeg")
 			if !ok {
 				fmt.Println("Error capturing picture")
@@ -502,7 +527,7 @@ func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 }
 
 func main() {
-	input := ""
+	//inputs := ""
 	//init can be changed
 	//	xvar := 81
 	//	yvar := 23
@@ -518,8 +543,13 @@ func main() {
 		flour.Toast(testToast, "green", "black")
 		//testToast = flour.CleanFlecks(testToast)
 		//fmt.Printf("\n<:o.o:>")
-		fmt.Scan(&input)
-		switch input {
+		//fmt.Scan(&inputs)
+		reader := bufio.NewReader(os.Stdin)
+		input, _ := reader.ReadString('\n')
+		intermediate := strings.Split(input, "\n")
+		inputs := strings.Split(intermediate[0], " ")
+		fmt.Println(inputs)
+		switch inputs[0] {
 		case "@":
 			//WIP FILE THINGIES
 			getNote(testToast, "blah")
@@ -583,7 +613,7 @@ func main() {
 					}
 					//flour.CleanFlecks(testToast)
 					//flat("_", testToast)
-					spawnContext("owo", testToast, testLoaf)
+					spawnContext(inputs, testToast, testLoaf)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
 					//fmt.Printf("0\n<:o.o:>")
 					flour.CopyToast("#", 4, 5+xpos, 1, testToast)
@@ -613,7 +643,7 @@ func main() {
 					//}
 					//flour.CleanFlecks(testToast)
 					//flat("_", testToast)
-					spawnContext("owo", testToast, testLoaf)
+					spawnContext(inputs, testToast, testLoaf)
 					//spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 					spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
 					//fmt.Printf("0\n<:o.o:>")
@@ -639,7 +669,7 @@ func main() {
 			//flour.CleanFlecks(testToast)
 			flat("_", testToast)
 
-			spawnContext("owo", testToast, testLoaf)
+			spawnContext(inputs, testToast, testLoaf)
 			//from here
 			//turn this into spawn_content
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
@@ -647,24 +677,24 @@ func main() {
 			spawnIndex("breadbox/001", 5, 5, testToast, 25, 14)
 			//do things with them
 		case "ewe":
-			spawnContext("ewe", testToast, testLoaf)
+			spawnContext(inputs, testToast, testLoaf)
 		case "owo":
 			//flat("_", testToast)
 			//fmt.Printf("_<:o.o:>")
-			spawnContext("owo", testToast, testLoaf)
+			spawnContext(inputs, testToast, testLoaf)
 			spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 		case "oco":
-			spawnContext("oco", testToast, testLoaf)
+			spawnContext(inputs, testToast, testLoaf)
 		case "ozo":
-			spawnContext("ozo", testToast, testLoaf)
+			spawnContext(inputs, testToast, testLoaf)
 		case "taste":
-			spawnContext("taste", testToast, testLoaf)
+			spawnContext(inputs, testToast, testLoaf)
 		case "ouo":
-			spawnContext("ouo", testToast, testLoaf)
+			spawnContext(inputs, testToast, testLoaf)
 		case "ono":
 			//flat("_", testToast)
 			//fmt.Printf("_<:o.o:>")
-			spawnContext("ono", testToast, testLoaf)
+			spawnContext(inputs, testToast, testLoaf)
 		case "spatter":
 			spatter(xvar, yvar, testToast)
 		case "welcome":
@@ -675,13 +705,13 @@ func main() {
 			os.Exit(1)
 			break
 		case "testColour":
-			spawnContext("testColour", testToast, testLoaf)
+			spawnContext(inputs, testToast, testLoaf)
 		case "zmq":
-			spawnContext("zmq", testToast, testLoaf)
+			spawnContext(inputs, testToast, testLoaf)
 		case "help":
-			spawnContext("help", testToast, testLoaf)
+			spawnIndex("breadbox/help", 5, 5, testToast, 55, 2)
 		default:
-			spawnContext("help", testToast, testLoaf)
+			spawnIndex("breadbox/help", 5, 5, testToast, 55, 2)
 			//testToast = flour.CleanFlecks(testToast)
 		}
 	}

@@ -1,32 +1,32 @@
-rsssXXXXXAAAAAAA222222222AAAAXs 
-rssssXXXXXAAAAAA22222222AAAAXXs 
-rssssXXsXXAAAAAAA22222AAAAAXXXs 
-rrssssssrsXAAAAAXA2AAAAAAAXXXss 
-rrsssssssrsAsAXrsAAAAAAAAXXXssr 
-rrrrssssXXriX2XXAAAAAAAAXXXsssr 
-irrrrsssssissAsAAAAAAAXXXXsssri 
-iirrrrssi;irs2iXAAAXXAXXXsssrri 
-iiirrrrsssrisAXAXXX:::::sssrrii 
-iiiirrrrssssX22XXX.,::,:ssrrii; 
-;iiiirrrrssssAXXX,,,,:;;isrrii; 
-;;iiiirrrrssssssX,,,:;ii:srrii; 
-;;;;iiirrrrssssss..,:iii:srrrii 
-;;;;iiiirrrrsssss ,,::iA.ssrrii 
-::;;;;iiirrrsssss:,:.Xr2sssrrii 
-::;;;;iiirrrsssss::;:ssAAsri;;: 
-::;;;;iiiiiiiiiii;:;,XsAXii;;:: 
-,,,::::;;;;;iiiiii::;sXAriiii;: 
-  ::::;;;iiiirrrrr::isXAriiii;; 
-  ::::;;;;iiiirrrr,:;XXArriiii; 
-  ::::;;;;iiiirrrr,,iXArrriiii; 
-  ::::;;;;iiiiirrr,,isXirriiii; 
-  ::::;;;;;iiiii:;,,iXXs;:,iiii 
-  :::;;;;;...,::,.,,;ssi:;:iiii 
-  ::::;;;; ,.,:,,,,:;r::,::iiii 
-  :::::;;; ,,,,.,. ,,:;:,:,,:ii 
-  ::::::;;;,.:..,,..,:.,,:,.:;i 
-  ::::::;;.,,...,.,...,:,:,.:,; 
- :::::::::... .......   ,:...:, 
- ,::::::::.,. .,,.,.,   .:,..., 
- ,,::::::.... ...,..:  .;:..... 
+XAAAA222222222222222222222222AA 
+XAAAAAAAA2222222222222222222AAX 
+XXXAAAAAAA2222222222222222AAAXX 
+XXXXXAXXXAA2222222222222AAAAXss 
+sXXXXXXXXrA2X2XXA2222AAAAXXXssr 
+sssXXXXXXXr;X2X2A22AAAAXXXsssrr 
+sssssXXXsriss2sAAAAAAXXXssrrrri 
+rrrsssssi;rss2iAAAXXXXssrrrrrii 
+irrrrrrrssr;s2sAXXXXssrrrrriiii 
+iiirrrrrssssX22AXs;:::irriiiii; 
+iiiiirrrrrsss2sss.,::;iriiiiii; 
+;;iiiiiirrrrsssrr,,,,;iirriiii; 
+;;;;;iiiirrrrrrrr.,:ir;irrriiii 
+:;;;;;iiiirrrrrr..:irsA.rrriiii 
+::::;;;iiirrrrrr .,iir2Xrrriiii 
+::::;;;iiiirrrrr:.,;:s2rrri;::: 
+::::;;;;ii;;;;;;:::rss2s;:::::, 
+..,,,,:::::::::;;::s2X2s;;;;;:: 
+  ,,::::::;;;;;;:::AXA22i;;;;:: 
+  ,,,:::::;;;;;;i:::XA22i;;;;;: 
+  ,,::::::;;;;;;;::ir22ii;;;;;; 
+  ,:::::::;;;;;;i,:sA2Aii;;;;;; 
+  ::::::::;;;;;;:.,sA2;i;..;;;; 
+  ::::::::  ;:,,,,,rXArs;,.;;;; 
+  :::::::: ::,.,.,.rXAriii,;;;; 
+  :::::::::,,,.,.,,isXii;::;;;; 
+,,::::::::,::,...,,;r;:;:::.;;; 
+ r,::::::,.::,,.. ,,;.,;,,,;is; 
+ :,::::::.,.::,....,.ii;.,.;;i; 
+ :::::::::.::::.,,....;:...;:ir 
+ ,,:::::...,:;, , ,.;.::,..:,:X 
                                 

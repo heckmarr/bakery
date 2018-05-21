@@ -42,7 +42,7 @@ func CreateServer(testToast []flour.Bread) {
 		colourMessage := flour.PrepareToast(testToast, "red", "blue")
 		//fmt.Println(message)
 		request.SendMessage(colourMessage)
-		fmt.Println("Message sent")
+		//fmt.Println("Message sent")
 		mess, err := request.RecvMessage(zmq4.SNDMORE)
 		//mess, err := reply.RecvMessage(zmq4.SNDMORE)
 		writer.WriteString(mess[0])
