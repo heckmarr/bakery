@@ -25,7 +25,7 @@ func Person(path string) {
 	}
 	count := 0
 	fileScanner := bufio.NewScanner(fileReader)
-	newFile, err := os.Create(path + ".txt")
+	newFile, err := os.Create(path[:18] + "00.txt")
 	if err != nil {
 		fmt.Println("Error creating file.")
 	}

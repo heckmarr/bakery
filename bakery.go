@@ -447,7 +447,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 					cannoli.CaptureDetect(webcam, "poptart/101/server.jpeg", classify)
 					poptart.Big("poptart/101/server.jpeg")
 					poptart.Person("poptart/101/server.txt")
-					spawnIndex("poptart/101/server.txt.txt", 5, 5, testToast, 25, 14)
+					spawnIndex("poptart/101/server00.txt", 5, 5, testToast, 25, 14)
 				}
 			} else {
 				poptart.Big("poptart/101/server.jpeg")
