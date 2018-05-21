@@ -167,7 +167,8 @@ func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen i
 //the toast passed in
 func spawnContext(view string, testToast []flour.Bread, testLoaf flour.Loaf) {
 	//put different context triggers here
-	switch view {
+	splitView := strings.Split(view, " ")
+	switch splitView[0] {
 	case "ouo":
 		//flat("_", testToast)
 		//testToast = flour.CleanFlecks(testToast)
