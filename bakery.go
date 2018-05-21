@@ -432,7 +432,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//}
 			//end hack
 			olive.CreateServer(testToast)
-			spawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
+
 			spawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
 			//words := taste.Interpret(in, stream, decoder)
 
@@ -440,7 +440,20 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			if !ok {
 				fmt.Println("Error capturing picture")
 			}
-			poptart.Big("poptart/101/server.jpeg")
+			if args && len(view) >= 3 {
+				if view[2] == "-facerec" {
+					classify := gocv.NewCascadeClassifier()
+					defer classify.Close()
+					cannoli.CaptureDetect(webcam, "poptart/101/server.jpeg", classify)
+					poptart.Big("poptart/101/server.jpeg")
+					poptart.Person("poptart/101/server.txt")
+					spawnIndex("poptart/101/server.txt.txt", 5, 5, testToast, 25, 14)
+				}
+			} else {
+				poptart.Big("poptart/101/server.jpeg")
+				spawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
+
+			}
 			flour.Toast(testToast, "red", "blue")
 
 		}
