@@ -50,7 +50,7 @@ func EncryptUsers(name string, comment string, email string) openpgp.EntityList 
 	//	entityList = append(entityList, entity)
 	//	fmt.Println(entityList)
 
-	path := "/users/twotonne/.gnupg"
+	path := "/home/twotonne/.gnupg"
 	//secRingPrefix := path + "/secring.gpg"
 	pubRingPrefix := path + "/pubring.gpg"
 
@@ -90,7 +90,7 @@ func EncryptUsers(name string, comment string, email string) openpgp.EntityList 
 	}
 
 	for scanner.Scan() {
-		bytesWritten, err := text.Write([]byte("Hi"))
+		bytesWritten, err := text.Write([]byte(scanner.Text()))
 		if err != nil {
 			fmt.Println("Error writing encoded text")
 		} else {
@@ -98,10 +98,9 @@ func EncryptUsers(name string, comment string, email string) openpgp.EntityList 
 
 			//		carrotPencil.Write([]byte(bytesWritten))
 		}
-
 	}
 	text.Close()
-
+	carrotPencil.Flush()
 	return entityList
 }
 func Users() {
