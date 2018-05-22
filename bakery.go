@@ -178,6 +178,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 	switch view[0] {
 	case "ovo":
 		kitchen.Users()
+		kitchen.EncryptUsers("snowcrash", "the network", "info@snowcrash.network")
 	case "ouo":
 		//flat("_", testToast)
 		//testToast = flour.CleanFlecks(testToast)

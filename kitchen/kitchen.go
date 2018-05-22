@@ -3,11 +3,13 @@ package kitchen
 import (
 	"bufio"
 	"fmt"
+
 	"io/ioutil"
 	"os"
 
 	"github.com/buger/jsonparser"
 	flour "gitlab.com/localtoast/flourPower"
+	"golang.org/x/crypto/openpgp"
 )
 
 //spawnIndex writes out a file to toast.
@@ -37,7 +39,71 @@ func InTheKitchen(testToast []flour.Bread, testLoaf flour.Loaf) []flour.Bread {
 	fmt.Println("Currently no one is in the kitchen")
 	return testToast
 }
+func EncryptUsers(name string, comment string, email string) openpgp.EntityList {
+	//	var hints openpgp.FileHints
+	//	hints.FileName = "chefs.json"
+	//	var entityList openpgp.EntityList
+	//	entity, err := openpgp.NewEntity(name, comment, email, nil)
+	//	if err != nil {
+	//		fmt.Println("Error creating Entity.")
+	//	}
+	//	entityList = append(entityList, entity)
+	//	fmt.Println(entityList)
 
+	path := "/users/twotonne/.gnupg"
+	//secRingPrefix := path + "/secring.gpg"
+	pubRingPrefix := path + "/pubring.gpg"
+
+	keyRingBuf, err := os.Open(pubRingPrefix)
+	defer keyRingBuf.Close()
+
+	entityList, err := openpgp.ReadKeyRing(keyRingBuf)
+	if err != nil {
+		fmt.Println("Error reading public ring!")
+	}
+
+	carrot, err := os.Create("kitchen/chefs/carrot")
+	carrotPencil := bufio.NewWriter(carrot)
+	//carrotPencil.WriteString(entity.Serialize)
+	//carrotPencil.Flush()
+	food, err := os.Open("kitchen/chefs/cabbage")
+	defer food.Close()
+	if err != nil {
+		fmt.Println("Too few chefs in the kitchen!")
+	}
+	//	reader, err := io.Reader("kitchen/chefs/chefs.json")
+	file, err := os.Open("kitchen/chefs/chefs.json")
+	reader := bufio.NewReader(file)
+	scanner := bufio.NewScanner(reader)
+	//writer := bufio.NewWriter(food)
+	//	readWriter := bufio.NewReadWriter(reader, writer)
+	if err != nil {
+		fmt.Println("Error opening user list.")
+	}
+	//	write, err := os.Writer(file)
+	//	var write io.Writer
+	//writer := bufio.NewWriter(file)
+	//buf := new(bytes.Buffer)
+	text, err := openpgp.Encrypt(carrotPencil, entityList, nil, nil, nil)
+	if err != nil {
+		fmt.Println("Encryption error!")
+	}
+
+	for scanner.Scan() {
+		bytesWritten, err := text.Write([]byte("Hi"))
+		if err != nil {
+			fmt.Println("Error writing encoded text")
+		} else {
+			fmt.Println(string(bytesWritten) + " bytes written.")
+
+			//		carrotPencil.Write([]byte(bytesWritten))
+		}
+
+	}
+	text.Close()
+
+	return entityList
+}
 func Users() {
 	file, err := ioutil.ReadFile("kitchen/chefs/chefs.json")
 	if err != nil {
@@ -48,4 +114,5 @@ func Users() {
 		fmt.Println("Error getting key!")
 	}
 	fmt.Println(KeyID)
+
 }
