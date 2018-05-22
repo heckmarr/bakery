@@ -4,6 +4,7 @@ import (
 	"gitlab.com/localtoast/flourPower"
 	"gocv.io/x/gocv"
 	"localtoast.net/localtoast/bakery/cannoli"
+	"localtoast.net/localtoast/bakery/kitchen"
 	//"localtoast.net/localtoast/bakery/flour"
 	"github.com/gordonklaus/portaudio"
 	"github.com/xlab/pocketsphinx-go/sphinx"
@@ -175,6 +176,8 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 	}
 
 	switch view[0] {
+	case "ovo":
+		kitchen.Users()
 	case "ouo":
 		//flat("_", testToast)
 		//testToast = flour.CleanFlecks(testToast)
@@ -517,7 +520,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 
 		for {
 
-			spawnIndex("poptart/101/matt00.txt.txt", 5, 5, testToast, 25, 14)
+			spawnIndex("poptart/101/matt00.txt", 5, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 5, 26, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 80, 5, testToast, 25, 14)
 			spawnIndex("poptart/101/test00.txt", 80, 26, testToast, 25, 14)
@@ -701,6 +704,8 @@ func main() {
 		case "ozo":
 			spawnContext(inputs, testToast, testLoaf)
 		case "taste":
+			spawnContext(inputs, testToast, testLoaf)
+		case "ovo":
 			spawnContext(inputs, testToast, testLoaf)
 		case "ouo":
 			spawnContext(inputs, testToast, testLoaf)
