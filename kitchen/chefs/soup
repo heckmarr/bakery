@@ -1,0 +1,9 @@
+{
+    "Keys": 
+        {
+            "KeyID": "SnowcrashNetwork",
+            "Server": "snowcrash.network",
+            "Port": "5555",
+            "Key": "xxxx"
+        }
+}

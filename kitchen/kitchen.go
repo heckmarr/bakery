@@ -2,8 +2,8 @@ package kitchen
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
-
 	"io/ioutil"
 	"os"
 
@@ -39,6 +39,48 @@ func InTheKitchen(testToast []flour.Bread, testLoaf flour.Loaf) []flour.Bread {
 	fmt.Println("Currently no one is in the kitchen")
 	return testToast
 }
+
+func decryptCarrot() {
+	path := "/home/twotonne/.gnupg"
+	secRingPrefix := path + "/secring.gpg"
+	keyRingBuf, err := os.Open(secRingPrefix)
+	defer keyRingBuf.Close()
+	if err != nil {
+		fmt.Println("Error opening ring file.")
+	}
+	entityList, err := openpgp.ReadKeyRing(keyRingBuf)
+	if err != nil {
+		fmt.Println("Error reading keyring.")
+	}
+
+	carrot, err := ioutil.ReadFile("kitchen/chefs/carrot")
+	if err != nil {
+		fmt.Println("Error reading.")
+	}
+	soup, err := os.Create("kitchen/chefs/soup")
+	if err != nil {
+		fmt.Println("Error creating soup.")
+	}
+
+	//Only needed if the private key has a passphrase
+	//err = key[0].PrivateKey.Decrypt(carrot)
+	mess, err := openpgp.ReadMessage(bytes.NewBuffer(carrot), entityList, nil, nil)
+	if err != nil {
+		fmt.Println("Error reading carrot.")
+	}
+	json, err := ioutil.ReadAll(mess.UnverifiedBody)
+	if err != nil {
+		fmt.Println("Error reading body of message.")
+	}
+
+	writer := bufio.NewWriter(soup)
+	writer.Write(json)
+	writer.Flush()
+	fmt.Println(json)
+	for {
+
+	}
+}
 func EncryptUsers(name string, comment string, email string) openpgp.EntityList {
 	//	Make sure to gpg --gen-keys
 
@@ -61,9 +103,9 @@ func EncryptUsers(name string, comment string, email string) openpgp.EntityList 
 	if err != nil {
 		fmt.Println("Too few chefs in the kitchen!")
 	}
-	file, err := os.Open("kitchen/chefs/chefs.json")
-	reader := bufio.NewReader(file)
-	scanner := bufio.NewScanner(reader)
+	file, err := ioutil.ReadFile("kitchen/chefs/chefs.json")
+	//reader := bufio.NewReader(file)
+	//scanner := bufio.NewScanner(reader)
 	if err != nil {
 		fmt.Println("Error opening user list.")
 	}
@@ -72,17 +114,26 @@ func EncryptUsers(name string, comment string, email string) openpgp.EntityList 
 		fmt.Println("Encryption error!")
 	}
 
-	for scanner.Scan() {
-		bytesWritten, err := text.Write([]byte(scanner.Text()))
-		if err != nil {
-			fmt.Println("Error writing encoded text")
-		} else {
-			fmt.Println(string(bytesWritten) + " bytes written.")
-
-		}
+	bytesWritten, err := text.Write(file)
+	if err != nil {
+		fmt.Println("Error writing encoded text.")
+	} else {
+		fmt.Println(string(bytesWritten) + " bytes written.")
 	}
+
+	//	for scanner.Scan() {
+	//		bytesWritten, err := text.Write([]byte(scanner.Text()))
+	//		if err != nil {
+	//			fmt.Println("Error writing encoded text")
+	//		} else {
+	//			fmt.Println(string(bytesWritten) + " bytes written.")
+
+	//		}
+	//	}
 	text.Close()
 	carrotPencil.Flush()
+
+	decryptCarrot()
 	return entityList
 }
 func Users() {
