@@ -179,9 +179,16 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 	case "testColour":
 		hello := "WELCOME"
 		for _, _ = range hello {
-			fmt.Println("\x1b[38;2;255;0;0;255mhallo\x1b[0m")
-			fmt.Println("\x1b[38;2;255;0;0;255mhenlo\x1b[0m")
-
+			hallo := "Hallo"
+			henlo := "henlo"
+			max := "255"
+			alpha := "249"
+			zero := "0"
+			//hallo = fmt.Sprint("\x1b[38;2;255;0;0;255mhallo\x1b[0m")
+			//henlo = fmt.Sprint("\x1b[38;2;0;255;0;255mhenlo\x1b[0m")
+			testToast = flour.Copy256Toast(hallo, 25, 15, 6, max, zero, zero, alpha, true, false, testToast)
+			testToast = flour.Copy256Toast(henlo, 40, 25, 6, zero, zero, max, alpha, true, false, testToast)
+			//fmt.Println("Testing 256 colour codes, " + hallo + henlo)
 		}
 		for i, v := range hello {
 			switch i {
