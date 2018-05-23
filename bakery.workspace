@@ -108,8 +108,8 @@ func flour.CopyToast(welcome string, xvar int, yvar int, yend int, testToast []f
 
 
 
-func flat(label string, testToast []flour.Bread) {
-	//flour.ToastLogger("flat")
+func flour.Flat(label string, testToast []flour.Bread) {
+	//flour.ToastLogger("flour.Flat")
         for i := range testToast {
                 testToast[i].Label = label
         }
@@ -125,8 +125,8 @@ func spawnButton(label string, xvar int, yvar int, testToast []flour.Bread){
 
 }
 
-func spawnContents(path string, xvar int, yvar int, testToast []flour.Bread) {
-        //flour.ToastLogger("spawnContents")
+func flour.SpawnContents(path string, xvar int, yvar int, testToast []flour.Bread) {
+        //flour.ToastLogger("flour.SpawnContents")
         slice := flour.Dough(xvar+1, yvar+1)
         slice = flour.Oven(slice, "=", xvar, yvar)
         filo, err := os.Open(path)
@@ -142,8 +142,8 @@ func spawnContents(path string, xvar int, yvar int, testToast []flour.Bread) {
         }
 }
 
-func spawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen int, yhei int) []flour.Bread {
-	//flour.ToastLogger("spawnIndex")
+func flour.SpawnIndex(path string, xvar int, yvar int, testToast []flour.Bread, xlen int, yhei int) []flour.Bread {
+	//flour.ToastLogger("flour.SpawnIndex")
 	slice := flour.Dough(xvar+1, yvar+1)
 	slice = flour.Oven(slice, "=", xvar, yvar)
 	filo, err := os.Open(path)
@@ -164,19 +164,19 @@ func spawnContext(view string, testToast []flour.Bread){
 //put different context triggers here
 	switch view {
 		case "owo":
-			flat("_", testToast)
+			flour.Flat("_", testToast)
 			spawnButton("$",30, 2, testToast)
 			spawnButton("@",30, 19, testToast)
 			spawnButton("#",1, 2, testToast)
 			spawnButton("4",1, 19, testToast)
 			spawnButton("5",74, 2, testToast)
 			spawnButton("6",74, 19, testToast)
-			spawnIndex("breadbox/000", 5, 4, testToast, 25, 14)
-			spawnIndex("breadbox/001", 5, 5, testToast, 25, 14)
+			flour.SpawnIndex("breadbox/000", 5, 4, testToast, 25, 14)
+			flour.SpawnIndex("breadbox/001", 5, 5, testToast, 25, 14)
 			//Update the screen
 			flour.Toast(testToast)
 		case "ono":
-                        flat("_", testToast)
+                        flour.Flat("_", testToast)
                         spawnButton("$",59, 2, testToast)
                         spawnButton("@",59, 19, testToast)
                         spawnButton("#",1, 2, testToast)
@@ -184,8 +184,8 @@ func spawnContext(view string, testToast []flour.Bread){
                         spawnButton("5",74, 2, testToast)
                         spawnButton("6",74, 19, testToast)
                   //update this with the autonoodly filename
-			spawnIndex("breadbox/toasting", 5, 4, testToast, 25, 14)
-                        spawnIndex("breadbox/001", 5, 5, testToast, 25, 14)
+			flour.SpawnIndex("breadbox/toasting", 5, 4, testToast, 25, 14)
+                        flour.SpawnIndex("breadbox/001", 5, 5, testToast, 25, 14)
                         //Update the screen
                         flour.Toast(testToast)
 
@@ -201,7 +201,7 @@ func main() {
 	yvar := 23
 	testToast := flour.Dough(xvar, yvar)
 	testToast = flour.Oven(testToast, "_", xvar, yvar)
-	flat("_", testToast)
+	flour.Flat("_", testToast)
 	//just toasting something
 	for {
 		flour.Toast(testToast)
@@ -211,7 +211,7 @@ func main() {
 			case "@":
 //WIP FILE THINGIES
 				getNote(testToast, "blah")
-			//	spawnContents(path, 
+			//	flour.SpawnContents(path, 
 			case "$":
 			        stdin := make(chan string, 1)
         			kill := make(chan bool, 1)
@@ -266,7 +266,7 @@ func main() {
 							thread = fmt.Sprint("0",xpos)
 						}
 						spawnContext("owo", testToast)
-                        	                spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
+                        	                flour.SpawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
 						flour.CopyToast("#", 4, 5+xpos, 1, testToast)
                                 	        flour.CopyToast("#", 30, 5+xpos, 1, testToast)
 						xpos--
@@ -292,8 +292,8 @@ func main() {
 	                                                }
 						//}
 							spawnContext("owo",testToast)
-							//spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
-							spawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
+							//flour.SpawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
+							flour.SpawnContents(fmt.Sprint("breadbox/"+thread+".1"), 35, 4, testToast)
                                                 	flour.CopyToast("#", 4, 5+xpos, 1, testToast)
 							flour.CopyToast("#", 30, 5+xpos, 1, testToast)
 						
@@ -303,7 +303,7 @@ func main() {
 				}
 
 			case "spawn":
-				flat("_", testToast)
+				flour.Flat("_", testToast)
 				time.Sleep(1*time.Second)
 				flour.CopyToast("DEEGEE", 35, 11, 1, testToast)
 				flour.Toast(testToast)
@@ -315,26 +315,26 @@ func main() {
 				spawnContext("owo",testToast)
 				//from here
 				//turn this into spawn_content
-				spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
-				spawnIndex("breadbox/000", 5, 4, testToast, 25, 14)
-				spawnIndex("breadbox/001", 5, 5, testToast, 25, 14)
+				flour.SpawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
+				flour.SpawnIndex("breadbox/000", 5, 4, testToast, 25, 14)
+				flour.SpawnIndex("breadbox/001", 5, 5, testToast, 25, 14)
 				//do things with them
 			case "owo":
-				flat("_", testToast)
+				flour.Flat("_", testToast)
 				fmt.Printf("_<:o.o:>")
 				spawnContext("owo", testToast)
-				spawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
+				flour.SpawnIndex("breadbox/000.1", 35, 4, testToast, 39, 14)
 				
 			case "ono":
-				flat("_", testToast)
+				flour.Flat("_", testToast)
 				fmt.Printf("_<:o.o:>")
 				spawnContext("ono", testToast)
 			case "spatter":
 				spatter(xvar, yvar, testToast)
 			case "welcome":
 				welcome(testToast)
-			case "flat":
-				flat("_", testToast)
+			case "flour.Flat":
+				flour.Flat("_", testToast)
 			case "exit":
 				break
 			default:
