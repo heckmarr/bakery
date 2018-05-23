@@ -178,6 +178,11 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		}
 	case "testColour":
 		hello := "WELCOME"
+		for _, _ = range hello {
+			fmt.Println("\x1b[38;2;255;0;0;255mhallo\x1b[0m")
+			fmt.Println("\x1b[38;2;255;0;0;255mhenlo\x1b[0m")
+
+		}
 		for i, v := range hello {
 			switch i {
 			case 0:
