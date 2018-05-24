@@ -401,7 +401,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//}
 			//end hack
 			olive.CreateServer(testToast)
-			//var coded string
+			var coded string
 			flour.SpawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
 			//words := taste.Interpret(in, stream, decoder)
 
@@ -419,7 +419,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 					flour.SpawnIndex("poptart/101/server00.txt", 5, 5, testToast, 25, 14)
 				}
 			} else {
-				poptart.BigColour("poptart/101/server.jpeg", testToast)
+				coded = poptart.BigColour("poptart/101/server.jpeg", testToast)
 				//fmt.Println(colourAscii)
 				//for i, _ := range colourAscii {
 				//	flour.CopyToast(colourAscii[i], 5, i, 1, testToast)
@@ -427,9 +427,9 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 				//flour.SpawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
 
 			}
-			//fmt.Printf(coded)
-			//flour.Toast25666(testToast)
-			//flour.Toast(testToast, "none", "none")
+			//flour.Toast25666(testToast, coded)
+			fmt.Printf(coded)
+			flour.Toast(testToast, "none", "none")
 
 		}
 	case "taste":

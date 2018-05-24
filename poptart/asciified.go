@@ -141,17 +141,17 @@ func BigColour(filename string, testToast []flour.Bread) string {
 				num = len(asciiCode) - 1
 			}
 			//fmt.Println(string(asciiCode[num]))
-			flour.Dye256(asciiCode[7], rS, gS, bS, aS, false, true, &testToast, int(row*column))
+			code := flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, &testToast, int(row*column))
 			//fmt.Printf(code)
 
-			//returnString += code
+			returnString += code
 			//_, err := asciipic.WriteString(code)
 			//fmt.Println(bytesWritten)
 			//if err != nil {
 			//	fmt.Println("Error writing string.")
 			//}
 		}
-		fmt.Println("")
+		//fmt.Println("")
 		//returnString += "\n"
 		//asciipic.WriteString("\n")
 	}
