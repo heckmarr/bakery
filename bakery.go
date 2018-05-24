@@ -179,15 +179,15 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 	case "testColour":
 		hello := "WELCOME"
 		for _, _ = range hello {
-			hallo := "Hallo"
-			henlo := "henlo"
-			max := "255"
-			alpha := "249"
-			zero := "0"
+			//hallo := "Hallo"
+			//henlo := "henlo"
+			//max := "255"
+			//alpha := "249"
+			//zero := "0"
 			//hallo = fmt.Sprint("\x1b[38;2;255;0;0;255mhallo\x1b[0m")
 			//henlo = fmt.Sprint("\x1b[38;2;0;255;0;255mhenlo\x1b[0m")
-			testToast = flour.Copy256Toast(hallo, 25, 15, 6, max, zero, zero, alpha, true, false, testToast)
-			testToast = flour.Copy256Toast(henlo, 40, 25, 6, zero, zero, max, alpha, true, false, testToast)
+			//testToast = flour.Copy256Toast(hallo, 25, 15, 6, max, zero, zero, alpha, true, false, testToast)
+			//testToast = flour.Copy256Toast(henlo, 40, 25, 6, zero, zero, max, alpha, true, false, testToast)
 			//fmt.Println("Testing 256 colour codes, " + hallo + henlo)
 		}
 		for i, v := range hello {
@@ -401,7 +401,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//}
 			//end hack
 			olive.CreateServer(testToast)
-
+			//var coded string
 			flour.SpawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
 			//words := taste.Interpret(in, stream, decoder)
 
@@ -419,11 +419,17 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 					flour.SpawnIndex("poptart/101/server00.txt", 5, 5, testToast, 25, 14)
 				}
 			} else {
-				poptart.Big("poptart/101/server.jpeg")
-				flour.SpawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
+				poptart.BigColour("poptart/101/server.jpeg", testToast)
+				//fmt.Println(colourAscii)
+				//for i, _ := range colourAscii {
+				//	flour.CopyToast(colourAscii[i], 5, i, 1, testToast)
+				//}
+				//flour.SpawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
 
 			}
-			flour.Toast(testToast, "red", "blue")
+			//fmt.Printf(coded)
+			//flour.Toast25666(testToast)
+			//flour.Toast(testToast, "none", "none")
 
 		}
 	case "taste":
