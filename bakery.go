@@ -401,8 +401,8 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//}
 			//end hack
 			olive.CreateServer(testToast)
-			var coded []string
-			flour.SpawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
+			//var coded []string
+			//flour.SpawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
 			//words := taste.Interpret(in, stream, decoder)
 
 			ok := cannoli.Capture(webcam, "poptart/101/server.jpeg")
@@ -419,7 +419,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 					flour.SpawnIndex("poptart/101/server00.txt", 5, 5, testToast, 25, 14)
 				}
 			} else {
-				coded = poptart.BigColour("poptart/101/server.jpeg", testToast)
+				poptart.BigColour("poptart/101/server.jpeg", testToast)
 				//fmt.Println(colourAscii)
 				//for i, _ := range colourAscii {
 				//	flour.CopyToast(colourAscii[i], 5, i, 1, testToast)
@@ -429,10 +429,10 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 				//	flour.CopyToast(coded[i], 5, i, 1, testToast)
 				//}
 			}
-			flour.Toast25666(testToast, coded)
+			//flour.Toast25666(testToast, coded)
 			//flour.Toast256(testToast)
 			//fmt.Printf(coded)
-			//flour.Toast(testToast, "none", "none")
+			flour.Toast(testToast, "none", "none")
 
 		}
 	case "taste":

@@ -90,10 +90,12 @@ func BigColour(filename string, testToast []flour.Bread) []string {
 	var rS int
 	var gS int
 	var bS int
+	count := 0
 	//var returnString []string
 	returnString := make([]string, 4096, 4096)
 	for column := 1; column < size; column++ {
 		for row := 1; row < size; row++ {
+			count++
 			//var imageColor color.Color
 			//r, g, b, a := pic.At(row, column)
 			//imageResized, err := picResized.ToImage()
@@ -140,11 +142,16 @@ func BigColour(filename string, testToast []flour.Bread) []string {
 			if num >= len(asciiCode) {
 				num = len(asciiCode) - 1
 			}
+			if count == column && column == size-1 {
+				flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, &testToast, int(row*column), true)
+				count = 0
+			} else {
+				flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, &testToast, int(row*column), false)
+			}
 			//fmt.Println(string(asciiCode[num]))
-			code := flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, &testToast, int(row*column))
 			//fmt.Printf(code)
 
-			returnString[column] += code
+			//returnString[column] += code
 			//_, err := asciipic.WriteString(code)
 			//fmt.Println(bytesWritten)
 			//if err != nil {
