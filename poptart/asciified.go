@@ -54,7 +54,7 @@ func Small(filename string) {
 }
 
 //BigColour converts an pic passed in via filename to an ascii text file.
-func BigColour(filename string, testToast []flour.Bread) []string {
+func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//	pic := imaging.New(64, 64, nil)
 	//	picd, err := imaging.Open(filename)
 	pic := gocv.IMRead(filename, gocv.IMReadReducedColor2)
@@ -64,7 +64,7 @@ func BigColour(filename string, testToast []flour.Bread) []string {
 	//}
 	var asciiCode []string
 	asciiCode = strings.Split("1-_-+-,-.-i-r-s-X-A-a-e-B-h-M-K-G-S-9-B-A-Z", "-")
-
+	//var code string
 	//pic = imaging.Grayscale(pic)
 	size := 31
 	//filter := imaging.NearestNeighbor
@@ -87,19 +87,27 @@ func BigColour(filename string, testToast []flour.Bread) []string {
 	//	if err != nil {
 	//		fmt.Println("Error opening text file.")
 	//	}
+
+	count := 0
+
+	//var returnString string
+	//returnString := make([]string, 4096, 4096)
+	var p gocv.Veci
+	var r float64
+	var g float64
+	var b float64
+	var G int
 	var rS int
 	var gS int
 	var bS int
-	count := 0
-	//var returnString []string
-	returnString := make([]string, 4096, 4096)
+
 	for column := 1; column < size; column++ {
 		for row := 1; row < size; row++ {
 			count++
 			//var imageColor color.Color
 			//r, g, b, a := pic.At(row, column)
 			//imageResized, err := picResized.ToImage()
-			p := picResized.GetVeciAt(row, column)
+			p = picResized.GetVeciAt(row, column)
 			//fmt.Println(p)
 			//picResized.Channels()
 			//fmt.Println(picResized.Channels())
@@ -113,10 +121,10 @@ func BigColour(filename string, testToast []flour.Bread) []string {
 			//imageColor := imageResized.At(row, column)
 			//fmt.Println(imageColor)
 			//imageColor
-			r := math.Floor((float64(p[2]) / 21474836))
-			g := math.Floor((float64(p[1]) / 21474836))
-			b := math.Floor((float64(p[0]) / 21474836))
-			G := int(int(g))
+			r = math.Floor((float64(p[2]) / 21474836))
+			g = math.Floor((float64(p[1]) / 21474836))
+			b = math.Floor((float64(p[0]) / 21474836))
+			G = int(int(g))
 
 			//fmt.Println(r, g, b, G)
 			//		a := "255"
@@ -128,7 +136,7 @@ func BigColour(filename string, testToast []flour.Bread) []string {
 			gS = int(g)
 			bS = int(b)
 			//aS := string(int(a))
-			aS := "255"
+			//aS := "255"
 			if rS <= 0 {
 				rS = 1
 			}
@@ -142,12 +150,34 @@ func BigColour(filename string, testToast []flour.Bread) []string {
 			if num >= len(asciiCode) {
 				num = len(asciiCode) - 1
 			}
-			if count == column && column == size-1 {
-				flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, &testToast, int(row*column), true)
-				count = 0
-			} else {
-				flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, &testToast, int(row*column), false)
+			i := row * column
+			//if count == column && column == size-1 {
+			//testToast = flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, testToast, int(row*column), true)
+			if column < size-1 {
+
+				slice := flour.BreadGetter(testToast[i].X, testToast[i].Y, testToast)
+				word := fmt.Sprint("\033[48;2;", rS, ";", gS, ";", bS, "m", testToast[i].Label, "\033[0m")
+				slice.Label = word
+				slice.Dirty = true
+				testToast = flour.BreadSetter(testToast[i].X, testToast[i].Y, testToast, slice)
 			}
+			if column == size-1 {
+
+				slice := flour.BreadGetter(testToast[i].X, testToast[i].Y, testToast)
+				word := fmt.Sprint("\033[48;2;", rS, ";", gS, ";", bS, "m", testToast[i].Label, "\033[0m")
+				slice.Label = word
+				slice.Dirty = true
+				slice.Nl = true
+				testToast = flour.BreadSetter(testToast[i].X, testToast[i].Y, testToast, slice)
+
+			}
+			//fmt.Printf(word)
+
+			//	return testToast
+			//	count = 0
+			//} else {
+			//	testToast = flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, &testToast, int(row*column), false)
+			//}
 			//fmt.Println(string(asciiCode[num]))
 			//fmt.Printf(code)
 
@@ -158,6 +188,7 @@ func BigColour(filename string, testToast []flour.Bread) []string {
 			//	fmt.Println("Error writing string.")
 			//}
 		}
+
 		//fmt.Println("")
 		//returnString += "\n"
 		//asciipic.WriteString("\n")
@@ -165,7 +196,7 @@ func BigColour(filename string, testToast []flour.Bread) []string {
 	//asciipic.Flush()
 	//flour.Toast256(testToast)
 	//flour.Toast(testToast, "none", "none")
-	return returnString
+	return testToast
 }
 
 //Big converts an pic passed in via filename to an ascii text file.

@@ -284,7 +284,9 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		var in []int16
 		var err error
 		var stream *portaudio.Stream
-
+		ozoToast := make([]flour.Bread, 1024, 1024)
+		ozoToast = flour.Oven(ozoToast, "*", 32, 32)
+		//var picOut string
 		if args && len(view) >= 2 {
 			if view[1] == "-sphinx" {
 				/////////////////////////////BEGIN SPHINX CODE/////////////////////////////
@@ -400,7 +402,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//	decoder.EndUtt()
 			//}
 			//end hack
-			olive.CreateServer(testToast)
+			//olive.CreateServer(testToast)
 			//var coded []string
 			//flour.SpawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
 			//words := taste.Interpret(in, stream, decoder)
@@ -419,20 +421,30 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 					flour.SpawnIndex("poptart/101/server00.txt", 5, 5, testToast, 25, 14)
 				}
 			} else {
-				poptart.BigColour("poptart/101/server.jpeg", testToast)
+				for i, _ := range testToast {
+					flour.CopyToast("*", testToast[i].X, testToast[i].Y, 1, testToast)
+				}
+				testToast = poptart.BigColour("poptart/101/server.jpeg", testToast)
 				//fmt.Println(colourAscii)
 				//for i, _ := range colourAscii {
 				//	flour.CopyToast(colourAscii[i], 5, i, 1, testToast)
 				//}
 				//flour.SpawnIndex("poptart/101/server.txt", 5, 5, testToast, 25, 14)
 				//for i, _ := range coded {
-				//	flour.CopyToast(coded[i], 5, i, 1, testToast)
+				//flour.CopyToast(picOut, 5, 5, 1, testToast)
 				//}
 			}
 			//flour.Toast25666(testToast, coded)
 			//flour.Toast256(testToast)
 			//fmt.Printf(coded)
+			//fmt.Print(ozoToast)
+			//var ozo string
+			//for i, _ := range ozoToast {
+			//	ozo += ozoToast[i].Label
+			//}
+			//fmt.Printf(ozo)
 			flour.Toast(testToast, "none", "none")
+			//flour.Toast25666(testToast, picOut)
 
 		}
 	case "taste":

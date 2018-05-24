@@ -39,7 +39,7 @@ func CreateServer(testToast []flour.Bread) {
 	writer := bufio.NewWriter(file)
 	for i := 0; i < 1; i++ {
 		//message := olive.PrepareMsg(testToast)
-		colourMessage := flour.PrepareToast(testToast, "red", "blue")
+		colourMessage := flour.PrepareToast(testToast, "green", "blue")
 		//fmt.Println(message)
 		request.SendMessage(colourMessage)
 		//fmt.Println("Message sent")
