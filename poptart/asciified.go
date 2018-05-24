@@ -54,7 +54,7 @@ func Small(filename string) {
 }
 
 //BigColour converts an pic passed in via filename to an ascii text file.
-func BigColour(filename string, testToast []flour.Bread) string {
+func BigColour(filename string, testToast []flour.Bread) []string {
 	//	pic := imaging.New(64, 64, nil)
 	//	picd, err := imaging.Open(filename)
 	pic := gocv.IMRead(filename, gocv.IMReadReducedColor2)
@@ -90,8 +90,8 @@ func BigColour(filename string, testToast []flour.Bread) string {
 	var rS int
 	var gS int
 	var bS int
-	var returnString string
-	//returnString := make([]string, 4096, 4096)
+	//var returnString []string
+	returnString := make([]string, 4096, 4096)
 	for column := 1; column < size; column++ {
 		for row := 1; row < size; row++ {
 			//var imageColor color.Color
@@ -144,7 +144,7 @@ func BigColour(filename string, testToast []flour.Bread) string {
 			code := flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, &testToast, int(row*column))
 			//fmt.Printf(code)
 
-			returnString += code
+			returnString[column] += code
 			//_, err := asciipic.WriteString(code)
 			//fmt.Println(bytesWritten)
 			//if err != nil {
