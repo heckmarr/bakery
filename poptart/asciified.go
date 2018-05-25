@@ -151,8 +151,8 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 	}
 	var stringToReturn string
 	//	fmt.Println(len(bigChar))
-	for row := 0; row < len(bigChar); row++ {
-		for column := 0; column < len(bigChar[row]); column++ {
+	for row := 1; row < len(bigChar); row++ {
+		for column := 1; column < len(bigChar[row]); column++ {
 			//fmt.Println(count)
 			//fmt.Println("cols", column)
 			//fmt.Println("rows", row)
@@ -163,7 +163,8 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 			//bG := valueColor.B
 			//imageResized, err := picResized.ToImage()
 			//		fmt.Println(picResized.Type())
-			p = eightBit.GetVeciAt(row*10, column*5)
+
+			p = eightBit.GetVeciAt((row*10)+100, column*5)
 			//fmt.Println(column, "cols")
 			//fmt.Println(row, "rows")
 			//p = eightBit.GetVeciAt(column, row)
@@ -221,7 +222,11 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 			}
 			//fmt.Println(column)
 			//fmt.Println(row)
-			stringToReturn = fmt.Sprintln(rS, "-", gS, "-", bS, "-", bigChar[row][column], "-", row, "-", column)
+			columnToAdd := column - 3
+			if columnToAdd <= 0 {
+				columnToAdd = column + 3
+			}
+			stringToReturn = fmt.Sprintln(rS, "-", gS, "-", bS, "-", bigChar[row][column], "-", columnToAdd, "-", row)
 			returnString = append(returnString, stringToReturn)
 			//fmt.Println(returnString)
 			//fmt.Println(len(returnString))
@@ -260,7 +265,7 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 		if err != nil {
 			fmt.Println("Not a valid int!")
 		}
-		slice := flour.BreadGetter(xvar, yvar, testToast)
+		slice := flour.BreadGetter(yvar, xvar, testToast)
 		rrS := strings.TrimSpace(words[0])
 		ggS := strings.TrimSpace(words[1])
 		bbS := strings.TrimSpace(words[2])
@@ -268,7 +273,7 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 		word := fmt.Sprint("\033[48;2;", rrS, ";", ggS, ";", bbS, "m", code, "\033[0m")
 		slice.Label = word
 		slice.Dirty = true
-		testToast = flour.BreadSetter(xvar, yvar, testToast, slice)
+		testToast = flour.BreadSetter(yvar, xvar, testToast, slice)
 
 		//fmt.Printf(word)
 	}
