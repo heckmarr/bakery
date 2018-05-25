@@ -3,6 +3,7 @@ package poptart
 import (
 	"bufio"
 	"fmt"
+	"image"
 	"math"
 	"os"
 	"strings"
@@ -85,7 +86,9 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//var point image.Point
 	//point.X = sizeX / 10
 	//point.Y = sizeY / 10
-	picResized = pic.Reshape(32, 32)
+	rect := image.Rect(0, 0, 64, 64)
+	picResized = pic.Region(rect)
+	//	picResized = pic.Reshape(32, 32)
 	//gocv.Resize(pic, &picResized, point, 0, 0, gocv.InterpolationLanczos4)
 	//pic = imaging.Resize(pic, size, size, filter)
 	//imaging.Save(pic, "poptart/101/greypic.jpeg")
