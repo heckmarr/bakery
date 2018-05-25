@@ -66,6 +66,12 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//if err != nil {
 	//	fmt.Println("Error opening pic.")
 	//}
+	//sizer, err := pic.ToImage()
+	///if err != nil {
+	//	fmt.Println("Error converting image.")
+	//}
+	//fmt.Println(sizer.Bounds().Dx())
+	//fmt.Println(sizer.Bounds().Dy())
 	var asciiCode []string
 	asciiCode = strings.Split("1-_-+-,-.-i-r-s-X-A-a-e-B-h-M-K-G-S-9-B-A-Z", "-")
 	//var code string
@@ -76,9 +82,9 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//fmt.Println(colours)
 	picResized := gocv.NewMat()
 	var point image.Point
-	point.X = 32
+	point.X = 24
 	point.Y = 32
-	gocv.Resize(pic, &picResized, point, 32, 32, 0)
+	gocv.Resize(pic, &picResized, point, 0, 0, 0)
 	//pic = imaging.Resize(pic, size, size, filter)
 	//imaging.Save(pic, "poptart/101/greypic.jpeg")
 	//	fileString := fmt.Sprint(filename[0:18] + ".txt")
@@ -170,8 +176,8 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//if count == column && column == size-1 {
 	//testToast = flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, testToast, int(row*column), true)
 	for i, _ := range testToast {
-		if i >= 960 {
-			i = 960
+		if i >= 767 {
+			i = 767
 		}
 
 		stringToSplit := returnString[i]
