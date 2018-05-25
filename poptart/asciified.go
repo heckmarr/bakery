@@ -126,7 +126,8 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 	//eightBit := gocv.NewMat()
 	//picResized.ConvertTo(&eightBit, gocv.MatTypeCV8S)
 	//	grayPic := gocv.NewMat()
-
+	eightBit := gocv.NewMat()
+	pic.ConvertTo(&eightBit, gocv.MatTypeCV8S)
 	//grayImage, err := picResized.ToImage()
 	//grayPic := imaging.Grayscale(grayImage)
 	//if err != nil {
@@ -150,8 +151,8 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 	}
 	var stringToReturn string
 	//	fmt.Println(len(bigChar))
-	for column := 0; column < len(bigChar)-8; column++ {
-		for row := 0; row < len(bigChar[column]); row++ {
+	for row := 0; row < len(bigChar); row++ {
+		for column := 0; column < len(bigChar[row]); column++ {
 			//fmt.Println(count)
 			//fmt.Println("cols", column)
 			//fmt.Println("rows", row)
@@ -162,7 +163,7 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 			//bG := valueColor.B
 			//imageResized, err := picResized.ToImage()
 			//		fmt.Println(picResized.Type())
-			p = pic.GetVeciAt(column*10, row*10)
+			p = eightBit.GetVeciAt(row*10, column*5)
 			//fmt.Println(column, "cols")
 			//fmt.Println(row, "rows")
 			//p = eightBit.GetVeciAt(column, row)
@@ -183,9 +184,9 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 			//fmt.Println(imageColor)
 			//imageColor
 
-			r = math.Floor((float64(p[2]) / 21474820))
-			g = math.Floor((float64(p[1]) / 21474820))
-			b = math.Floor((float64(p[0]) / 21474820))
+			r = math.Floor((float64(p[2]) / 21474836))
+			g = math.Floor((float64(p[1]) / 21474836))
+			b = math.Floor((float64(p[0]) / 21474836))
 			G = int(int(g))
 			//fmt.Println(r, g, b, G)
 			//		a := "255"
@@ -193,9 +194,9 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 			//imageColor
 			num := int(G) / 8
 			//num := asciinum / 8
-			rS = int(r)
-			gS = int(g)
-			bS = int(b)
+			rS = int(r) - 25
+			gS = int(g) - 25
+			bS = int(b) - 25
 			//rGI := int(rG)
 			//gGI := int(gG)
 			//bGI := int(bG)
@@ -220,7 +221,7 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 			}
 			//fmt.Println(column)
 			//fmt.Println(row)
-			stringToReturn = fmt.Sprintln(rS, "-", gS, "-", bS, "-", bigChar[column][row], "-", column, "-", row)
+			stringToReturn = fmt.Sprintln(rS, "-", gS, "-", bS, "-", bigChar[row][column], "-", row, "-", column)
 			returnString = append(returnString, stringToReturn)
 			//fmt.Println(returnString)
 			//fmt.Println(len(returnString))
@@ -253,7 +254,7 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 		xvar, err := strconv.Atoi(strings.TrimSpace(words[4]))
 		yvar, err := strconv.Atoi(strings.TrimSpace(words[5]))
 
-		//		xvar = xvar
+		//		xvar = xvar / 2
 		//		yvar = yvar * 2
 
 		if err != nil {
