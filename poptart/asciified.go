@@ -87,7 +87,7 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//var point image.Point
 	//point.X = sizeX / 10
 	//point.Y = sizeY / 10
-	rect := image.Rect(128, 88, 192, 152)
+	rect := image.Rect(144, 104, 176, 136)
 	picResized = pic.Region(rect)
 	//	picResized = pic.Reshape(32, 32)
 	//gocv.Resize(pic, &picResized, point, 0, 0, gocv.InterpolationLanczos4)
@@ -120,14 +120,14 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//	var returnString []string
 	eightBit := gocv.NewMat()
 	picResized.ConvertTo(&eightBit, gocv.MatTypeCV8S)
-	for column := 0; column < eightBit.Cols(); column++ {
-		for row := 0; row < eightBit.Rows(); row++ {
+	for column := 1; column < picResized.Cols(); column++ {
+		for row := 1; row < picResized.Rows(); row++ {
 			//fmt.Println(count)
 			//var imageColor color.Color
 			//r, g, b, a := pic.At(row, column)
 			//imageResized, err := picResized.ToImage()
 			//		fmt.Println(picResized.Type())
-			p = eightBit.GetVeciAt(row, column)
+			p = picResized.GetVeciAt(row, column)
 			//fmt.Println(column, "cols")
 			//fmt.Println(row, "rows")
 			//p = eightBit.GetVeciAt(column, row)
@@ -186,8 +186,8 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//if count == column && column == size-1 {
 	//testToast = flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, testToast, int(row*column), true)
 	for i, _ := range testToast {
-		if i >= 4031 {
-			i = 4031
+		if i >= len(returnString) {
+			i = len(returnString) - 1
 		}
 
 		stringToSplit := returnString[i]
