@@ -6,6 +6,7 @@ import (
 	"image"
 	"math"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/disintegration/imaging"
@@ -86,7 +87,7 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//var point image.Point
 	//point.X = sizeX / 10
 	//point.Y = sizeY / 10
-	rect := image.Rect(0, 0, 64, 64)
+	rect := image.Rect(128, 88, 192, 152)
 	picResized = pic.Region(rect)
 	//	picResized = pic.Reshape(32, 32)
 	//gocv.Resize(pic, &picResized, point, 0, 0, gocv.InterpolationLanczos4)
@@ -127,7 +128,8 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 			//imageResized, err := picResized.ToImage()
 			//		fmt.Println(picResized.Type())
 			p = eightBit.GetVeciAt(row, column)
-
+			//fmt.Println(column, "cols")
+			//fmt.Println(row, "rows")
 			//p = eightBit.GetVeciAt(column, row)
 
 			//p = picResized.GetVeciAt(row, column)
@@ -173,7 +175,7 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 			if num >= len(asciiCode) {
 				num = len(asciiCode) - 1
 			}
-			stringToReturn := fmt.Sprintln(rS, "-", gS, "-", bS, "-", asciiCode[num])
+			stringToReturn := fmt.Sprintln(rS, "-", gS, "-", bS, "-", asciiCode[num], "-", row, "-", column)
 			returnString = append(returnString, stringToReturn)
 			//fmt.Println(returnString)
 			//fmt.Println(len(returnString))
@@ -184,8 +186,8 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//if count == column && column == size-1 {
 	//testToast = flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, testToast, int(row*column), true)
 	for i, _ := range testToast {
-		if i >= 689 {
-			i = 689
+		if i >= 4031 {
+			i = 4031
 		}
 
 		stringToSplit := returnString[i]
@@ -193,8 +195,11 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 		//fmt.Println(words)
 
 		//fmt.Println(testToast[i].Y)
-		xvar := testToast[i].X
-		yvar := testToast[i].Y
+		xvar, err := strconv.Atoi(strings.TrimSpace(words[4]))
+		yvar, err := strconv.Atoi(strings.TrimSpace(words[5]))
+		if err != nil {
+			fmt.Println("Not a valid int!")
+		}
 		slice := flour.BreadGetter(xvar, yvar, testToast)
 		rrS := strings.TrimSpace(words[0])
 		ggS := strings.TrimSpace(words[1])
