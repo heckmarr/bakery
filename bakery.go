@@ -416,6 +416,8 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			if !ok {
 				fmt.Println("Error capturing picture")
 			}
+
+			poptart.Big("poptart/101/server.jpeg")
 			if args && len(view) >= 3 {
 				if view[2] == "-personrec" {
 					classify := gocv.NewCascadeClassifier()
@@ -429,7 +431,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 				//for i, _ := range ozoToast {
 				//	flour.CopyToast("=", ozoToast[i].X, ozoToast[i].Y, 1, ozoToast)
 				//}
-				ozoToast = poptart.BigColour("poptart/101/server.jpeg", ozoToast)
+				ozoToast = poptart.BigColour("poptart/101/server.jpeg", ozoToast, "poptart/101/server.txt")
 				//	count := 1
 				//	for i, _ := range ozoToast {
 				//		count++

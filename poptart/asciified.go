@@ -3,7 +3,6 @@ package poptart
 import (
 	"bufio"
 	"fmt"
-	"image"
 	"math"
 	"os"
 	"strconv"
@@ -55,24 +54,24 @@ func Small(filename string) {
 }
 
 //BigColour converts an pic passed in via filename to an ascii text file.
-func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
+func BigColour(filename string, testToast []flour.Bread, fileText string) []flour.Bread {
 
 	//	var stringToReturn string
 	var returnString []string
 	//	returnString := make([]string, len(testToast))
 	//	pic := imaging.New(64, 64, nil)
 	//	picd, err := imaging.Open(filename)
-	pic := gocv.IMRead(filename, gocv.IMReadReducedColor2)
+	pic := gocv.IMRead(filename, gocv.IMReadUnchanged)
 	//pic.Open(filename)
 	//if err != nil {
 	//	fmt.Println("Error opening pic.")
 	//}
-	//	sizer, err := pic.ToImage()
-	//	if err != nil {
-	//		fmt.Println("Error converting image.")
-	//	}
-	//	sizeX := sizer.Bounds().Dx()
-	//	sizeY := sizer.Bounds().Dy()
+	//sizer, err := pic.ToImage()
+	//if err != nil {
+	//	fmt.Println("Error converting image.")
+	//}
+	//sizeX := sizer.Bounds().Dx()
+	//sizeY := sizer.Bounds().Dy()
 	//fmt.Println(sizer.Bounds().Dx())
 	//fmt.Println(sizer.Bounds().Dy())
 	var asciiCode []string
@@ -83,14 +82,20 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//filter := imaging.NearestNeighbor
 	//colours := pic.ColorModel()
 	//fmt.Println(colours)
-	picResized := gocv.NewMat()
+	//picResized := gocv.NewMat()
 	//var point image.Point
-	//point.X = sizeX / 10
-	//point.Y = sizeY / 10
-	rect := image.Rect(144, 104, 176, 136)
-	picResized = pic.Region(rect)
-	//	picResized = pic.Reshape(32, 32)
-	//gocv.Resize(pic, &picResized, point, 0, 0, gocv.InterpolationLanczos4)
+	//point.X = 24
+	//point.Y = 32
+
+	//gocv.Resize(pic, &picResized, point, 0, 0, 0)
+	//needed for pinhole view
+	//rect := image.Rect(64, 64, 164, 164)
+	//rect := image.Rect(144, 104, 176, 136)
+
+	//needed for pinhole view
+	//picResized = pic.Region(rect)
+
+	//gocv.Resize(pic, &picResized, point, 0, 0, gocv.InterpolationNearestNeighbor)
 	//pic = imaging.Resize(pic, size, size, filter)
 	//imaging.Save(pic, "poptart/101/greypic.jpeg")
 	//	fileString := fmt.Sprint(filename[0:18] + ".txt")
@@ -118,16 +123,45 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	var bS int
 	//var dont bool
 	//	var returnString []string
-	eightBit := gocv.NewMat()
-	picResized.ConvertTo(&eightBit, gocv.MatTypeCV8S)
-	for column := 1; column < picResized.Cols(); column++ {
-		for row := 1; row < picResized.Rows(); row++ {
+	//eightBit := gocv.NewMat()
+	//picResized.ConvertTo(&eightBit, gocv.MatTypeCV8S)
+	//	grayPic := gocv.NewMat()
+
+	//grayImage, err := picResized.ToImage()
+	//grayPic := imaging.Grayscale(grayImage)
+	//if err != nil {
+	//	fmt.Println("Error converting to grayscale.")
+	//}
+	//picResized = pic.Reshape(32, 24)
+	//pinhole view
+	//picResized.ConvertTo(&eightBit, gocv.MatTypeCV8S)
+	//Big("/poptart/101/server.jpeg")
+	bigFile, err := os.Open(fileText)
+	if err != nil {
+		fmt.Println("Error opening file")
+	}
+	bigScanner := bufio.NewScanner(bigFile)
+	var bigChar []string
+	for bigScanner.Scan() {
+		//	for _, v := range bigScanner.Text() {
+		bigChar = append(bigChar, bigScanner.Text())
+		//fmt.Println(bigChar)
+		//	}
+	}
+	fmt.Println(len(bigChar))
+	for column := 0; column < len(bigChar)-8; column++ {
+		for row := 0; row < len(bigChar[column]); row++ {
 			//fmt.Println(count)
+			//fmt.Println("cols", column)
+			//fmt.Println("rows", row)
 			//var imageColor color.Color
-			//r, g, b, a := pic.At(row, column)
+			//valueColor := grayPic.NRGBAAt(row, column)
+			//rG := valueColor.R
+			//gG := valueColor.G
+			//bG := valueColor.B
 			//imageResized, err := picResized.ToImage()
 			//		fmt.Println(picResized.Type())
-			p = picResized.GetVeciAt(row, column)
+			p = pic.GetVeciAt(column*10, row*10)
 			//fmt.Println(column, "cols")
 			//fmt.Println(row, "rows")
 			//p = eightBit.GetVeciAt(column, row)
@@ -147,6 +181,7 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 			//imageColor := imageResized.At(row, column)
 			//fmt.Println(imageColor)
 			//imageColor
+
 			r = math.Floor((float64(p[2]) / 21474820))
 			g = math.Floor((float64(p[1]) / 21474820))
 			b = math.Floor((float64(p[0]) / 21474820))
@@ -160,13 +195,16 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 			rS = int(r)
 			gS = int(g)
 			bS = int(b)
-			num = ((rS + gS + bS) / 3) / 22
+			//rGI := int(rG)
+			//gGI := int(gG)
+			//bGI := int(bG)
+			//num = (rGI + gGI + bGI) / 22
 			//aS := string(int(a))
 			//aS := "255"
 			//fmt.Println(G)
 			//num = int(G) / 4
 
-			//fmt.Println(num)
+			//fmt.Println(gG)
 			if rS <= 0 {
 				rS = 1
 			}
@@ -179,7 +217,9 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 			if num >= len(asciiCode) || num < 0 {
 				num = len(asciiCode) - 1
 			}
-			stringToReturn := fmt.Sprintln(rS, "-", gS, "-", bS, "-", asciiCode[num], "-", row, "-", column)
+			//fmt.Println(column)
+			//fmt.Println(row)
+			stringToReturn := fmt.Sprintln(rS, "-", gS, "-", bS, "-", bigChar[row][column], "-", row, "-", column)
 			returnString = append(returnString, stringToReturn)
 			//fmt.Println(returnString)
 			//fmt.Println(len(returnString))
@@ -194,17 +234,21 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 			i = len(returnString) - 1
 		}
 
-		stringToSplit := returnString[i]
+		stringToSplit := returnString[testToast[i].Y]
 		words := strings.Split(stringToSplit, "-")
 		//fmt.Println(words)
 
 		//fmt.Println(testToast[i].Y)
 		xvar, err := strconv.Atoi(strings.TrimSpace(words[4]))
 		yvar, err := strconv.Atoi(strings.TrimSpace(words[5]))
+
+		xvar = xvar
+		yvar = yvar * 2
+
 		if err != nil {
 			fmt.Println("Not a valid int!")
 		}
-		slice := flour.BreadGetter(xvar, yvar, testToast)
+		slice := flour.BreadGetter(testToast[i].X, testToast[i].Y, testToast)
 		rrS := strings.TrimSpace(words[0])
 		ggS := strings.TrimSpace(words[1])
 		bbS := strings.TrimSpace(words[2])
@@ -212,7 +256,7 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 		word := fmt.Sprint("\033[48;2;", rrS, ";", ggS, ";", bbS, "m", code, "\033[0m")
 		slice.Label = word
 		slice.Dirty = true
-		testToast = flour.BreadSetter(xvar, yvar, testToast, slice)
+		testToast = flour.BreadSetter(testToast[i].X, testToast[i].Y, testToast, slice)
 
 		//fmt.Printf(word)
 	}
