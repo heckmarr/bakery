@@ -285,8 +285,8 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		var err error
 		var stream *portaudio.Stream
 		//ozoToast, _ := flour.SpawnWin(32, 32)
-		//ozoToast := make([]flour.Bread, 4096)
-		_, _, ozoToast, _ := flour.DoughMax()
+		ozoToast := make([]flour.Bread, 4096)
+		//_, _, ozoToast, _ := flour.DoughMax()
 		ozoToast = flour.Oven(ozoToast, "*", 64, 64)
 		fmt.Println(len(ozoToast))
 		//flour.Flat("8", ozoToast)
@@ -407,7 +407,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//	decoder.EndUtt()
 			//}
 			//end hack
-			//olive.CreateServer(testToast)
+			olive.CreateServer(ozoToast)
 			//var coded []string
 			//flour.SpawnIndex("poptart/101/serve0.txt", 80, 5, testToast, 25, 14)
 			//words := taste.Interpret(in, stream, decoder)
