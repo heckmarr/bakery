@@ -284,8 +284,10 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		var in []int16
 		var err error
 		var stream *portaudio.Stream
-		ozoToast := make([]flour.Bread, 1024, 1024)
-		ozoToast = flour.Oven(ozoToast, "*", 32, 32)
+		ozoToast, _ := flour.SpawnWin(32, 32)
+		flour.Flat("8", ozoToast)
+		//ozoToast := make([]flour.Bread, 1024, 1024)
+		//ozoToast = flour.Oven(ozoToast, "*", 32, 32)
 		//var picOut string
 		if args && len(view) >= 2 {
 			if view[1] == "-sphinx" {
@@ -421,10 +423,23 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 					flour.SpawnIndex("poptart/101/server00.txt", 5, 5, testToast, 25, 14)
 				}
 			} else {
-				for i, _ := range testToast {
-					flour.CopyToast("*", testToast[i].X, testToast[i].Y, 1, testToast)
-				}
-				testToast = poptart.BigColour("poptart/101/server.jpeg", testToast)
+				//for i, _ := range ozoToast {
+				//	flour.CopyToast("=", ozoToast[i].X, ozoToast[i].Y, 1, ozoToast)
+				//}
+				ozoToast = poptart.BigColour("poptart/101/server.jpeg", ozoToast)
+				//	count := 1
+				//	for i, _ := range ozoToast {
+				//		count++
+				//		if count == ozoLoaf.Width {
+				//			fmt.Println("")
+				//			count = 0
+				//		} else {
+				//			flour.Copy256Toast(&ozoToast[i].Label, ozoToast[i].X, ozoToast[i].Y, 1, testToast)
+				//		}
+				//	}
+				flour.Toast(ozoToast, "none", "none")
+
+				//testToast, _ = flour.RelWin(0.03, 0.5, 1, 1, ozoToast, testToast, ozoLoaf, true)
 				//fmt.Println(colourAscii)
 				//for i, _ := range colourAscii {
 				//	flour.CopyToast(colourAscii[i], 5, i, 1, testToast)
@@ -443,7 +458,7 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 			//	ozo += ozoToast[i].Label
 			//}
 			//fmt.Printf(ozo)
-			flour.Toast(testToast, "none", "none")
+			//flour.Toast(testToast, "none", "none")
 			//flour.Toast25666(testToast, picOut)
 
 		}
