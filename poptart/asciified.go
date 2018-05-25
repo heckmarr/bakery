@@ -113,15 +113,17 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//var dont bool
 	//	var returnString []string
 	eightBit := gocv.NewMat()
-	picResized.ConvertTo(&eightBit, gocv.MatTypeCV8S)
-	for column := 1; column < size; column++ {
-		for row := 1; row < size; row++ {
+	pic.ConvertTo(&eightBit, gocv.MatTypeCV8S)
+	for column := 0; column < size; column++ {
+		for row := 0; row < 24; row++ {
 			//fmt.Println(count)
 			//var imageColor color.Color
 			//r, g, b, a := pic.At(row, column)
 			//imageResized, err := picResized.ToImage()
 			//		fmt.Println(picResized.Type())
-			p = eightBit.GetVeciAt(column, row)
+			p = eightBit.GetVeciAt(row*10, column*10)
+			//p = eightBit.GetVeciAt(column, row)
+
 			//p = picResized.GetVeciAt(row, column)
 			//fmt.Println(p)
 
@@ -176,14 +178,18 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//if count == column && column == size-1 {
 	//testToast = flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, testToast, int(row*column), true)
 	for i, _ := range testToast {
-		if i >= 767 {
-			i = 767
+		if i >= 689 {
+			i = 689
 		}
 
 		stringToSplit := returnString[i]
 		words := strings.Split(stringToSplit, "-")
 		//fmt.Println(words)
-		slice := flour.BreadGetter(testToast[i].X, testToast[i].Y, testToast)
+
+		//fmt.Println(testToast[i].Y)
+		xvar := testToast[i].X
+		yvar := testToast[i].Y
+		slice := flour.BreadGetter(xvar, yvar, testToast)
 		rrS := strings.TrimSpace(words[0])
 		ggS := strings.TrimSpace(words[1])
 		bbS := strings.TrimSpace(words[2])
@@ -191,7 +197,7 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 		word := fmt.Sprint("\033[48;2;", rrS, ";", ggS, ";", bbS, "m", code, "\033[0m")
 		slice.Label = word
 		slice.Dirty = true
-		testToast = flour.BreadSetter(testToast[i].X, testToast[i].Y, testToast, slice)
+		testToast = flour.BreadSetter(xvar, yvar, testToast, slice)
 
 		//fmt.Printf(word)
 	}
