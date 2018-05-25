@@ -157,12 +157,16 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 			//imageColor
 			num := int(G) / 8
 			//num := asciinum / 8
-			rS = int(r) + 99
-			gS = int(g) + 99
-			bS = int(b) + 99
+			rS = int(r)
+			gS = int(g)
+			bS = int(b)
+			num = ((rS + gS + bS) / 3) / 22
 			//aS := string(int(a))
 			//aS := "255"
-			num = (int(g) + 99) / 9
+			//fmt.Println(G)
+			//num = int(G) / 4
+
+			//fmt.Println(num)
 			if rS <= 0 {
 				rS = 1
 			}
@@ -172,7 +176,7 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 			if bS <= 0 {
 				bS = 1
 			}
-			if num >= len(asciiCode) {
+			if num >= len(asciiCode) || num < 0 {
 				num = len(asciiCode) - 1
 			}
 			stringToReturn := fmt.Sprintln(rS, "-", gS, "-", bS, "-", asciiCode[num], "-", row, "-", column)
