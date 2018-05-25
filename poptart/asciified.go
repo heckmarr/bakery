@@ -3,7 +3,6 @@ package poptart
 import (
 	"bufio"
 	"fmt"
-	"image"
 	"math"
 	"os"
 	"strings"
@@ -66,25 +65,28 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//if err != nil {
 	//	fmt.Println("Error opening pic.")
 	//}
-	//sizer, err := pic.ToImage()
-	///if err != nil {
-	//	fmt.Println("Error converting image.")
-	//}
+	//	sizer, err := pic.ToImage()
+	//	if err != nil {
+	//		fmt.Println("Error converting image.")
+	//	}
+	//	sizeX := sizer.Bounds().Dx()
+	//	sizeY := sizer.Bounds().Dy()
 	//fmt.Println(sizer.Bounds().Dx())
 	//fmt.Println(sizer.Bounds().Dy())
 	var asciiCode []string
 	asciiCode = strings.Split("1-_-+-,-.-i-r-s-X-A-a-e-B-h-M-K-G-S-9-B-A-Z", "-")
 	//var code string
 	//pic = imaging.Grayscale(pic)
-	size := 32
+	//size := 32
 	//filter := imaging.NearestNeighbor
 	//colours := pic.ColorModel()
 	//fmt.Println(colours)
 	picResized := gocv.NewMat()
-	var point image.Point
-	point.X = 24
-	point.Y = 32
-	gocv.Resize(pic, &picResized, point, 0, 0, 0)
+	//var point image.Point
+	//point.X = sizeX / 10
+	//point.Y = sizeY / 10
+	picResized = pic.Reshape(32, 32)
+	//gocv.Resize(pic, &picResized, point, 0, 0, gocv.InterpolationLanczos4)
 	//pic = imaging.Resize(pic, size, size, filter)
 	//imaging.Save(pic, "poptart/101/greypic.jpeg")
 	//	fileString := fmt.Sprint(filename[0:18] + ".txt")
@@ -113,15 +115,16 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//var dont bool
 	//	var returnString []string
 	eightBit := gocv.NewMat()
-	pic.ConvertTo(&eightBit, gocv.MatTypeCV8S)
-	for column := 0; column < size; column++ {
-		for row := 0; row < 24; row++ {
+	picResized.ConvertTo(&eightBit, gocv.MatTypeCV8S)
+	for column := 0; column < eightBit.Cols(); column++ {
+		for row := 0; row < eightBit.Rows(); row++ {
 			//fmt.Println(count)
 			//var imageColor color.Color
 			//r, g, b, a := pic.At(row, column)
 			//imageResized, err := picResized.ToImage()
 			//		fmt.Println(picResized.Type())
-			p = eightBit.GetVeciAt(row*10, column*10)
+			p = eightBit.GetVeciAt(row, column)
+
 			//p = eightBit.GetVeciAt(column, row)
 
 			//p = picResized.GetVeciAt(row, column)
