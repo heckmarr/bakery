@@ -285,9 +285,9 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		var err error
 		var stream *portaudio.Stream
 		//ozoToast, _ := flour.SpawnWin(32, 32)
-		ozoToast := make([]flour.Bread, 4096)
+		ozoToast := make([]flour.Bread, 1024)
 		//_, _, ozoToast, _ := flour.DoughMax()
-		ozoToast = flour.Oven(ozoToast, "*", 64, 64)
+		ozoToast = flour.Oven(ozoToast, "*", 32, 32)
 		fmt.Println(len(ozoToast))
 		//flour.Flat("8", ozoToast)
 

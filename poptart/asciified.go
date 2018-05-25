@@ -148,7 +148,8 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 		//fmt.Println(bigChar)
 		//	}
 	}
-	fmt.Println(len(bigChar))
+	var stringToReturn string
+	//	fmt.Println(len(bigChar))
 	for column := 0; column < len(bigChar)-8; column++ {
 		for row := 0; row < len(bigChar[column]); row++ {
 			//fmt.Println(count)
@@ -219,36 +220,46 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 			}
 			//fmt.Println(column)
 			//fmt.Println(row)
-			stringToReturn := fmt.Sprintln(rS, "-", gS, "-", bS, "-", bigChar[row][column], "-", row, "-", column)
+			stringToReturn = fmt.Sprintln(rS, "-", gS, "-", bS, "-", bigChar[column][row], "-", column, "-", row)
 			returnString = append(returnString, stringToReturn)
 			//fmt.Println(returnString)
 			//fmt.Println(len(returnString))
 		}
 	}
+	//	fmt.Println(returnString)
 	//fmt.Println(rS, gS, bS)
 
 	//if count == column && column == size-1 {
 	//testToast = flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, testToast, int(row*column), true)
-	for i, _ := range testToast {
-		if i >= len(returnString) {
-			i = len(returnString) - 1
+	count := 0
+	for _, v := range returnString {
+		//if i >= len(returnString) {
+		//	i = len(returnString) - 1
+		//}
+		stringToSplit := v
+		//fmt.Println(stringToSplit)
+		if count >= 32 {
+			count = 0
+		} else {
+			count++
 		}
-
-		stringToSplit := returnString[testToast[i].Y]
 		words := strings.Split(stringToSplit, "-")
 		//fmt.Println(words)
 
 		//fmt.Println(testToast[i].Y)
+		//xvar := testToast[i].X
+		//yvar := testToast[i].Y
+		//		fmt.Println(xvar, yvar)
 		xvar, err := strconv.Atoi(strings.TrimSpace(words[4]))
 		yvar, err := strconv.Atoi(strings.TrimSpace(words[5]))
 
-		xvar = xvar
-		yvar = yvar * 2
+		//		xvar = xvar
+		//		yvar = yvar * 2
 
 		if err != nil {
 			fmt.Println("Not a valid int!")
 		}
-		slice := flour.BreadGetter(testToast[i].X, testToast[i].Y, testToast)
+		slice := flour.BreadGetter(xvar, yvar, testToast)
 		rrS := strings.TrimSpace(words[0])
 		ggS := strings.TrimSpace(words[1])
 		bbS := strings.TrimSpace(words[2])
@@ -256,7 +267,7 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 		word := fmt.Sprint("\033[48;2;", rrS, ";", ggS, ";", bbS, "m", code, "\033[0m")
 		slice.Label = word
 		slice.Dirty = true
-		testToast = flour.BreadSetter(testToast[i].X, testToast[i].Y, testToast, slice)
+		testToast = flour.BreadSetter(xvar, yvar, testToast, slice)
 
 		//fmt.Printf(word)
 	}
