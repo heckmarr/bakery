@@ -55,6 +55,10 @@ func Small(filename string) {
 
 //BigColour converts an pic passed in via filename to an ascii text file.
 func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
+
+	//	var stringToReturn string
+	var returnString []string
+	//	returnString := make([]string, len(testToast))
 	//	pic := imaging.New(64, 64, nil)
 	//	picd, err := imaging.Open(filename)
 	pic := gocv.IMRead(filename, gocv.IMReadReducedColor2)
@@ -88,8 +92,8 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	//		fmt.Println("Error opening text file.")
 	//	}
 
-	count := 0
-
+	//count := 1
+	//	fmt.Println(len(testToast))
 	//var returnString string
 	//returnString := make([]string, 4096, 4096)
 	var p gocv.Veci
@@ -100,11 +104,13 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 	var rS int
 	var gS int
 	var bS int
+	//var dont bool
+	//	var returnString []string
 	eightBit := gocv.NewMat()
 	picResized.ConvertTo(&eightBit, gocv.MatTypeCV8S)
 	for column := 1; column < size; column++ {
 		for row := 1; row < size; row++ {
-			count++
+			//fmt.Println(count)
 			//var imageColor color.Color
 			//r, g, b, a := pic.At(row, column)
 			//imageResized, err := picResized.ToImage()
@@ -112,6 +118,7 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 			p = eightBit.GetVeciAt(column, row)
 			//p = picResized.GetVeciAt(row, column)
 			//fmt.Println(p)
+
 			//picResized.Channels()
 			//fmt.Println(picResized.Channels())
 			//for _, v := range p {
@@ -149,42 +156,58 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 			if bS <= 0 {
 				bS = 1
 			}
-			//fmt.Println(rS, gS, bS)
 			if num >= len(asciiCode) {
 				num = len(asciiCode) - 1
 			}
+			stringToReturn := fmt.Sprintln(rS, "-", gS, "-", bS, "-", asciiCode[num])
+			returnString = append(returnString, stringToReturn)
+			//fmt.Println(returnString)
+			//fmt.Println(len(returnString))
+		}
+	}
+	//fmt.Println(rS, gS, bS)
 
-			//if count == column && column == size-1 {
-			//testToast = flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, testToast, int(row*column), true)
-
-			slice := flour.BreadGetter(testToast[count].X, testToast[count].Y, testToast)
-			word := fmt.Sprint("\033[48;2;", rS, ";", gS, ";", bS, "m", asciiCode[num], "\033[0m")
-			slice.Label = word
-			slice.Dirty = true
-			testToast = flour.BreadSetter(testToast[count].X, testToast[count].Y, testToast, slice)
-
-			//fmt.Printf(word)
-
-			//	return testToast
-			//	count = 0
-			//} else {
-			//	testToast = flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, &testToast, int(row*column), false)
-			//}
-			//fmt.Println(string(asciiCode[num]))
-			//fmt.Printf(code)
-
-			//returnString[column] += code
-			//_, err := asciipic.WriteString(code)
-			//fmt.Println(bytesWritten)
-			//if err != nil {
-			//	fmt.Println("Error writing string.")
-			//}
+	//if count == column && column == size-1 {
+	//testToast = flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, testToast, int(row*column), true)
+	for i, _ := range testToast {
+		if i >= 960 {
+			i = 960
 		}
 
-		//fmt.Println("")
-		//returnString += "\n"
-		//asciipic.WriteString("\n")
+		stringToSplit := returnString[i]
+		words := strings.Split(stringToSplit, "-")
+		//fmt.Println(words)
+		slice := flour.BreadGetter(testToast[i].X, testToast[i].Y, testToast)
+		rrS := strings.TrimSpace(words[0])
+		ggS := strings.TrimSpace(words[1])
+		bbS := strings.TrimSpace(words[2])
+		code := strings.TrimSpace(words[3])
+		word := fmt.Sprint("\033[48;2;", rrS, ";", ggS, ";", bbS, "m", code, "\033[0m")
+		slice.Label = word
+		slice.Dirty = true
+		testToast = flour.BreadSetter(testToast[i].X, testToast[i].Y, testToast, slice)
+
+		//fmt.Printf(word)
 	}
+	//	return testToast
+	//	count = 0
+	//} else {
+	//	testToast = flour.Dye256(asciiCode[0], rS, gS, bS, aS, false, true, &testToast, int(row*column), false)
+	//}
+	//fmt.Println(string(asciiCode[num]))
+	//fmt.Printf(code)
+
+	//returnString[column] += code
+	//_, err := asciipic.WriteString(code)
+	//fmt.Println(bytesWritten)
+	//if err != nil {
+	//	fmt.Println("Error writing string.")
+	//}
+
+	//fmt.Println("")
+	//returnString += "\n"
+	//asciipic.WriteString("\n")
+
 	//asciipic.Flush()
 	//flour.Toast256(testToast)
 	//flour.Toast(testToast, "none", "none")

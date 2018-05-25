@@ -284,10 +284,13 @@ func spawnContext(view []string, testToast []flour.Bread, testLoaf flour.Loaf) {
 		var in []int16
 		var err error
 		var stream *portaudio.Stream
-		ozoToast, _ := flour.SpawnWin(32, 32)
-		flour.Flat("8", ozoToast)
-		//ozoToast := make([]flour.Bread, 1024, 1024)
-		//ozoToast = flour.Oven(ozoToast, "*", 32, 32)
+		//ozoToast, _ := flour.SpawnWin(32, 32)
+		ozoToast := make([]flour.Bread, 1055)
+
+		ozoToast = flour.Oven(ozoToast, "*", 32, 32)
+		fmt.Println(len(ozoToast))
+		//flour.Flat("8", ozoToast)
+
 		//var picOut string
 		if args && len(view) >= 2 {
 			if view[1] == "-sphinx" {
