@@ -309,7 +309,7 @@ func Big(filename string) {
 	if err != nil {
 		fmt.Println("Error opening pic.")
 	}
-	asciicode := strings.Split(" -.-,-:-;-i-r-s-X-A-2-5-3-h-M-H-G-S-#-9-B-&-@", "-")
+	asciicode := strings.Split(" -.-,-:-.-i-r-s-X-A-2-5-3-h-M-H-G-S-#-9-B-&-@", "-")
 	pic = imaging.Grayscale(pic)
 	size := 32
 	filter := imaging.NearestNeighbor
@@ -328,9 +328,9 @@ func Big(filename string) {
 
 	for column := 1; column <= size; column++ {
 		for row := 1; row <= size; row++ {
-			_, g, _, _ := pic.At(row, column).RGBA()
-			asciinum := int(g) / (25 * 32)
-			num := asciinum / 8
+			r, g, b, _ := pic.At(row, column).RGBA()
+			asciinum := int((r + g + b/3)) / (25 * 32)
+			num := asciinum / 20
 			_, err := asciipic.WriteString(asciicode[num])
 			//fmt.Println(bytesWritten)
 			if err != nil {
