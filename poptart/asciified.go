@@ -109,7 +109,7 @@ func BigColour(filename string, testToast []flour.Bread) []flour.Bread {
 			//r, g, b, a := pic.At(row, column)
 			//imageResized, err := picResized.ToImage()
 			//		fmt.Println(picResized.Type())
-			p = eightBit.GetVeciAt(row, column)
+			p = eightBit.GetVeciAt(column, row)
 			//p = picResized.GetVeciAt(row, column)
 			//fmt.Println(p)
 			//picResized.Channels()
