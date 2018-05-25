@@ -271,6 +271,7 @@ func BigColour(filename string, testToast []flour.Bread, fileText string) []flou
 		bbS := strings.TrimSpace(words[2])
 		code := strings.TrimSpace(words[3])
 		word := fmt.Sprint("\033[48;2;", rrS, ";", ggS, ";", bbS, "m", code, "\033[0m")
+		word = fmt.Sprint("\033[38;2;", rrS, ";", ggS, ";", bbS, "m", word, "\033[0m")
 		slice.Label = word
 		slice.Dirty = true
 		testToast = flour.BreadSetter(yvar, xvar, testToast, slice)
