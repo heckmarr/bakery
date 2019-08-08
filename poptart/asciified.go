@@ -9,7 +9,7 @@ import (
 	"strings"
 
 	"github.com/disintegration/imaging"
-	flour "gitlab.com/localtoast/flourPower"
+	flour "gitlab.com/py-entro/loaf"
 	"gocv.io/x/gocv"
 )
 

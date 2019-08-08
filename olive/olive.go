@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/pebbe/zmq4"
-	flour "gitlab.com/localtoast/flourPower"
+	flour "gitlab.com/py-entro/loaf"
 )
 
 func InitOlive() zmq4.Context {

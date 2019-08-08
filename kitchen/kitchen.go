@@ -8,7 +8,7 @@ import (
 	"os"
 
 	"github.com/buger/jsonparser"
-	flour "gitlab.com/localtoast/flourPower"
+	flour "gitlab.com/py-entro/loaf"
 	"golang.org/x/crypto/openpgp"
 )
 
